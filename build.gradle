@@ -1,0 +1,72 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+bootJar {
+	enabled = false
+}
+jar {
+	enabled = true
+}
+
+repositories {
+	mavenCentral()
+}
+
+allprojects {
+	group 'kr.co.yapp'
+	version '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
+		compileOnly 'org.projectlombok:lombok'
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+		runtimeOnly 'com.h2database:h2'
+		annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+		annotationProcessor 'org.projectlombok:lombok'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.dbunit:dbunit:2.6.0'
+		testImplementation 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
+		implementation 'mysql:mysql-connector-java'
+		implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+		annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+project(':knowlly-api') {
+	dependencies {
+		implementation project(":knowlly-core")
+		testImplementation project(':knowlly-core').sourceSets.test.output
+
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'io.springfox:springfox-swagger2:2.9.2'
+		implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	}
+}
+
+
+
