@@ -1,0 +1,41 @@
+spring:
+    profiles:
+      active: default
+
+  # JPA
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      show_sql: true
+      properties:
+          hibernate:
+            format_sql: true
+    # Batch
+    batch:
+      job:
+        enabled: false
+
+    mvc:
+      pathmatch:
+        matching-strategy: ant_path_matcher
+
+# logging
+logging:
+    level:
+        org:
+          hibernate:
+                type:
+                  descriptor:
+                          sql: trace
+
+# server
+server:
+  error:
+    whitelabel:
+          enabled: false
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
