@@ -1,6 +1,6 @@
-package kr.co.yapp.core.lecture.entity;
+package kr.co.knowledgerally.core.lecture.entity;
 
-import kr.co.yapp.core.user.entity.User;
+import kr.co.knowledgerally.core.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

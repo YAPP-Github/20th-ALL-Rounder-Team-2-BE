@@ -1,4 +1,4 @@
-package kr.co.yapp.core.user.entity;
+package kr.co.knowledgerally.core.lecture.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ball_history")
-public class BallHistory {
+@Table(name = "tag")
+public class Tag {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -21,17 +21,11 @@ public class BallHistory {
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @Column(nullable = false)
-    private String title;
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 
     @Column(nullable = false)
     private String content;
-
-    @Column(nullable = false)
-    private int count;
 
     @Builder.Default
     @CreationTimestamp

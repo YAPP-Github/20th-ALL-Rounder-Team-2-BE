@@ -1,4 +1,4 @@
-package kr.co.yapp.core.user.entity;
+package kr.co.knowledgerally.core.lecture.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,35 +12,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "lecture_image")
+public class LectureImage {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @MapsId("id")
+    @ManyToOne
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
-    private String kakaoId;
-
-    @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String intro;
-
-    @Builder.Default
-    @Column(nullable = false)
-    private Boolean isCoach = true;
-
-    @Builder.Default
-    @Column(nullable = false)
-    private Boolean isActive = true;
+    private String lectureImgUrl;
 
     @Builder.Default
     @CreationTimestamp

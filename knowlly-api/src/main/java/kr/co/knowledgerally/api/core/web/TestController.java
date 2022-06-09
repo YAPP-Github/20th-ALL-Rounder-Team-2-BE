@@ -1,4 +1,4 @@
-package kr.co.yapp.api.core.web;
+package kr.co.knowledgerally.api.core.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

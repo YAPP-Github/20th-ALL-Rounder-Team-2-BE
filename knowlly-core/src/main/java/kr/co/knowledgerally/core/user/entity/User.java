@@ -1,6 +1,5 @@
-package kr.co.yapp.core.lecture.entity;
+package kr.co.knowledgerally.core.user.entity;
 
-import kr.co.yapp.core.user.entity.Coach;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,31 +12,31 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "lecture")
-public class Lecture {
+@Table(name = "user")
+public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
-    @ManyToOne
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
-
-    @MapsId("id")
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
-    private String title;
+    private String password;
+
+    @Column(nullable = false, unique = true)
+    private String kakaoId;
 
     @Column(nullable = false)
-    private String introduce;
+    private String username;
 
     @Column(nullable = false)
-    private int price;
+    private String intro;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean isCoach = true;
 
     @Builder.Default
     @Column(nullable = false)

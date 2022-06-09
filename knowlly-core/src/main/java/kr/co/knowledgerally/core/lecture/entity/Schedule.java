@@ -1,4 +1,4 @@
-package kr.co.yapp.core.user.entity;
+package kr.co.knowledgerally.core.lecture.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user_image")
-public class UserImage {
+@Table(name = "schedule")
+public class Schedule {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -21,15 +21,18 @@ public class UserImage {
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 
     @Column(nullable = false)
-    private String userImgUrl;
+    private LocalDateTime startAt;
 
-    @Builder.Default
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private LocalDateTime endAt;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private State state;
 
     @Builder.Default
     @CreationTimestamp
@@ -40,4 +43,11 @@ public class UserImage {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public enum State {
+        ON_BOARD,
+        ON_GOING,
+        DONE,
+        CLOSED;
+    }
 }
