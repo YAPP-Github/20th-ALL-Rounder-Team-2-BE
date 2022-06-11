@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knowlly-api-dev-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: knowlly-api-dev
+  template:
+    metadata:
+      labels:
+        app: knowlly-api-dev
+    spec:
+      containers:
+        - name: knowlly-api-dev
+          image: <IMAGE>
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev"
