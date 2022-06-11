@@ -1,4 +1,4 @@
-package kr.co.yapp.api.core.config;
+package kr.co.knowledgerally.api.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

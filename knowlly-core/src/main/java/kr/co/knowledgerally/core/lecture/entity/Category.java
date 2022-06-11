@@ -1,12 +1,8 @@
-package kr.co.yapp.core.lecture.entity;
+package kr.co.knowledgerally.core.lecture.entity;
 
-import kr.co.yapp.core.user.entity.Coach;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter @Setter
 @Builder

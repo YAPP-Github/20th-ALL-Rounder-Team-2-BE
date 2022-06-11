@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'kr.co.yapp.knowlly'
+group 'kr.co.knowledgerally'
 version '0.0.1-SNAPSHOT'
 
 bootJar {

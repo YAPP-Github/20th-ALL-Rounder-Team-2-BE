@@ -1,4 +1,4 @@
-package kr.co.yapp.core.user.entity;
+package kr.co.knowledgerally.core.user.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "coach")
-public class Coach {
+@Table(name = "review")
+public class Review {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -24,8 +24,13 @@ public class Coach {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @MapsId("id")
+    @OneToOne
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
+
     @Column(nullable = false)
-    private String introduce;
+    private String content;
 
     @Builder.Default
     @CreationTimestamp
