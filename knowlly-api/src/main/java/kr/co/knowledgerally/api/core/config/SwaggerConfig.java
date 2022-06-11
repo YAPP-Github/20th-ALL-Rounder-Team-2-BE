@@ -22,7 +22,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("kr.co.yapp.api"))
+                .apis(RequestHandlerSelectors.basePackage("kr.co.knowledgerally.api"))
                 .paths(PathSelectors.any()).build()
                 .apiInfo(metaData())
                 .securityContexts(Collections.singletonList(securityContext()))
