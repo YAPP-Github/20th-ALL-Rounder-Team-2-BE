@@ -23,24 +23,23 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
-    private String kakaoId;
+    private String username;
 
     @Column(nullable = false)
-    private String username;
+    private int ballCnt;
 
     @Column(nullable = false)
     private String intro;
 
-    @Builder.Default
     @Column(nullable = false)
-    private Boolean isCoach = true;
+    private boolean isCoach = false;
+
+    @Column(nullable = false)
+    private boolean isPushActive = true;
 
     @Builder.Default
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private boolean isActive = true;
 
     @Builder.Default
     @CreationTimestamp

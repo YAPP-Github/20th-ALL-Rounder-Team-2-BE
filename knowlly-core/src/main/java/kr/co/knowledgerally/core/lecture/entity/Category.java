@@ -19,6 +19,7 @@ public class Category {
     @Column(nullable = false)
     private String categoryName;
 
+    @Builder.Default
     @Column(nullable = false)
-    private Long parentId;
+    private boolean isActive = true;
 }

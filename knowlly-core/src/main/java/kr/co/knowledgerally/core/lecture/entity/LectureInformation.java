@@ -1,6 +1,6 @@
 package kr.co.knowledgerally.core.lecture.entity;
 
-import kr.co.knowledgerally.core.user.entity.User;
+import kr.co.knowledgerally.core.user.entity.Coach;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "form")
-public class Form {
+@Table(name = "lecture_information")
+public class LectureInformation {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -22,20 +22,22 @@ public class Form {
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(nullable = false)
-    private String content;
+    private String topic;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private State state;
+    private String introduce;
+
+    @Column(nullable = false)
+    private int price;
 
     @Builder.Default
     @Column(nullable = false)
@@ -50,10 +52,4 @@ public class Form {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
-
-    public enum State {
-        REQUEST,
-        ACCEPT,
-        REJECT;
-    }
 }
