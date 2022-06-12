@@ -57,6 +57,18 @@ subprojects {
 	}
 }
 
+project(':knowlly-batch') {
+	dependencies {
+		implementation project(':knowlly-core')
+		testImplementation project(':knowlly-core').sourceSets.test.output
+
+		implementation 'org.springframework.boot:spring-boot-starter-quartz'
+		implementation 'org.springframework.boot:spring-boot-starter-batch'
+		implementation 'com.mchange:c3p0'
+		testImplementation 'org.springframework.batch:spring-batch-test'
+	}
+}
+
 project(':knowlly-api') {
 	dependencies {
 		implementation project(":knowlly-core")
