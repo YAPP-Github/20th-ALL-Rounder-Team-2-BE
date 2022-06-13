@@ -7,4 +7,5 @@ pluginManagement {
 rootProject.name = 'knowlly'
 include 'knowlly-core'
 include 'knowlly-api'
+include 'knowlly-batch'
 
