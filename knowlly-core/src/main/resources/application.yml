@@ -19,6 +19,9 @@ spring:
     batch:
       job:
         enabled: false
+      # JWT
+    jwt:
+      secret: 12345678901234567890123456789012
 
     mvc:
       pathmatch:
