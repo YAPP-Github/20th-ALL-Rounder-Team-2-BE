@@ -1,7 +1,7 @@
 ---
 name: 업무 요청
 about: 비개발 성격이 강한 업무, 문서화 등을 요청하기 위한 템플릿
-title: ''
+title: '[업무] '
 labels: 'documentation'
 assignees: ''
 
