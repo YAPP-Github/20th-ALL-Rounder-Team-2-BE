@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <lecture_information id="1" coach_id="1" category_id="4" topic="마케팅 수업" introduce="효과적인 마케팅에 대해 배웁니다" price="1"
+                         is_active="true" created_at="2022-06-13 22:39:40" updated_at="2022-06-13 22:39:54"/>
+    <lecture_information id="2" coach_id="2" category_id="3" topic="자바 개발" introduce="자바를 자바라" price="1"
+                         is_active="true" created_at="2022-06-13 22:39:41" updated_at="2022-06-13 22:39:54"/>
+    <lecture_information id="3" coach_id="3" category_id="2" topic="그래픽 디자인" introduce="그래픽을 그래그래" price="1"
+                         is_active="true" created_at="2022-06-13 22:39:42" updated_at="2022-06-13 22:39:55"/>
+    <lecture_information id="4" coach_id="4" category_id="1" topic="좋은 기획이란 무엇인가" introduce="기획이 제일 쉬웠어요 사실 뻥이야"
+                         price="1" is_active="false" created_at="2022-06-13 22:39:42" updated_at="2022-06-13 22:39:55"/>
+    <lecture_information id="5" coach_id="1" category_id="6" topic="요리 클래스" introduce="맛있는 요리 만들기" price="1"
+                         is_active="true" created_at="2022-06-13 22:39:42" updated_at="2022-06-13 22:39:55"/>
+
+</dataset>
