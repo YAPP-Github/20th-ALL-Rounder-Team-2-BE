@@ -21,11 +21,15 @@ public class Tag {
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+    @JoinColumn(name = "lecture_info_id")
+    private LectureInformation lecture;
 
     @Column(nullable = false)
     private String content;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private boolean isActive = true;
 
     @Builder.Default
     @CreationTimestamp

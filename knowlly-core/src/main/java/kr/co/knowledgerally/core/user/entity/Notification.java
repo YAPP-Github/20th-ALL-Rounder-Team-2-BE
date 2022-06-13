@@ -1,6 +1,6 @@
-package kr.co.knowledgerally.core.lecture.entity;
+package kr.co.knowledgerally.core.user.entity;
 
-import kr.co.knowledgerally.core.user.entity.User;
+import kr.co.knowledgerally.core.lecture.entity.Form;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,29 +13,32 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "form")
-public class Form {
+@Table(name = "notification")
+public class Notification {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @MapsId("id")
-    @ManyToOne
-    @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
-
-    @MapsId("id")
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @MapsId("id")
+    @OneToOne
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
 
     @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private State state;
+    private NotiType notiType;
+
+    @Column(nullable = false)
+    private boolean isRead = false;
 
     @Builder.Default
     @Column(nullable = false)
@@ -51,9 +54,8 @@ public class Form {
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public enum State {
-        REQUEST,
-        ACCEPT,
-        REJECT;
+    public enum NotiType {
+        PLAYER,
+        COACH
     }
 }

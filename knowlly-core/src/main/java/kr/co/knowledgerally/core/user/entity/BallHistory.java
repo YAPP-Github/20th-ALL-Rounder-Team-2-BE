@@ -34,6 +34,10 @@ public class BallHistory {
     private int count;
 
     @Builder.Default
+    @Column(nullable = false)
+    private boolean isActive = true;
+
+    @Builder.Default
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

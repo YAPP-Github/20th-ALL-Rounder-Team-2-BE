@@ -29,7 +29,7 @@ public class UserImage {
 
     @Builder.Default
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private boolean isActive = true;
 
     @Builder.Default
     @CreationTimestamp

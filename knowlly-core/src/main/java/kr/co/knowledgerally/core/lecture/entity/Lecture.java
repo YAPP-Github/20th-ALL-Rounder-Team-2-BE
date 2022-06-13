@@ -1,6 +1,5 @@
 package kr.co.knowledgerally.core.lecture.entity;
 
-import kr.co.knowledgerally.core.user.entity.Coach;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -22,26 +21,25 @@ public class Lecture {
 
     @MapsId("id")
     @ManyToOne
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
-
-    @MapsId("id")
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "lecture_info_id")
+    private LectureInformation lectureInformation;
 
     @Column(nullable = false)
-    private String title;
+    private LocalDateTime startAt;
 
     @Column(nullable = false)
-    private String introduce;
+    private LocalDateTime endAt;
 
     @Column(nullable = false)
-    private int price;
+    @Enumerated(EnumType.STRING)
+    private State state;
+
+    @Column(nullable = false)
+    private boolean isReviewWritten = true;
 
     @Builder.Default
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private boolean isActive = true;
 
     @Builder.Default
     @CreationTimestamp
@@ -52,4 +50,10 @@ public class Lecture {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public enum State {
+        ON_BOARD,
+        ON_GOING,
+        DONE
+    }
 }
