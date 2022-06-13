@@ -27,9 +27,6 @@ public class Coach {
     @Column(nullable = false)
     private String introduce;
 
-    @Column(nullable = false)
-    private String kakaoId;
-
     @Builder.Default
     @CreationTimestamp
     @Column(nullable = false)

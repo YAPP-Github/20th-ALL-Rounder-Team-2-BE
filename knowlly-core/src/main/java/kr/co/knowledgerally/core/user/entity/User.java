@@ -32,6 +32,9 @@ public class User {
     private String intro;
 
     @Column(nullable = false)
+    private String kakaoId;
+
+    @Column(nullable = false)
     private boolean isCoach = false;
 
     @Column(nullable = false)
