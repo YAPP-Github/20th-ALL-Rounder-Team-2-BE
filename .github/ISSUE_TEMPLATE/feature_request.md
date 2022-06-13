@@ -1,5 +1,5 @@
 ---
-name: 기능
+name: 기능 요청
 about: 새로운 기능 개발을 위한 이슈 템플릿
 title: ''
 labels: 'enhancement'
