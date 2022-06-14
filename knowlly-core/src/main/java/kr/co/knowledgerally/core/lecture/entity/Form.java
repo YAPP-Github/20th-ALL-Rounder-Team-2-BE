@@ -20,12 +20,10 @@ public class Form {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "lecture_id")
     private Lecture lecture;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -33,9 +31,10 @@ public class Form {
     @Column(nullable = false)
     private String content;
 
+    @Builder.Default
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private State state;
+    private State state = State.REQUEST;
 
     @Builder.Default
     @Column(nullable = false)

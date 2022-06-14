@@ -10,6 +10,11 @@ spring:
       properties:
           hibernate:
             format_sql: true
+
+    # liquibase
+    liquibase:
+      change-log: classpath:config/liquibase/master.xml
+
     # Batch
     batch:
       job:

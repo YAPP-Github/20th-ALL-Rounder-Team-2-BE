@@ -20,12 +20,10 @@ public class Notification {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @MapsId("id")
     @OneToOne
     @JoinColumn(name = "coach_id")
     private Coach coach;
@@ -37,6 +35,7 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     private NotiType notiType;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean isRead = false;
 

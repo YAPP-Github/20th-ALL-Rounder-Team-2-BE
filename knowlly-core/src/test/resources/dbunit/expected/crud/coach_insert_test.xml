@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <coach id="1" user_id="1" introduce="안녕하세요. 테스트1 코치입니다." is_active="true" />
+    <coach id="2" user_id="3" introduce="안녕하세요. 테스트3 코치입니다." is_active="true" />
+    <coach id="3" user_id="4" introduce="안녕하세요. 테스트4 코치입니다." is_active="true" />
+    <coach id="4" user_id="5" introduce="안녕하세요. 테스트5 코치입니다." is_active="false" />
+    <coach id="5" user_id="2" introduce="안녕하세요. 테스트5 코치입니다." is_active="true" />
+</dataset>
