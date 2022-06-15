@@ -19,7 +19,6 @@ public class Lecture {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "lecture_info_id")
     private LectureInformation lectureInformation;
@@ -30,12 +29,14 @@ public class Lecture {
     @Column(nullable = false)
     private LocalDateTime endAt;
 
+    @Builder.Default
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private State state;
+    private State state = State.ON_BOARD;
 
+    @Builder.Default
     @Column(nullable = false)
-    private boolean isReviewWritten = true;
+    private boolean isReviewWritten = false;
 
     @Builder.Default
     @Column(nullable = false)

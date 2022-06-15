@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <review id="1" user_id="1" coach_id="3" content="테스트3은 좋은 코치입니다!" is_active="true" />
+    <review id="2" user_id="2" coach_id="1" content="테스트1 코치는 친절했어요~" is_active="true" />
+    <review id="3" user_id="4" coach_id="3" content="테스트3 코치는 좀 별로였습니다" is_active="true" />
+    <review id="4" user_id="3" coach_id="1" content="테스트1 코치가 최고에요~" is_active="true" />
+    <review id="5" user_id="1" coach_id="2" content="테스트5 내용" is_active="true" />
+
+</dataset>

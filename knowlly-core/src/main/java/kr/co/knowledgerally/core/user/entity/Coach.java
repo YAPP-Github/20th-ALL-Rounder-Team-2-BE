@@ -19,13 +19,16 @@ public class Coach {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
     private String introduce;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private boolean isActive = true;
 
     @Builder.Default
     @CreationTimestamp

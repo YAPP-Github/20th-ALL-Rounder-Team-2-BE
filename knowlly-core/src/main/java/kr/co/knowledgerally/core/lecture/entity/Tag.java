@@ -19,10 +19,9 @@ public class Tag {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "lecture_info_id")
-    private LectureInformation lecture;
+    private LectureInformation lectureInformation;
 
     @Column(nullable = false)
     private String content;

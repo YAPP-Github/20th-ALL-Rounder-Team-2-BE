@@ -35,9 +35,11 @@ public class User {
     private String kakaoId;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean isCoach = false;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean isPushActive = true;
 
     @Builder.Default

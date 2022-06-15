@@ -20,12 +20,10 @@ public class LectureInformation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "coach_id")
     private Coach coach;
 
-    @MapsId("id")
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
