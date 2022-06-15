@@ -10,6 +10,9 @@
     <changeSet id="20220614" author="hkpark">
         <addColumn tableName="user" >
             <column name="portfolio" type="varchar(500)" />
+            <column name="identifier" type="varchar(500)" >
+                <constraints unique="true" nullable="false" />
+            </column>
         </addColumn>
     </changeSet>
 

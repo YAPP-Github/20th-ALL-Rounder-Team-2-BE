@@ -2,17 +2,17 @@
 <dataset>
     <user id="1" email="test1@email.com" username="테스트1" ball_cnt="1" intro="안녕하세요. 저는 테스트1이라고 합니다." is_coach="true"
           is_push_active="true" is_active="true" created_at="2022-06-10 21:18:58" updated_at="2022-06-10 21:19:00"
-          kakao_id="kakao_test1" portfolio="포트폴리오1"/>
+          kakao_id="kakao_test1" portfolio="포트폴리오1" identifier="identifier1"/>
     <user id="2" email="test2@email.com" username="테스트2" ball_cnt="2" intro="안녕하세요. 저는 테스트2이라고 합니다." is_coach="false"
           is_push_active="true" is_active="true" created_at="2022-06-11 21:18:58" updated_at="2022-06-12 21:19:00"
-          kakao_id="kakao_test2" portfolio="포트폴리오2"/>
+          kakao_id="kakao_test2" portfolio="포트폴리오2" identifier="identifier2"/>
     <user id="3" email="test3@email.com" username="테스트3" ball_cnt="3" intro="안녕하세요. 저는 테스트3이라고 합니다." is_coach="true"
           is_push_active="false" is_active="true" created_at="2022-06-13 21:18:58" updated_at="2022-06-13 21:19:00"
-          kakao_id="kakao_test3" portfolio="포트폴리오3"/>
+          kakao_id="kakao_test3" portfolio="포트폴리오3" identifier="identifier3"/>
     <user id="4" email="test4@email.com" username="테스트4" ball_cnt="5" intro="안녕하세요. 저는 테스트4이라고 합니다." is_coach="true"
           is_push_active="true" is_active="true" created_at="2022-06-05 21:18:58" updated_at="2022-06-11 21:19:00"
-          kakao_id="kakao_test4" portfolio="포트폴리오4"/>
+          kakao_id="kakao_test4" portfolio="포트폴리오4" identifier="identifier4"/>
     <user id="5" email="test5@email.com" username="테스트5" ball_cnt="6" intro="안녕하세요. 저는 테스트5이라고 합니다." is_coach="true"
           is_push_active="true" is_active="false" created_at="2022-06-08 21:18:58" updated_at="2022-06-10 21:19:00"
-          kakao_id="kakao_test5" portfolio="포트폴리오5"/>
+          kakao_id="kakao_test5" portfolio="포트폴리오5" identifier="identifier5"/>
 </dataset>

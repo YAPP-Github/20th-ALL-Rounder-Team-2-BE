@@ -38,6 +38,9 @@ public class User {
     private String portfolio;
 
     @Column(nullable = false)
+    private String identifier;
+
+    @Column(nullable = false)
     @Builder.Default
     private boolean isCoach = false;
 
