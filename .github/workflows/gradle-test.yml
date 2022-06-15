@@ -30,3 +30,8 @@ jobs:
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
         arguments: build test
+    - uses: codecov/codecov-action@v2
+      with:
+        files: ./knowlly-core/build/reports/jacoco/test/jacocoTestReport.xml
+        name: knowlly-codedev
+        verbose: true
