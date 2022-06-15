@@ -35,6 +35,9 @@ public class User {
     private String kakaoId;
 
     @Column(nullable = false)
+    private String portfolio;
+
+    @Column(nullable = false)
     @Builder.Default
     private boolean isCoach = false;
 

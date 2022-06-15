@@ -23,6 +23,7 @@ public class TestUserEntityFactory implements TestEntityFactory<User> {
                 .ballCnt(1)
                 .intro(String.format("안녕하세요. 저는 테스트%d이라고 합니다.", entityId))
                 .kakaoId(String.format("kakao_test%d", entityId))
+                .portfolio(String.format("포트폴리오%d", entityId))
                 .build();
     }
 }
