@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     permissions:
@@ -50,3 +51,10 @@ jobs:
       if: ${{ always() }}
       with:
         files: ./knowlly-core/build/test-results/**/*.xml
+
+    - name: Report Codecov Test Coverage
+      uses: codecov/codecov-action@v2
+      with:
+        files: ./knowlly-core/build/reports/jacoco/test/jacocoTestReport.xml
+        name: knowlly-codedev
+        verbose: true

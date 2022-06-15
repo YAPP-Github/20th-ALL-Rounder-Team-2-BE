@@ -64,7 +64,7 @@ subprojects {
 		reports {
 			html.destination file("${buildDir}/jacocoHtml")
 			csv.enabled false
-			xml.enabled false
+			xml.enabled true
 		}
 
 		finalizedBy 'jacocoTestCoverageVerification'
