@@ -35,6 +35,9 @@ class UserRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals("테스트1", user.getUsername());
         assertEquals(1, user.getBallCnt());
         assertEquals("안녕하세요. 저는 테스트1이라고 합니다.", user.getIntro());
+        assertEquals("kakao_test1", user.getKakaoId());
+        assertEquals("포트폴리오1", user.getPortfolio());
+        assertEquals("identifier1", user.getIdentifier());
         assertTrue(user.isCoach());
         assertTrue(user.isPushActive());
         assertTrue(user.isActive());
