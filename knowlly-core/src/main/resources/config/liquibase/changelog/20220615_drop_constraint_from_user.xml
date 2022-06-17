@@ -9,15 +9,15 @@
 
     <changeSet id="20220615" author="hkpark">
         <addColumn tableName="user">
-            <column name="email_temp" type="VARCHAR(255)">
-                <constraints nullable="true" unique="false" />
+            <column name="email_temp" type="varchar(255)">
+                <constraints nullable="true" unique="false"/>
             </column>
         </addColumn>
         <update tableName="user">
             <column name="email_temp" type="varchar(255)" valueComputed="email"/>
         </update>
         <dropColumn columnName="email" tableName="user"/>
-        <renameColumn tableName="user" oldColumnName="email_temp" newColumnName="email"/>
+        <renameColumn tableName="user" oldColumnName="email_temp" newColumnName="email" columnDataType="varchar(255)"/>
     </changeSet>
 
 </databaseChangeLog>
