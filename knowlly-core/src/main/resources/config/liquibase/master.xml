@@ -10,4 +10,5 @@
     <include file="config/liquibase/changelog/00000000_initial_schema.xml"/>
     <include file="config/liquibase/changelog/20220613_kakao_id_change.xml"/>
     <include file="config/liquibase/changelog/20220614_add_portfolio_column.xml"/>
+    <include file="config/liquibase/changelog/20220615_drop_constraint_from_user.xml"/>
 </databaseChangeLog>
