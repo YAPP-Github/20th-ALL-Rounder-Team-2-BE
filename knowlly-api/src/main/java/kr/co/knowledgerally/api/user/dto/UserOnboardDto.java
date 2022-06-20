@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "사용자 회원가입 모델", description = "사용자 회원가입용 모델")
+@ApiModel(value = "사용자 온보딩 모델", description = "사용자 온보딩 모델")
 public class UserOnboardDto {
     @ApiModelProperty(value = "사용자 프로필")
     @JsonProperty
@@ -21,6 +21,7 @@ public class UserOnboardDto {
 
     @Builder
     @Getter
+    @ApiModel(value = "사용자 온보딩 읽기 모델", description = "사용자 온보딩 읽기 모델")
     public static class ReadOnly {
         @ApiModelProperty(value = "사용자 프로필")
         @JsonProperty
