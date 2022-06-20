@@ -52,11 +52,13 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: ${{ always() }}
       with:
-        files: ./knowlly-core/build/test-results/**/*.xml
+        files: | 
+            ./knowlly-core/build/test-results/**/*.xml
+            ./knowlly-api/build/test-results/**/*.xml
 
     - name: Report Codecov Test Coverage
       uses: codecov/codecov-action@v2
       with:
-        files: ./knowlly-core/build/reports/jacoco/test/jacocoTestReport.xml
+        files: ./knowlly-core/build/reports/jacoco/test/jacocoTestReport.xml,./knowlly-api/build/reports/jacoco/test/jacocoTestReport.xml
         name: knowlly-codedev
         verbose: true

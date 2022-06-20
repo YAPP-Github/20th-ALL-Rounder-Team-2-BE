@@ -55,22 +55,37 @@ subprojects {
 		annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	}
 
-	tasks.named('test') {
+	test {
 		useJUnitPlatform()
 		finalizedBy 'jacocoTestReport'
 	}
 
-	tasks.named('jacocoTestReport') {
+	jacocoTestReport {
 		reports {
 			html.destination file("${buildDir}/jacocoHtml")
 			csv.enabled false
 			xml.enabled true
 		}
 
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.collect {
+				fileTree(dir: it, exclude: [
+						"**/*Knowlly*Application*",
+						"**/config/*",
+						"**/exception/*",
+						"**/dto/*",
+						"**/advice/*",
+						"**/util/*",
+						"**/core/core/**/*",
+						"**/core/web/*",
+				])
+			}))
+		}
+
 		finalizedBy 'jacocoTestCoverageVerification'
 	}
 
-	tasks.named('jacocoTestCoverageVerification') {
+	jacocoTestCoverageVerification {
 		violationRules {
 			rule {
 				enabled = true
@@ -83,8 +98,14 @@ subprojects {
 				}
 
 				excludes = [
-				        "*BasePackage*",
-				        "*Knowlly*Application*",
+				        "**/*Knowlly*Application*",
+				        "**/config/*",
+				        "**/exception/*",
+				        "**/dto/*",
+				        "**/advice/*",
+				        "**/util/*",
+				        "**/core/core/**/*",
+						"**/api/core/web/*",
 				]
 			}
 
@@ -112,6 +133,9 @@ project(':knowlly-api') {
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		implementation 'io.springfox:springfox-swagger2:2.9.2'
 		implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		implementation 'io.jsonwebtoken:jjwt:0.9.1'
+		implementation 'org.springframework.security:spring-security-test'
 	}
 }
 
