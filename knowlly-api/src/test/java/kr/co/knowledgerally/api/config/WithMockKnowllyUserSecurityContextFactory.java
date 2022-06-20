@@ -1,7 +1,7 @@
 package kr.co.knowledgerally.api.config;
 
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
-import kr.co.knowledgerally.api.core.service.UserDetailsImpl;
+import kr.co.knowledgerally.api.core.oauth2.dto.UserDetailsImpl;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

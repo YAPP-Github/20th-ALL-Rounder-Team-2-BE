@@ -23,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 @Service("kakaoOAuth2Service")
 public class KakaoOAuth2Service implements OAuth2Service {
     private static final String SOCIAL_KAKAO_PROFILE_URL = "https://kapi.kakao.com/v2/user/me";
+    private static final String KAKAO_IDENTIFIER_PREFIX = "kakao_";
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -63,6 +64,6 @@ public class KakaoOAuth2Service implements OAuth2Service {
         long identifier = jsonNode.get("id").asLong();
         String name = jsonNode.get("kakao_account").get("profile").get("nickname").asText();
 
-        return new OAuth2Profile("kakao_" + identifier, name);
+        return new OAuth2Profile(KAKAO_IDENTIFIER_PREFIX + identifier, name);
     }
 }

@@ -48,22 +48,6 @@ public class UserAuthController {
         ));
     }
 
-    @ApiOperation(value = "사용자 식별자 조회", notes = "프로바이더 토큰을 이용해 사용자 식별값을 조회합니다.")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "조회 성공"),
-    })
-    @GetMapping("/identifier")
-    public ResponseEntity<ApiResult<UserIdentifierDto>> identifier(
-            @ApiParam(value = "프로바이더 제공 액세스 토큰", required = true)
-            @RequestParam(name = "provider_token") String providerToken,
-            @ApiParam(value = "프로바이더 이름 (현재는 KAKAO만 가능) (생략가능)")
-            @RequestParam(name = "provider_name", required = false, defaultValue = "KAKAO") String providerName) {
-        OAuth2Profile profile = oAuth2ServiceFactory.getInstance(TokenProvider.valueOf(providerName)).getProfile(providerToken);
-        return ResponseEntity.ok(ApiResult.ok(
-                new UserIdentifierDto(profile.getIdentifier())
-        ));
-    }
-
     @ApiOperation(value = "사용자 등록 (JWT 발급)", notes = "사용자를 신규로 등록하고, JWT를 발급합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "등록 성공"),
@@ -103,12 +87,5 @@ public class UserAuthController {
     @Getter
     public static class UserExistsDto {
         private final boolean exists;
-    }
-
-    @ApiIgnore
-    @AllArgsConstructor
-    @Getter
-    public static class UserIdentifierDto {
-        private final String identifier;
     }
 }

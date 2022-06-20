@@ -12,10 +12,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserControllerTest extends AbstractControllerTest {
+    private static final String USER_ONBOARD_URL = "/api/user/onboard";
+
     @WithMockKnowllyUser
     @Test
     public void 사용자_온보딩_테스트() throws Exception {
-        String newMemberJsonString =
+        final String newMemberJsonString =
                 "{" +
                     "\"user\" : {" +
                         "\"username\": \"테스트이름\"," +
@@ -30,7 +32,7 @@ class UserControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                        patch("/api/user/onboard")
+                        patch(USER_ONBOARD_URL)
                                 .content(newMemberJsonString)
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())

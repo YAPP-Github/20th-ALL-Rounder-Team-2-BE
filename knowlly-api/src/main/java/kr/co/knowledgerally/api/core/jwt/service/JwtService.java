@@ -50,7 +50,7 @@ public class JwtService {
      * @param knowllyRefreshToken 리프레시 JWT 토큰
      * @return jwt 토큰
      */
-    @Transactional
+    @Transactional // TODO db 데이터와 대조하는 로직 필요
     public JwtToken refresh(JwtToken.Refresh knowllyRefreshToken){
         if (isExpired(knowllyRefreshToken)) {
             throw new UnauthorizedException("Refresh Token이 만료되었습니다. 다시 로그인 해주세요.");

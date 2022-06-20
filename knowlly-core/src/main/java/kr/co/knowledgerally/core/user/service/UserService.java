@@ -29,8 +29,4 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findByIdentifier(String identifier) { return userRepository.findByIdentifierAndIsActive(identifier, true)
             .orElseThrow(() -> new ResourceNotFoundException(NOT_EXIST_USER)); }
-
-    @Transactional(readOnly = true)
-    public User findById(Long memberId) { return userRepository.findById(memberId)
-            .orElseThrow(() -> new ResourceNotFoundException(NOT_EXIST_USER)); }
 }

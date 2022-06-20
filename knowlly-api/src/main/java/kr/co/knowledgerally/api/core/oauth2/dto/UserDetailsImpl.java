@@ -1,4 +1,4 @@
-package kr.co.knowledgerally.api.core.service;
+package kr.co.knowledgerally.api.core.oauth2.dto;
 
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.Getter;

@@ -22,6 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserAuthControllerTest extends AbstractControllerTest {
+    private static final String USER_EXISTS_URL = "/api/user/user-exists";
+    private static final String USER_SIGNUP_URL = "/api/user/signup";
+    private static final String USER_SIGNIN_URL = "/api/user/signin";
+    private static final String USER_REFRESH_URL = "/api/user/refresh";
+
     private static final String TEST_PROVIDER_ACCESS_TOKEN = "testProviderToken";
     private static final String TEST_KNOWLLY_ACCESS_TOKEN = "testKnowllyAccessToken";
     private static final String TEST_KNOWLLY_REFRESH_TOKEN = "testKnowllyRefreshToken";
@@ -51,7 +56,7 @@ class UserAuthControllerTest extends AbstractControllerTest {
                 .thenReturn(providerAccessToken -> new OAuth2Profile(TEST_EXIST_IDENTIFIER, "테스트이름"));
 
         mockMvc.perform(
-                        get("/api/user/user-exists")
+                        get(USER_EXISTS_URL)
                                 .param("provider_token", TEST_PROVIDER_ACCESS_TOKEN)
                                 .param("provider_name", "KAKAO")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -67,7 +72,7 @@ class UserAuthControllerTest extends AbstractControllerTest {
                 .thenReturn(providerAccessToken -> new OAuth2Profile(TEST_NON_EXIST_IDENTIFIER, "테스트이름"));
 
         mockMvc.perform(
-                        get("/api/user/user-exists")
+                        get(USER_EXISTS_URL)
                                 .param("provider_token", TEST_PROVIDER_ACCESS_TOKEN)
                                 .param("provider_name", "KAKAO")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -85,7 +90,7 @@ class UserAuthControllerTest extends AbstractControllerTest {
         String body = String.format("{\"providerName\":\"KAKAO\", " +
                 "\"providerAccessToken\":\"%s\"}", TEST_PROVIDER_ACCESS_TOKEN);
         mockMvc.perform(
-                        post("/api/user/signup")
+                        post(USER_SIGNUP_URL)
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
@@ -96,11 +101,27 @@ class UserAuthControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void 사용자_등록_이미_존재_테스트() throws Exception {
+        when(oAuth2ServiceFactory.getInstance(eq(TokenProvider.KAKAO)))
+                .thenReturn(providerAccessToken -> new OAuth2Profile(TEST_EXIST_IDENTIFIER, "테스트이름"));
+
+        String body = String.format("{\"providerName\":\"KAKAO\", " +
+                "\"providerAccessToken\":\"%s\"}", TEST_PROVIDER_ACCESS_TOKEN);
+        mockMvc.perform(
+                        post(USER_SIGNUP_URL)
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("사용자가 이미 존재합니다."))
+                .andDo(print());
+    }
+
+    @Test
     void 사용자_로그인_테스트() throws Exception {
         String body = String.format("{\"providerName\":\"KAKAO\", " +
                 "\"providerAccessToken\":\"%s\"}", TEST_PROVIDER_ACCESS_TOKEN);
         mockMvc.perform(
-                        post("/api/user/signin")
+                        post(USER_SIGNIN_URL)
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
@@ -114,7 +135,7 @@ class UserAuthControllerTest extends AbstractControllerTest {
     @WithMockKnowllyUser
     void 사용자_리프레시_테스트() throws Exception {
         mockMvc.perform(
-                        get("/api/user/refresh")
+                        get(USER_REFRESH_URL)
                                 .param("refresh_token", TEST_KNOWLLY_REFRESH_TOKEN)
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
