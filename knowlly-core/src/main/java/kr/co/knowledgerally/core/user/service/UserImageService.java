@@ -12,6 +12,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_USER;
 
 @Validated
@@ -22,6 +25,11 @@ public class UserImageService {
 
     @Transactional
     public UserImage saveUserImage(@Valid UserImage newUserImage) {
+        List<UserImage> userImages = userImageRepository.findAllByUser(newUserImage.getUser());
+        for (UserImage userImage : userImages) {
+            userImage.makeInactive();
+        }
+        newUserImage.setActive(true);
         return userImageRepository.saveAndFlush(newUserImage);
     }
 }

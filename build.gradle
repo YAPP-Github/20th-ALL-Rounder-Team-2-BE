@@ -130,6 +130,7 @@ project(':knowlly-api') {
 		implementation project(":knowlly-core")
 		testImplementation project(':knowlly-core').sourceSets.test.output
 
+		implementation 'org.springframework.cloud:spring-cloud-aws-context:2.2.1.RELEASE'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		implementation 'io.springfox:springfox-swagger2:2.9.2'
 		implementation 'io.springfox:springfox-swagger-ui:2.9.2'
