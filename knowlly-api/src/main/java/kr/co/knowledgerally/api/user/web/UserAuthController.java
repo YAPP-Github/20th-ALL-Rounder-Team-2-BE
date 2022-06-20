@@ -55,7 +55,7 @@ public class UserAuthController {
     })
     @PostMapping("/signup")
     public ResponseEntity<ApiResult<JwtToken>> signup(
-            @ApiParam(value = "액세스 토큰", required = true) @RequestBody @Valid ProviderToken providerToken) {
+            @ApiParam(value = "프로바이더 액세스 토큰", required = true) @RequestBody @Valid ProviderToken providerToken) {
         return ResponseEntity.ok(ApiResult.ok(
                 signUpService.signUp(providerToken)));
     }
@@ -66,7 +66,7 @@ public class UserAuthController {
     })
     @PostMapping("/signin")
     public ResponseEntity<ApiResult<JwtToken>> signin(
-            @ApiParam(value = "액세스 토큰", required = true) @RequestBody @Valid ProviderToken providerToken) {
+            @ApiParam(value = "프로바이더 액세스 토큰", required = true) @RequestBody @Valid ProviderToken providerToken) {
         return ResponseEntity.ok(ApiResult.ok(
                 jwtService.issue(providerToken)));
     }
@@ -77,7 +77,7 @@ public class UserAuthController {
     })
     @GetMapping("/refresh")
     public ResponseEntity<ApiResult<JwtToken>> refresh(
-            @ApiParam(value = "프로바이더 제공 액세스 토큰", required = true) @RequestParam(name = "refresh_token") String knowllyRefreshToken) {
+            @ApiParam(value = "발급된 JWT refresh 토큰", required = true) @RequestParam(name = "refresh_token") String knowllyRefreshToken) {
         return ResponseEntity.ok(ApiResult.ok(
                 jwtService.refresh(new JwtToken.Refresh(knowllyRefreshToken))));
     }
