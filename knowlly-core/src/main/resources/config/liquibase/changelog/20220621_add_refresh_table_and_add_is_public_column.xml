@@ -26,7 +26,7 @@
             </column>
         </createTable>
         <addColumn tableName="review" >
-            <column name="is_public" type="boolean" value="true">
+            <column name="is_public" type="boolean" valueBoolean="true">
                 <constraints nullable="false"/>
             </column>
         </addColumn>
