@@ -95,8 +95,9 @@ class UserAuthControllerTest extends AbstractControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.knowllyAccessToken").value(TEST_KNOWLLY_ACCESS_TOKEN))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.knowllyRefreshToken").value(TEST_KNOWLLY_REFRESH_TOKEN))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.jwtToken.knowllyAccessToken").value(TEST_KNOWLLY_ACCESS_TOKEN))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.jwtToken.knowllyRefreshToken").value(TEST_KNOWLLY_REFRESH_TOKEN))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.username").value("테스트이름"))
                 .andDo(print());
     }
 
