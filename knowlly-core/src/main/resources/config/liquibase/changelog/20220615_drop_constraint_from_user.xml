@@ -9,7 +9,7 @@
 
     <changeSet id="20220615" author="hkpark">
         <addColumn tableName="user">
-            <column name="email_temp" type="varchar(255)">
+            <column name="email_temp" type="VARCHAR(255)">
                 <constraints nullable="true" unique="false"/>
             </column>
         </addColumn>
