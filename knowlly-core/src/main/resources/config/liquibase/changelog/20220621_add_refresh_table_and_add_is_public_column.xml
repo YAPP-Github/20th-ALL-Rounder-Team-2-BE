@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20220621" author="hkpark">
+        <createTable tableName="refresh_token">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="fk_refresh_token_user" references="user(id)" nullable="false"/>
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addColumn tableName="review" >
+            <column name="is_public" type="boolean" value="true">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

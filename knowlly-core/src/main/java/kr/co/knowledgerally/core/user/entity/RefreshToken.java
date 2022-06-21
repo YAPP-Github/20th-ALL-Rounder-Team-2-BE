@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "review")
-public class Review {
+@Table(name = "refresh_token")
+public class RefreshToken {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,20 +23,8 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
-
     @Column(nullable = false)
-    private String content;
-
-    @Builder.Default
-    @Column(nullable = false)
-    private boolean isPublic = true;
-
-    @Builder.Default
-    @Column(nullable = false)
-    private boolean isActive = true;
+    private String value;
 
     @Builder.Default
     @CreationTimestamp

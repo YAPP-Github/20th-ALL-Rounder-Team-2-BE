@@ -20,6 +20,12 @@ INSERT INTO ball_history (id, user_id, title, content, count, is_active, created
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (6, 4, '온보딩', '온보딩', 1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (7, 5, '운영 클래스', '프랑스어 수업', 1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
 
+INSERT INTO refresh_token (id, user_id, value, created_at, updated_at) VALUES (1, 1, 'refresh_token1', '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+INSERT INTO refresh_token (id, user_id, value, created_at, updated_at) VALUES (2, 2, 'refresh_token2', '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+INSERT INTO refresh_token (id, user_id, value, created_at, updated_at) VALUES (3, 3, 'refresh_token3', '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+INSERT INTO refresh_token (id, user_id, value, created_at, updated_at) VALUES (4, 4, 'refresh_token4', '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+INSERT INTO refresh_token (id, user_id, value, created_at, updated_at) VALUES (5, 5, 'refresh_token5', '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+
 INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VALUES (1, 1, '안녕하세요. 테스트1 코치입니다.', true, '2022-06-13 21:57:17', '2022-06-13 21:57:17');
 INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VALUES (2, 3, '안녕하세요. 테스트3 코치입니다.', true, '2022-06-13 21:57:18', '2022-06-13 21:57:18');
 INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VALUES (3, 4, '안녕하세요. 테스트4 코치입니다.', true, '2022-06-13 21:57:18', '2022-06-13 21:57:19');
@@ -30,10 +36,10 @@ INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is
 INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (3, 1, 2, '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
 INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (4, 4, 3, '알림 내용', 'PLAYER', true, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
 
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at) VALUES (1, 1, 3, '테스트3은 좋은 코치입니다!', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15');
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at) VALUES (2, 2, 1, '테스트1 코치는 친절했어요~', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15');
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at) VALUES (3, 4, 3, '테스트3 코치는 좀 별로였습니다', true, '2022-06-13 22:19:16', '2022-06-13 22:19:16');
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at) VALUES (4, 3, 1, '테스트1 코치가 최고에요~', true, '2022-06-13 22:19:18', '2022-06-13 22:19:17');
+INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (1, 1, 3, '테스트3은 좋은 코치입니다!', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
+INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (2, 2, 1, '테스트1 코치는 친절했어요~', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
+INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (3, 4, 3, '테스트3 코치는 좀 별로였습니다', true, '2022-06-13 22:19:16', '2022-06-13 22:19:16', false);
+INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (4, 3, 1, '테스트1 코치가 최고에요~', true, '2022-06-13 22:19:18', '2022-06-13 22:19:17', true);
 
 INSERT INTO category (id, category_name, is_active) VALUES (1, '기획 / PM', true);
 INSERT INTO category (id, category_name, is_active) VALUES (2, '디자인', true);
