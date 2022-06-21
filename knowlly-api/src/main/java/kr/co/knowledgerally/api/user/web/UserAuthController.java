@@ -8,6 +8,7 @@ import kr.co.knowledgerally.api.core.jwt.dto.TokenProvider;
 import kr.co.knowledgerally.api.core.jwt.service.JwtService;
 import kr.co.knowledgerally.api.core.oauth2.dto.OAuth2Profile;
 import kr.co.knowledgerally.api.core.oauth2.service.OAuth2ServiceFactory;
+import kr.co.knowledgerally.api.user.dto.UserSignUpDto;
 import kr.co.knowledgerally.api.user.service.UserSignUpService;
 import kr.co.knowledgerally.core.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -54,7 +55,7 @@ public class UserAuthController {
             @ApiResponse(code = 400, message = "잘못된 요청, 이미 등록한 사용자"),
     })
     @PostMapping("/signup")
-    public ResponseEntity<ApiResult<JwtToken>> signup(
+    public ResponseEntity<ApiResult<UserSignUpDto>> signup(
             @ApiParam(value = "프로바이더 액세스 토큰", required = true) @RequestBody @Valid ProviderToken providerToken) {
         return ResponseEntity.ok(ApiResult.ok(
                 signUpService.signUp(providerToken)));
