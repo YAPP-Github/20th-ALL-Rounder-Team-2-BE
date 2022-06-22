@@ -23,6 +23,11 @@ import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_USER
 public class UserImageService {
     private final UserImageRepository userImageRepository;
 
+    /**
+     * 사용자 이미지 저장
+     * @param newUserImage 신규 이미지
+     * @return 저장 결과 이미지 객체
+     */
     @Transactional
     public UserImage saveUserImage(@Valid UserImage newUserImage) {
         List<UserImage> userImages = userImageRepository.findAllByUser(newUserImage.getUser());
