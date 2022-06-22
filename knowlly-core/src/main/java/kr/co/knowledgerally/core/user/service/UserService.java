@@ -19,8 +19,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public User saveUser(@Valid User newUser) {
-        return userRepository.saveAndFlush(newUser);
+    public User saveUser(@Valid User user) {
+        return userRepository.saveAndFlush(user);
     }
 
     @Transactional(readOnly = true)
