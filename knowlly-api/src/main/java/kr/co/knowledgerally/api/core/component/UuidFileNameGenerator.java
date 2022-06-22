@@ -15,6 +15,6 @@ public class UuidFileNameGenerator implements FileNameGenerator {
      */
     @Override
     public String generate(String originalFileName) {
-        return originalFileName + UNDER_DASH + UUID.randomUUID();
+        return UUID.randomUUID() + UNDER_DASH + originalFileName;
     }
 }

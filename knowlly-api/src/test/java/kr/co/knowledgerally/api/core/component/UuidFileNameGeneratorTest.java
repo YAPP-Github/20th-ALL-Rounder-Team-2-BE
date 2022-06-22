@@ -12,6 +12,6 @@ class UuidFileNameGeneratorTest {
 
         String generated = fileNameGenerator.generate(originalFileName);
         System.out.println(generated);
-        assertTrue(generated.startsWith("원본파일이름_"));
+        assertTrue(generated.endsWith("_원본파일이름"));
     }
 }
