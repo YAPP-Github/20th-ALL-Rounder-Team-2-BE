@@ -23,7 +23,6 @@ public class TestUserDtoFactory implements TestDtoFactory<UserDto> {
                 .intro("안녕하세요. 저는 테스트1이라고 합니다.")
                 .kakaoId("kakao_test1")
                 .portfolio("포트폴리오1")
-                .identifier("identifier1")
                 .build();
     }
 
