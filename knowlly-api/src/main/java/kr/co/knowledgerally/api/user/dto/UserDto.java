@@ -37,11 +37,6 @@ public class UserDto {
     @JsonProperty(index = PropertyDisplayOrder.PORTFOLIO)
     private String portfolio;
 
-    @NotBlank
-    @ApiModelProperty(value = "사용자 식별값", required = true, position = PropertyDisplayOrder.IDENTIFIER)
-    @JsonProperty(index = PropertyDisplayOrder.IDENTIFIER)
-    private String identifier;
-
     @SuperBuilder
     @Getter
     @Setter
@@ -68,6 +63,10 @@ public class UserDto {
                 position = PropertyDisplayOrder.IS_PUSH_ACTIVE)
         @JsonProperty(index = PropertyDisplayOrder.IS_PUSH_ACTIVE)
         private boolean isPushActive;
+
+        @ApiModelProperty(value = "사용자 식별값", position = PropertyDisplayOrder.IDENTIFIER)
+        @JsonProperty(index = PropertyDisplayOrder.IDENTIFIER)
+        private String identifier;
     }
 
     private static class PropertyDisplayOrder {

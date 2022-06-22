@@ -23,8 +23,7 @@ class UserControllerTest extends AbstractControllerTest {
                         "\"username\": \"테스트이름\"," +
                         "\"intro\": \"테스트 자기소개\"," +
                         "\"kakaoId\": \"test_kakao_id\"," +
-                        "\"portfolio\": \"portfolio.io\"," +
-                        "\"identifier\": \"kakao_12341234\"" +
+                        "\"portfolio\": \"portfolio.io\"" +
                 "   }," +
                     "\"userImage\" : {" +
                         "\"userImgUrl\": \"http://testImgUrl.com\"" +
@@ -42,7 +41,7 @@ class UserControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.intro").value("테스트 자기소개"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.kakaoId").value("test_kakao_id"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.portfolio").value("portfolio.io"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.identifier").value("kakao_12341234"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.identifier").value("kakao_12341234"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.userImage.userImgUrl").value("http://testImgUrl.com"));
     }
 

@@ -38,6 +38,7 @@ public class UserOnboardService {
                                            User loggedInUser) {
         User onBoardingUser = userMapper.toEntity(userOnboardDto.getUser());
         onBoardingUser.setId(loggedInUser.getId());
+        onBoardingUser.setIdentifier(loggedInUser.getIdentifier());
         User savedUser = userService.saveUser(onBoardingUser);
         UserImage savedUserImage = userImageService.saveUserImage(userImageMapper.toEntity(userOnboardDto.getUserImage(), savedUser));
 
