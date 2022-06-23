@@ -28,7 +28,6 @@ class UserMeControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.kakaoId").value("kakao_test1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.portfolio").value("포트폴리오1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.identifier").value("identifier1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.coach").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.userImage.userImgUrl").value("http://test1.img.url"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.coach.introduce").value("안녕하세요. 테스트1 코치입니다."))
                 .andDo(print());
