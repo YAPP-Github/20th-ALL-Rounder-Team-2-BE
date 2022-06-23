@@ -37,4 +37,17 @@ public class UserImageService {
         newUserImage.setActive(true);
         return userImageRepository.saveAndFlush(newUserImage);
     }
+
+    /**
+     * 사용자 프로필 이미지 검색
+     * @param user 사용자
+     * @return 사용자의 프로필 이미지 객체
+     */
+    @Transactional
+    public UserImage findByUser(User user) {
+        return userImageRepository.findAllByUser(user).stream()
+                .filter(UserImage::isActive)
+                .findFirst()
+                .orElse(null);
+    }
 }

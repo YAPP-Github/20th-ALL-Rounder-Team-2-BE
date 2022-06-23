@@ -23,7 +23,6 @@ public class UserDto {
     @JsonProperty(index = PropertyDisplayOrder.USERNAME)
     private String username;
 
-    @KorEngOnly
     @NotBlank
     @ApiModelProperty(value = "사용자 자기 소개", required = true, position = PropertyDisplayOrder.INTRO)
     @JsonProperty(index = PropertyDisplayOrder.INTRO)
