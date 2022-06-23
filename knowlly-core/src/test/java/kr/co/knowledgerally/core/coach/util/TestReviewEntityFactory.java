@@ -1,9 +1,10 @@
-package kr.co.knowledgerally.core.user.util;
+package kr.co.knowledgerally.core.coach.util;
 
 import kr.co.knowledgerally.core.core.util.TestEntityFactory;
-import kr.co.knowledgerally.core.user.entity.Coach;
-import kr.co.knowledgerally.core.user.entity.Review;
+import kr.co.knowledgerally.core.coach.entity.Coach;
+import kr.co.knowledgerally.core.coach.entity.Review;
 import kr.co.knowledgerally.core.user.entity.User;
+import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 
 /**
  * 테스트용 리뷰 엔티티 생성 팩토리

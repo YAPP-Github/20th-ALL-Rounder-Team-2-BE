@@ -1,5 +1,6 @@
-package kr.co.knowledgerally.core.user.entity;
+package kr.co.knowledgerally.core.coach.entity;
 
+import kr.co.knowledgerally.core.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

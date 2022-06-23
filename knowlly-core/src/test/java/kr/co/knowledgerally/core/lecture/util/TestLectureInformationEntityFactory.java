@@ -3,8 +3,8 @@ package kr.co.knowledgerally.core.lecture.util;
 import kr.co.knowledgerally.core.core.util.TestEntityFactory;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
-import kr.co.knowledgerally.core.user.entity.Coach;
-import kr.co.knowledgerally.core.user.util.TestCoachEntityFactory;
+import kr.co.knowledgerally.core.coach.entity.Coach;
+import kr.co.knowledgerally.core.coach.util.TestCoachEntityFactory;
 
 /**
  * 테스트용 강의정보 엔티티 생성 팩토리
