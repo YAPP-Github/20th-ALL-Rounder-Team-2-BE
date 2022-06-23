@@ -32,9 +32,9 @@ class ReviewRepositoryCrudTest extends AbstractRepositoryCrudTest {
         Review review = reviewRepository.findById(1L).orElseThrow();
 
         assertEquals(1L, review.getId());
-        assertEquals(1L, review.getUser().getId());
-        assertEquals(3L, review.getCoach().getId());
-        assertEquals(4L, review.getCoach().getUser().getId());
+        assertEquals(1L, review.getWriter().getId());
+        assertEquals(3L, review.getReviewee().getId());
+        assertEquals(4L, review.getReviewee().getUser().getId());
         assertEquals("테스트3은 좋은 코치입니다!", review.getContent());
         assertTrue(review.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 19, 14), review.getCreatedAt());
