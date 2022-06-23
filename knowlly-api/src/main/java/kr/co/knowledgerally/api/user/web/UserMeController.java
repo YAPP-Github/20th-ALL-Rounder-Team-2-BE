@@ -10,6 +10,7 @@ import kr.co.knowledgerally.api.user.dto.UserProfileDto;
 import kr.co.knowledgerally.api.user.service.UserDropoutService;
 import kr.co.knowledgerally.api.user.service.UserModifyService;
 import kr.co.knowledgerally.api.user.service.UserProfileService;
+import kr.co.knowledgerally.core.core.exception.BadRequestException;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.service.UserImageService;
 import kr.co.knowledgerally.core.user.service.UserService;
