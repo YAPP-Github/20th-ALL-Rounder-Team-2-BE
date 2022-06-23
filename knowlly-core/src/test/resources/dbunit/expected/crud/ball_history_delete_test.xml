@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <ball_history id="2" user_id="1" title="수강 클래스" content="영어 수업" count="-1" is_active="true"
-                  created_at="2022-06-13 21:52:34" updated_at="2022-06-13 21:52:35"/>
+                  created_at="2022-06-13 21:52:35" updated_at="2022-06-13 21:52:36"/>
     <ball_history id="3" user_id="2" title="온보딩" content="온보딩" count="1" is_active="true"
                   created_at="2022-06-13 21:52:34" updated_at="2022-06-13 21:52:35"/>
     <ball_history id="4" user_id="2" title="수강 클래스" content="자바 수업" count="-1" is_active="true"
