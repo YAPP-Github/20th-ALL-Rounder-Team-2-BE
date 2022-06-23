@@ -52,9 +52,9 @@ public class UserMeController {
         return ResponseEntity.ok(ApiResult.ok(userModifyService.modify(userDto, loggedInUser)));
     }
 
-    @ApiOperation(value = "로그인한 사용자 탈퇴하기", notes = "현재 로그인한 사용자를 탈퇴합니다.")
+    @ApiOperation(value = "로그인한 사용자 탈퇴하기", notes = "현재 로그인한 사용자를 탈퇴합니다.\n*주의 : 테스트용 JWT를 사용한 채로 이 엔드포인트를 호출하지 마세요. 데이터 꼬입니다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "조회 성공"),
+            @ApiResponse(code = 200, message = "삭제 성공"),
     })
     @DeleteMapping("/me")
     public ResponseEntity<ApiResult<String>> meDelete(@ApiIgnore @CurrentUser User loggedInUser) {
