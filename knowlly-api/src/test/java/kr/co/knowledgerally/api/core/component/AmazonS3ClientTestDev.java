@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-@EnabledIfEnvironmentVariable(named = "SPRING_PROFILES_ACTIVE", matches = "dev")
+@EnabledIfEnvironmentVariable(named = "TEST_SPRING_PROFILES_ACTIVE", matches = "dev")
 @ActiveProfiles("dev")
 @SpringBootTest
 class AmazonS3ClientTestDev {

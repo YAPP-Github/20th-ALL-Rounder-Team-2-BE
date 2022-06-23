@@ -50,7 +50,7 @@ jobs:
       - name: Gradle 테스트 및 실행파일 생성
         run: ./gradlew build test bootJar -Dfile.encoding=UTF-8 -Duser.timezone=Asia/Seoul --info
         env:
-          SPRING_PROFILES_ACTIVE: dev
+          TEST_SPRING_PROFILES_ACTIVE: dev
 
       - uses: actions/upload-artifact@v2
         name: 생성한 파일 업로드
