@@ -58,6 +58,11 @@ public class UserMeController {
     })
     @DeleteMapping("/me")
     public ResponseEntity<ApiResult<String>> meDelete(@ApiIgnore @CurrentUser User loggedInUser) {
+        // 임시조치 - 테스트용 JWT 삭제 방지, 프론트에서 개발이 어느정도 완료되면 삭제
+        if ("kakao_identifier1".equals(loggedInUser.getIdentifier())) {
+            throw new BadRequestException("테스트용 JWT로 삭제요청하지 마세요!!");
+        }
+
         userDropoutService.dropOut(loggedInUser);
         return ResponseEntity.ok(ApiResult.ok("로그인된 사용자가 삭제되었습니다."));
     }
