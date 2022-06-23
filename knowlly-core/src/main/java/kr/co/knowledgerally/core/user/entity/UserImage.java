@@ -39,4 +39,8 @@ public class UserImage {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public void makeInactive() {
+        this.isActive = false;
+    }
 }

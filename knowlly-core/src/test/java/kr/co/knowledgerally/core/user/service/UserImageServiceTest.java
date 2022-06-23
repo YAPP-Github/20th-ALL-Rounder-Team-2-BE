@@ -25,7 +25,7 @@ class UserImageServiceTest {
     TestUserImageEntityFactory testUserImageEntityFactory = new TestUserImageEntityFactory();
 
     @Test
-    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/user_image_insert_test.xml",
+    @ExpectedDatabase(value = "classpath:dbunit/expected/유저_이미지_저장_테스트.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     void 유저_이미지_저장_테스트() {
         UserImage userImage = testUserImageEntityFactory.createEntity(8L, 1L);
