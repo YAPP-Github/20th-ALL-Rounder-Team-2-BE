@@ -65,4 +65,30 @@ class UserServiceTest {
             userService.findByIdentifier("non-exist-identifier");
         });
     }
+
+    @Test
+    void ID로_사용자_찾기() {
+        User user = userService.findById(1L);
+
+        assertEquals(1L, user.getId());
+        assertEquals("test1@email.com", user.getEmail());
+        assertEquals("테스트1", user.getUsername());
+        assertEquals(1, user.getBallCnt());
+        assertEquals("안녕하세요. 저는 테스트1이라고 합니다.", user.getIntro());
+        assertEquals("kakao_test1", user.getKakaoId());
+        assertEquals("포트폴리오1", user.getPortfolio());
+        assertEquals("identifier1", user.getIdentifier());
+        assertTrue(user.isCoach());
+        assertTrue(user.isPushActive());
+        assertTrue(user.isActive());
+        assertEquals(LocalDateTime.of(2022, 6, 10, 21, 18, 58), user.getCreatedAt());
+        assertEquals(LocalDateTime.of(2022, 6, 10, 21, 19, 0), user.getUpdatedAt());
+    }
+
+    @Test
+    void ID로_사용자_찾기_실패() {
+        assertThrows(ResourceNotFoundException.class, () -> {
+            userService.findById(9999L);
+        });
+    }
 }

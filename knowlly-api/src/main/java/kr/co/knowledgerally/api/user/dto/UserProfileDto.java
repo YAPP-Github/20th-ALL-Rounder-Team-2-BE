@@ -3,6 +3,7 @@ package kr.co.knowledgerally.api.user.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.knowledgerally.api.coach.dto.CoachDto;
 import lombok.*;
 
 @Builder
@@ -19,4 +20,8 @@ public class UserProfileDto {
     @ApiModelProperty(value = "프로필 이미지")
     @JsonProperty
     private UserImageDto userImage;
+
+    @ApiModelProperty(value = "코치 정보")
+    @JsonProperty
+    private CoachDto.ReadOnly coach;
 }

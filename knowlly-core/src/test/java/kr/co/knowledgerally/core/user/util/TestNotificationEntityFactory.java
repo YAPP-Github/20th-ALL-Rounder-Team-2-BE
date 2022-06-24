@@ -1,7 +1,8 @@
 package kr.co.knowledgerally.core.user.util;
 
+import kr.co.knowledgerally.core.coach.util.TestCoachEntityFactory;
 import kr.co.knowledgerally.core.core.util.TestEntityFactory;
-import kr.co.knowledgerally.core.user.entity.Coach;
+import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.user.entity.Notification;
 import kr.co.knowledgerally.core.user.entity.User;
 

@@ -41,7 +41,7 @@ public class UserImageService {
     /**
      * 사용자 프로필 이미지 검색
      * @param user 사용자
-     * @return 사용자의 프로필 이미지 객체
+     * @return 사용자의 프로필 이미지 객체, 없다면 null 리턴
      */
     @Transactional
     public UserImage findByUser(User user) {

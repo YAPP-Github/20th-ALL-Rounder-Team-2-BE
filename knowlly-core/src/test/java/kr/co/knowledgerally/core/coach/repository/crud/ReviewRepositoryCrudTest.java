@@ -1,12 +1,12 @@
-package kr.co.knowledgerally.core.user.repository.crud;
+package kr.co.knowledgerally.core.coach.repository.crud;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import kr.co.knowledgerally.core.core.repository.AbstractRepositoryCrudTest;
-import kr.co.knowledgerally.core.user.entity.Review;
-import kr.co.knowledgerally.core.user.repository.ReviewRepository;
-import kr.co.knowledgerally.core.user.util.TestReviewEntityFactory;
+import kr.co.knowledgerally.core.coach.entity.Review;
+import kr.co.knowledgerally.core.coach.repository.ReviewRepository;
+import kr.co.knowledgerally.core.coach.util.TestReviewEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
