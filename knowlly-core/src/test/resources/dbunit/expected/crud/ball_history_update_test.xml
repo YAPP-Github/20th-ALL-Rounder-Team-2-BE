@@ -3,7 +3,7 @@
     <ball_history id="1" user_id="1" title="제목 변경" content="프랑스어 수업" count="1" is_active="true"
                   created_at="2022-06-13 21:52:34" />
     <ball_history id="2" user_id="1" title="수강 클래스" content="영어 수업" count="-1" is_active="true"
-                  created_at="2022-06-13 21:52:34" />
+                  created_at="2022-06-13 21:52:35" />
     <ball_history id="3" user_id="2" title="온보딩" content="온보딩" count="1" is_active="true"
                   created_at="2022-06-13 21:52:34" />
     <ball_history id="4" user_id="2" title="수강 클래스" content="자바 수업" count="-1" is_active="true"

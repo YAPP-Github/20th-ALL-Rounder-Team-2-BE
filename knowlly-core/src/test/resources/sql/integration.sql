@@ -13,7 +13,7 @@ INSERT INTO user_image (id, user_id, user_img_url, is_active, created_at, update
 INSERT INTO user_image (id, user_id, user_img_url, is_active, created_at, updated_at) VALUES (7, 2, 'http://test2.img2.url', true, '2022-06-13 21:27:06', '2022-06-13 21:27:06');
 
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (1, 1, '운영 클래스', '프랑스어 수업', 1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
-INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (2, 1, '수강 클래스', '영어 수업', -1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
+INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (2, 1, '수강 클래스', '영어 수업', -1, true, '2022-06-13 21:52:35', '2022-06-13 21:52:36');
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (3, 2, '온보딩', '온보딩', 1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (4, 2, '수강 클래스', '자바 수업', -1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
 INSERT INTO ball_history (id, user_id, title, content, count, is_active, created_at, updated_at) VALUES (5, 3, '운영 클래스', '프랑스어 수업', 1, true, '2022-06-13 21:52:34', '2022-06-13 21:52:35');
