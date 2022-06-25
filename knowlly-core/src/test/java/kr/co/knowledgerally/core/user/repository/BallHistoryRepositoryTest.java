@@ -5,6 +5,7 @@ import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.user.entity.BallHistory;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import liquibase.pro.packaged.T;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ class BallHistoryRepositoryTest {
 
     TestUserEntityFactory testUserEntityFactory = new TestUserEntityFactory();
 
+    @Test
     void 사용자로_볼내역_목록_찾기() {
         List<BallHistory> ballHistories = ballHistoryRepository.findAllByUserOrderByCreatedAtDesc(
                 testUserEntityFactory.createEntity(1L));
