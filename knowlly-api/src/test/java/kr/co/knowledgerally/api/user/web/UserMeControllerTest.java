@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserMeControllerTest extends AbstractControllerTest {
-    private static final String USER_ONBOARD_URL = "/api/user/onboard";
     private static final String USER_ME_URL = "/api/user/me";
 
     @WithMockKnowllyUser
@@ -31,30 +30,6 @@ class UserMeControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.userImage.userImgUrl").value("http://test1.img.url"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.coach.introduce").value("안녕하세요. 테스트1 코치입니다."))
                 .andDo(print());
-    }
-
-    @WithMockKnowllyUser
-    @Test
-    public void 사용자_온보딩_테스트() throws Exception {
-        final String newMemberJsonString =
-                "{" +
-                    "\"username\": \"테스트이름\"," +
-                    "\"intro\": \"테스트 자기소개\"," +
-                    "\"kakaoId\": \"test_kakao_id\"," +
-                    "\"portfolio\": \"portfolio.io\"" +
-                "}";
-
-        mockMvc.perform(
-                        patch(USER_ONBOARD_URL)
-                                .content(newMemberJsonString)
-                                .contentType(MediaType.APPLICATION_JSON)
-                ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(1L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.username").value("테스트이름"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.intro").value("테스트 자기소개"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.kakaoId").value("test_kakao_id"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.portfolio").value("portfolio.io"));
     }
 
     @WithMockKnowllyUser

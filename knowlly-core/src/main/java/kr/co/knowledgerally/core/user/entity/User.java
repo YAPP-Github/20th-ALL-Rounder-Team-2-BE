@@ -28,13 +28,13 @@ public class User {
     @Column(nullable = false)
     private int ballCnt;
 
-    @Column(nullable = false)
+    @Column
     private String intro;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private String kakaoId;
 
-    @Column(nullable = false)
+    @Column
     private String portfolio;
 
     @Column(nullable = false)
@@ -47,6 +47,10 @@ public class User {
     @Column(nullable = false)
     @Builder.Default
     private boolean isPushActive = true;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean isOnboard = false;
 
     @Builder.Default
     @Column(nullable = false)
@@ -61,4 +65,11 @@ public class User {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public void modify(User user) {
+        this.username = user.username;
+        this.intro = user.intro;
+        this.kakaoId = user.kakaoId;
+        this.portfolio = user.portfolio;
+    }
 }
