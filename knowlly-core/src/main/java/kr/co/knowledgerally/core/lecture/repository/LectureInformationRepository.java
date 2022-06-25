@@ -12,7 +12,7 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
      * @param isActive 활성화 여부
      * @return 클래스-info List
      */
-    List<LectureInformation> findAllByIsActiveOrderByCreatedAtDesc(boolean isActive);
+    List<LectureInformation> findAllByIsActiveOrderByIdDesc(boolean isActive);
 
     /**
      * 클래스-info들을 카테고리와 활성화 여부로 검색
@@ -20,5 +20,5 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
      * @param category 카테고리
      * @return 클래스-info List
      */
-    List<LectureInformation> findAllByIsActiveAndCategoryOrderByCreatedAtDesc(boolean isActive, Category category);
+    List<LectureInformation> findAllByCategoryAndIsActiveOrderByIdDesc(Category category, boolean isActive);
 }

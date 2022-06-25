@@ -1,4 +1,4 @@
-package kr.co.knowledgerally.api.lecture.service;
+package kr.co.knowledgerally.core.lecture.service;
 
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
@@ -22,7 +22,7 @@ public class LectureInformationService {
      */
     @Transactional
     public List<LectureInformation> findAll() {
-        return lectureInformationRepository.findAllByIsActiveOrderByCreatedAtDesc(true);
+        return lectureInformationRepository.findAllByIsActiveOrderByIdDesc(true);
     }
 
     /**
@@ -32,6 +32,6 @@ public class LectureInformationService {
      */
     @Transactional
     public List<LectureInformation> findAllByCategory(Category category) {
-        return lectureInformationRepository.findAllByIsActiveAndCategoryOrderByCreatedAtDesc(true, category);
+        return lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true);
     }
 }
