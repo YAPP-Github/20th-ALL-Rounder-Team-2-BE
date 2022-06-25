@@ -19,5 +19,5 @@ public class UserSignUpDto {
 
     @ApiModelProperty(value = "사용자 프로필")
     @JsonProperty
-    private UserDto user;
+    private UserDto.ReadOnly user;
 }
