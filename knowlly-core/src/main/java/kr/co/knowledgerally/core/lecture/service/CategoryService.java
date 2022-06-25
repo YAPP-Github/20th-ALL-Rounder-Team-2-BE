@@ -15,6 +15,10 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
+    /**
+     * 클래스 카테고리 목록을 조회합니다.
+     * @return 카테고리 리스트
+     */
     @Transactional(readOnly = true)
     public List<Category> findAll() {
         return categoryRepository.findAllByIsActive(true);
