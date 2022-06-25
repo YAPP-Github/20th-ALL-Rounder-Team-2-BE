@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class CategoryServiceTest {
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
 
     @Test
-    void IsActive로_카테고리_목록_조회() {
+    void 카테고리_목록_조회() {
         List<Category> categoryList = categoryService.findAll();
 
         assertEquals(categoryList.get(0).getCategoryName(), "기획 / PM");
@@ -35,5 +36,11 @@ class CategoryServiceTest {
         assertEquals(categoryList.get(3).getCategoryName(), "마케팅");
         assertEquals(categoryList.get(4).getCategoryName(), "외국어");
         assertEquals(categoryList.get(5).getCategoryName(), "기타");
+    }
+
+    @Test
+    void Id로_카테고리_조회() {
+        Optional<Category> category= categoryService.findById(1L);
+        assertEquals(category.get().getCategoryName(), "기획 / PM");
     }
 }
