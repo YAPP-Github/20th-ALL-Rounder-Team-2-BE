@@ -41,6 +41,7 @@ class FormRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(4L, form.getUser().getId());
         assertEquals("신청서를 받아주세요!", form.getContent());
         assertEquals(Form.State.ACCEPT, form.getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 17), form.getExpirationDate());
         assertTrue(form.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getUpdatedAt());

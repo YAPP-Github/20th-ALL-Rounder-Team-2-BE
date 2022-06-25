@@ -6,6 +6,8 @@ import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 
+import java.time.LocalDateTime;
+
 /**
  * 테스트용 신청서 엔티티 생성 팩토리
  */
@@ -38,6 +40,7 @@ public class TestFormEntityFactory implements TestEntityFactory<Form> {
                 .lecture(testLectureEntityFactory.createEntity(lectureId))
                 .user(testUserEntityFactory.createEntity(userId))
                 .content(String.format("테스트%d의 신청 내용", entityId))
+                .expirationDate(LocalDateTime.of(2022, 6, 16, 22, 48, 17))
                 .build();
     }
 }

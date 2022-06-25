@@ -16,7 +16,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
      * @return 클래스 일정 목록
      */
     @Query("select distinct lec from Lecture lec left join fetch lec.forms f join fetch lec.lectureInformation " +
-            "where lec.lectureInformation.coach = :coach " +
+            "where lec.lectureInformation.coach = :coach and lec.isActive = true " +
             "order by lec.createdAt desc, f.createdAt desc")
     List<Lecture> findAllByCoach(Coach coach);
 
@@ -28,7 +28,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
      */
     @Query("select distinct lec from Lecture lec left join fetch lec.forms f join fetch lec.lectureInformation " +
             "where lec.lectureInformation.coach = :coach and " +
-            "lec.state = :state " +
+            "lec.state = :state and lec.isActive = true " +
             "order by lec.createdAt desc, f.createdAt desc")
     List<Lecture> findAllByCoachAndState(Coach coach, Lecture.State state);
 }

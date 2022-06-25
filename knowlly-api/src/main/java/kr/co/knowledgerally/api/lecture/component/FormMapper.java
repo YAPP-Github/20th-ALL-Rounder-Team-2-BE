@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
         uses = { UserMapper.class, LectureMapper.class }
 )
 public interface FormMapper {
+    @Mapping(target = "expirationDate", expression = "java(form.getExpirationDate().toString())")
     FormDto.ReadOnly toDto(Form form);
     Form toEntity(FormDto lectureDto);
 }

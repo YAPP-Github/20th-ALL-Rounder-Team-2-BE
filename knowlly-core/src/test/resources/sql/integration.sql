@@ -31,10 +31,10 @@ INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VA
 INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VALUES (3, 4, '안녕하세요. 테스트4 코치입니다.', true, '2022-06-13 21:57:18', '2022-06-13 21:57:19');
 INSERT INTO coach (id, user_id, introduce, is_active, created_at, updated_at) VALUES (4, 5, '안녕하세요. 테스트5 코치입니다.', false, '2022-06-13 21:57:20', '2022-06-13 21:57:19');
 
-INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (1, 1, 3, '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
-INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (2, 3, 1, '알림 내용2', 'COACH', true, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
-INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (3, 1, 2, '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
-INSERT INTO notification (id, user_id, coach_id, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (4, 4, 3, '알림 내용', 'PLAYER', true, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
+INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (1, 1, 3, '제목1', '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:08', '2022-06-13 22:17:09');
+INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (2, 3, 1, '제목2', '알림 내용2', 'COACH', true, true, '2022-06-13 22:17:18', '2022-06-13 22:17:19');
+INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (3, 1, 2, '제목3', '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:28', '2022-06-13 22:17:29');
+INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (4, 4, 3, '제목4', '알림 내용', 'PLAYER', true, true, '2022-06-13 22:17:38', '2022-06-13 22:17:39');
 
 INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (1, 1, 3, '테스트3은 좋은 코치입니다!', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
 INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (2, 2, 1, '테스트1 코치는 친절했어요~', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
@@ -75,11 +75,11 @@ INSERT INTO lecture_image (id, lecture_info_id, lecture_img_url, is_active, crea
 INSERT INTO lecture_image (id, lecture_info_id, lecture_img_url, is_active, created_at, updated_at) VALUES (6, 5, 'http://lecture5.img.url', true, '2022-06-13 21:27:05', '2022-06-13 21:27:05');
 INSERT INTO lecture_image (id, lecture_info_id, lecture_img_url, is_active, created_at, updated_at) VALUES (7, 2, 'http://lecture2.img2.url', true, '2022-06-13 21:27:06', '2022-06-13 21:27:06');
 
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (1, 1, 4, '신청서를 받아주세요!', 'ACCEPT', true, '2022-06-13 22:48:17', '2022-06-13 22:48:17');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (2, 2, 3, '제 신청서를 받아주세요!', 'ACCEPT', true, '2022-06-13 22:48:18', '2022-06-13 22:48:18');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (3, 1, 2, '안받아주셔도 되요', 'REJECT', true, '2022-06-13 22:48:19', '2022-06-13 22:48:19');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (4, 4, 1, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-13 22:48:20', '2022-06-13 22:48:20');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (5, 3, 3, '신청 거절해주세요', 'REJECT', true, '2022-06-13 22:51:03', '2022-06-13 22:51:04');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (6, 3, 4, '신청합니다!', 'REQUEST', true, '2022-06-13 22:51:04', '2022-06-13 22:51:05');
-INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (7, 4, 2, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-13 22:51:05', '2022-06-13 22:51:06');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (1, 1, 4, '신청서를 받아주세요!', 'ACCEPT', true, '2022-06-16 22:48:17', '2022-06-13 22:48:17', '2022-06-13 22:48:17');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (2, 2, 3, '제 신청서를 받아주세요!', 'ACCEPT', true, '2022-06-16 22:48:18', '2022-06-13 22:48:18', '2022-06-13 22:48:18');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (3, 1, 2, '안받아주셔도 되요', 'REJECT', true, '2022-06-16 22:48:19', '2022-06-13 22:48:19', '2022-06-13 22:48:19');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (4, 4, 1, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-16 22:48:20', '2022-06-13 22:48:20', '2022-06-13 22:48:20');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (5, 3, 3, '신청 거절해주세요', 'REJECT', true, '2022-06-16 22:51:03', '2022-06-13 22:51:03', '2022-06-13 22:51:04');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (6, 3, 4, '신청합니다!', 'REQUEST', true, '2022-06-16 22:51:04', '2022-06-13 22:51:04', '2022-06-13 22:51:05');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, expiration_date, created_at, updated_at) VALUES (7, 4, 2, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-16 22:51:05', '2022-06-13 22:51:05', '2022-06-13 22:51:06');
 

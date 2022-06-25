@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -34,9 +35,18 @@ public class FormRegisterService {
         Form newForm = formMapper.toEntity(formDto);
         newForm.setLecture(lectureService.findById(lectureId));
         newForm.setUser(loggedInUser);
+        setFormExpirationDate(newForm);
 
         // TODO 볼 차감
 
         return formMapper.toDto(formService.saveForm(newForm));
+    }
+
+    private void setFormExpirationDate(Form newForm) {
+        LocalDateTime expirationDate = newForm.getCreatedAt().plusDays(3);
+        if (expirationDate.isBefore(newForm.getLecture().getStartAt())) {
+            expirationDate = newForm.getLecture().getStartAt();
+        }
+        newForm.setExpirationDate(expirationDate);
     }
 }
