@@ -35,7 +35,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("")
-    public ResponseEntity<ApiResult<List<LectureInformationDto>>> getAllLectureInformation (
+    public ResponseEntity<ApiResult<List<LectureInformationDto.ReadOnly>>> getAllLectureInformation (
             @RequestParam(name = "categoryId", required = false) Long categoryId
     ) {
         List<LectureInformation> result;
