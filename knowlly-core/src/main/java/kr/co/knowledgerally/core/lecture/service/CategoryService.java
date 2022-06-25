@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 @Service
@@ -22,5 +23,15 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public List<Category> findAll() {
         return categoryRepository.findAllByIsActive(true);
+    }
+
+    /**
+     * 클래스 카테고리를 조회합니다.
+     * @param categoryId 카테고리 id
+     * @return 카테고리
+     */
+    @Transactional(readOnly = true)
+    public Optional<Category> findById(Long categoryId) {
+        return categoryRepository.findByIdAndIsActive(categoryId,true);
     }
 }

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.core.lecture.service.CategoryService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
@@ -23,9 +24,10 @@ import java.util.stream.Collectors;
 @Api(value = "클래스-info 관련 엔드포인트")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/lecture-information")
+@RequestMapping("/api/lectureinfo")
 public class LectureInformationController {
     private final LectureInformationService lectureInformationService;
+    private final CategoryService categoryService;
     private final LectureInformationMapper lectureInformationMapper;
 
     @ApiOperation(value = "클래스-info", notes = "클래스-info 목록을 조회합니다.")
@@ -34,12 +36,17 @@ public class LectureInformationController {
     })
     @GetMapping("")
     public ResponseEntity<ApiResult<List<LectureInformationDto>>> getAllLectureInformation (
-            @RequestParam(required = false) Category category
+            @RequestParam(name = "categoryId", required = false) Long categoryId
     ) {
-        if(category == null) {
-            List<LectureInformation> result = lectureInformationService.findAll();
+        List<LectureInformation> result;
+
+        if(categoryId == null) {
+            result = lectureInformationService.findAll();
         }
-        List<LectureInformation> result = lectureInformationService.findAllByCategory(category);
+        else {
+            Category category = categoryService.findById(categoryId).get();
+            result = lectureInformationService.findAllByCategory(category);
+        }
         return ResponseEntity.ok(ApiResult.ok(
                 result
                         .stream()

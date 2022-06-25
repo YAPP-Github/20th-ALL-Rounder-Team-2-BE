@@ -18,7 +18,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @ApiModel(value = "카테고리 모델", description = "클래스 카테고리를 나타내는 모델")
 public class CategoryDto {
-    @NotBlank
+    @ApiModelProperty(value = "카테고리 고유 아이디", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
+    @JsonProperty
+    private Long id;
+
     @ApiModelProperty(value = "카테고리 이름", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @JsonProperty
     private String categoryName;
