@@ -31,9 +31,15 @@ public class BallHistoryDto {
     @JsonProperty(index = PropertyDisplayOrder.COUNT)
     private int count;
 
+    @ApiModelProperty(value = "내역 날짜", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
+            position = PropertyDisplayOrder.HISTORY_DATE)
+    @JsonProperty(index = PropertyDisplayOrder.HISTORY_DATE)
+    private String historyDate;
+
     private static class PropertyDisplayOrder {
         private static final int TITLE = 0;
         private static final int CONTENT = 1;
         private static final int COUNT = 2;
+        private static final int HISTORY_DATE = 3;
     }
 }

@@ -8,8 +8,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.time.format.DateTimeFormatter;
+
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        imports = DateTimeFormatter.class)
 public interface BallHistoryMapper {
-    BallHistoryDto toDto(BallHistory user);
+    @Mapping(target = "historyDate", expression = "java(ballHistory.getCreatedAt()" +
+            ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) )")
+    BallHistoryDto toDto(BallHistory ballHistory);
 }

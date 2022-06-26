@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,9 +28,11 @@ class BallHistoryControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("수강 클래스"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("영어 수업"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].count").value(-1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].historyDate").value("2022-06-13"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].title").value("운영 클래스"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].content").value("프랑스어 수업"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].count").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].historyDate").value("2022-06-13"))
                 .andDo(print());
     }
 }
