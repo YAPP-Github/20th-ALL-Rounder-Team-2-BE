@@ -46,7 +46,7 @@ public class UserMeController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "수정 성공"),
     })
-    @PatchMapping(value = {"/me", "/onboard"})
+    @PatchMapping("/me")
     public ResponseEntity<ApiResult<UserDto.ReadOnly>> mePatch(@ApiIgnore @CurrentUser User loggedInUser,
                                                              @ApiParam(value = "수정할 회원 정보", required = true)
                                                              @RequestBody @Valid UserDto userDto) {

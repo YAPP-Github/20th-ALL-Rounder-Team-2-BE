@@ -40,6 +40,7 @@ class UserRepositoryTest {
         assertEquals("identifier1", user.getIdentifier());
         assertTrue(user.isCoach());
         assertTrue(user.isPushActive());
+        assertTrue(user.isOnboard());
         assertTrue(user.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 10, 21, 18, 58), user.getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 10, 21, 19, 0), user.getUpdatedAt());
