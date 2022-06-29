@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.api.lecture.service.LectureInformationSearchService;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/lectureinfo")
 public class LectureInformationController {
     private final LectureInformationService lectureInformationService;
+    private final LectureInformationSearchService lectureInformationSearchService;
     private final CategoryService categoryService;
     private final LectureInformationMapper lectureInformationMapper;
 
@@ -49,6 +51,22 @@ public class LectureInformationController {
         }
         return ResponseEntity.ok(ApiResult.ok(
                 result
+                        .stream()
+                        .map(lectureInformationMapper::toDto)
+                        .collect(Collectors.toList())
+        ));
+    }
+
+    @ApiOperation(value = "클래스-info 검색", notes = "키워드로 클래스-info 목록을 검색합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @GetMapping("/search")
+    public ResponseEntity<ApiResult<List<LectureInformationDto.ReadOnly>>> searchAllLectureInformation (
+            @RequestParam(name = "keyword") String keyword
+    ) {
+        return ResponseEntity.ok(ApiResult.ok(
+                lectureInformationSearchService.searchAllByKeyword(keyword)
                         .stream()
                         .map(lectureInformationMapper::toDto)
                         .collect(Collectors.toList())

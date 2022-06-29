@@ -1,5 +1,6 @@
 package kr.co.knowledgerally.core.lecture.repository;
 
+import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,12 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
      * @return 클래스-info List
      */
     List<LectureInformation> findAllByCategoryAndIsActiveOrderByIdDesc(Category category, boolean isActive);
+
+    /**
+     * 클래스-info들을 topic과 활성화 여부로 검색
+     * @param isActive 활성화 여부
+     * @param topic 제목
+     * @return 클래스-info List
+     */
+    List<LectureInformation> findAllByTopicAndIsActiveOrderByIdDesc(String topic, boolean isActive);
 }

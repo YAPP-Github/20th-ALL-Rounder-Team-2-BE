@@ -44,6 +44,10 @@ public class LectureInformationDto {
         @ApiModelProperty(value = "카테고리 정보", position = PropertyDisplayOrder.CATEGORY)
         @JsonProperty(index = PropertyDisplayOrder.CATEGORY)
         private CategoryDto category;
+
+        @ApiModelProperty(value = "클래스-info 이미지", position = PropertyDisplayOrder.IMAGE)
+        @JsonProperty(index = PropertyDisplayOrder.IMAGE)
+        private LectureImageDto lectureImage;
     }
 
     private static class PropertyDisplayOrder {
@@ -52,5 +56,6 @@ public class LectureInformationDto {
         private static final int PRICE = 2;
         private static final int COACH = 3;
         private static final int CATEGORY = 4;
+        private static final int IMAGE = 5;
     }
 }
