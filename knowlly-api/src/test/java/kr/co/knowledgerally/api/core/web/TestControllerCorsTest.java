@@ -25,7 +25,7 @@ class TestControllerCorsTest extends AbstractControllerTest {
                                 .header(ACCESS_CONTROL_ALLOW_METHODS, "GET")
                                 .header(ORIGIN, "http://localhost:3000")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.header().string(ACCESS_CONTROL_ALLOW_ORIGIN,"*"))
+                .andExpect(MockMvcResultMatchers.header().string(ACCESS_CONTROL_ALLOW_ORIGIN,"http://localhost:3000"))
                 .andDo(print());
     }
 
