@@ -9,4 +9,5 @@ public class ErrorMessage {
 
     // Member
     public static String NOT_EXIST_USER = "존재하지 않는 사용자입니다.";
+    public static String NOT_EXIST_COACH = "존재하지 않는 코치입니다.";
 }
