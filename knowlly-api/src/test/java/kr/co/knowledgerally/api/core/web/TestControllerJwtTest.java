@@ -1,21 +1,17 @@
 package kr.co.knowledgerally.api.core.web;
 
-import kr.co.knowledgerally.api.core.jwt.dto.TokenProvider;
-import kr.co.knowledgerally.api.core.oauth2.dto.OAuth2Profile;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class TestControllerTest extends AbstractControllerTest {
-    private static final String API_TEST_URL = "/api/test";
+class TestControllerJwtTest extends AbstractControllerTest {
     private static final String API_AUTHENTICATED_TEST_URL = "/api/authenticated-test";
 
     private static final String X_AUTH_TOKEN = "X-AUTH-TOKEN";
@@ -26,7 +22,6 @@ class TestControllerTest extends AbstractControllerTest {
     private static final String TEST_NOT_VALID_ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub24tZXhpc3QtaWRlbnRpZm" +
             "llciIsInVzZXJuYW1lIjoi7YWM7Iqk7Yq4MSIsImlhdCI6MzQ5NjcwNTExMCwiZXhwIjozNDk2NzkxNTEwfQ.mE1-xQ5Yr1Txkqz9d1_2" +
             "wM5fC6KgFLQssALKe7c8lN7qivYHkMGXN21pFzJt_W8977QrpvGodMYK0Q1VtsQBgA";
-
 
     @Test
     void JWT_토큰_테스트() throws Exception {
