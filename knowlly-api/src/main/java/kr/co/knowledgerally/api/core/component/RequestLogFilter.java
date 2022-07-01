@@ -20,7 +20,6 @@ import java.util.Map;
  *  <a href="https://velog.io/@sixhustle/log">소스코드 출처</a>
  */
 @Slf4j
-@WebFilter(urlPatterns= "/api/*")
 public class RequestLogFilter implements Filter {
 
     @Override
