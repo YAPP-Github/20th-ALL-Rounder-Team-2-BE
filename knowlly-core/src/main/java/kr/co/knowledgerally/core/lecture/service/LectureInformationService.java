@@ -24,8 +24,8 @@ public class LectureInformationService {
      * @return 클래스-info 리스트
      */
     @Transactional
-    public List<LectureInformation> findAll() {
-        return lectureInformationRepository.findAllTop10ByIsActiveOrderByIdDesc(true);
+    public Page<LectureInformation> findAllWithPageable(Pageable pageable) {
+        return lectureInformationRepository.findAllTop10ByIsActiveOrderByIdDesc(true, pageable);
     }
 
     /**
@@ -34,13 +34,23 @@ public class LectureInformationService {
      * @return 클래스-info 리스트
      */
     @Transactional
-    public List<LectureInformation> findAllByCategory(Category category) {
-        return lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true);
+    public Page<LectureInformation> findAllByCategoryWithPageable(Category category, Pageable pageable) {
+        return lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true, pageable);
+    }
+
+    /**
+     * 해당 카테고리 이름으로 클래스-info 목록을 검색합니다.
+     * @param categoryName 검색하고자 하는 카테고리 이름
+     * @return 클래스-info 리스트
+     */
+    @Transactional
+    public List<LectureInformation> searchAllByCategoryName(String categoryName) {
+        return lectureInformationRepository.findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc(categoryName, true);
     }
 
     /**
      * 제목으로 클래스-info 목록을 검색합니다.
-     * @param topic 검색하고자 하는 카테고리
+     * @param topic 검색하고자 하는 클래스 제목
      * @return 클래스-info 리스트
      */
     @Transactional

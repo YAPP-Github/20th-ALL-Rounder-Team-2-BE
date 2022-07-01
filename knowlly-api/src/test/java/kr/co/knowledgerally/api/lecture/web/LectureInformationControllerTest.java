@@ -64,17 +64,31 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
     public void 클래스_info_keyword로_검색_테스트() throws Exception {
         String keyword = "keyword";
 
+        //클래스 제목 기반 검색
         mockMvc.perform(
                 get(LECTUREINFORMATION_SEARCH_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .queryParam(keyword, "마케팅"))
+                        .queryParam(keyword, "수업"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("마케팅 수업"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("효과적인 마케팅에 대해 배웁니다"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2)
-        );
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2));
+
+        //카테고리 이름 기반 검색
+        mockMvc.perform(
+                        get(LECTUREINFORMATION_SEARCH_URL)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .queryParam(keyword, "기타"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("요리 클래스"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(1));
+
     }
 }

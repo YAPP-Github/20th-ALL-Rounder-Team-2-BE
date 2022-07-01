@@ -27,7 +27,7 @@ public class LectureInformationSearchServiceTest {
 
     @Test
     void 클래스_info_keyword로_검색() {
-        Page<LectureInformation> lectureInformations = lectureInformationSearchService.searchAllByKeyword("마케팅", PageRequest.of(0, 2));
+        Page<LectureInformation> lectureInformations = lectureInformationSearchService.searchAllByKeyword("수업", PageRequest.of(0, 2));
 
         assertEquals(1, lectureInformations.getNumberOfElements());
         assertEquals(1, lectureInformations.getTotalElements());

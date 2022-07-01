@@ -14,13 +14,12 @@ import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Api(value = "클래스-info 관련 엔드포인트")
 @RestController
@@ -40,17 +39,17 @@ public class LectureInformationController {
     public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation (
             @RequestParam(name = "categoryId", required = false) Long categoryId, ApiPageRequest pageRequest
     ) {
-        List<LectureInformation> result;
+        Page<LectureInformation> result;
 
         if(categoryId == null) {
-            result = lectureInformationService.findAll();
+            result = lectureInformationService.findAllWithPageable(pageRequest.convert());
         }
         else {
             Category category = categoryService.findById(categoryId).get();
-            result = lectureInformationService.findAllByCategory(category);
+            result = lectureInformationService.findAllByCategoryWithPageable(category, pageRequest.convert());
         }
         return ResponseEntity.ok(ApiPageResult.ok(
-                lectureInformationSearchService.paginateResult(result, pageRequest.convert())
+                result
                         .map(lectureInformationMapper::toDto)
         ));
     }

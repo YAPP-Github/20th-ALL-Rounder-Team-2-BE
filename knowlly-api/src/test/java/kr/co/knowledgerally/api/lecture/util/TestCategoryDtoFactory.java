@@ -13,11 +13,12 @@ public class TestCategoryDtoFactory implements TestDtoFactory<CategoryDto> {
      * 테스트용 카테고리 Dto를 생성한다.
      *
      * @param id 생성될 Dto Id
-     * @return 생성된 사용자 Dto
+     * @return 생성된 카테고리 Dto
      */
     @Override
     public CategoryDto createDto(long id) {
         return CategoryDto.builder()
+                .id(id)
                 .categoryName(String.format("테스트 카테고리%d", id))
                 .build();
     }

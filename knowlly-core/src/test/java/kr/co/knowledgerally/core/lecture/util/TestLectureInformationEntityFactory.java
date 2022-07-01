@@ -37,10 +37,10 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
      */
     public LectureInformation createEntity(long entityId, long coachId, long categoryId, long lectureImageNum) {
         Set<LectureImage> lectureImageSet = new LinkedHashSet<>();
-        for (int index=1; index<=lectureImageNum; index++) {
+        for (long index=1; index<=lectureImageNum; index++) {
             lectureImageSet.add(
                     LectureImage.builder()
-                            .id(entityId)
+                            .id(index)
                             .lectureInformation(LectureInformation.builder().build())
                             .lectureImgUrl(String.format("http://lecture%d.img%d.url", entityId, index))
                             .build()

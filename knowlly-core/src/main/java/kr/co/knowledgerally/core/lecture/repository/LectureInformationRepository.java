@@ -15,17 +15,27 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
     /**
      * 클래스-info들을 활성화 여부로 검색
      * @param isActive 활성화 여부
-     * @return 클래스-info List
+     * @param pageable 페이징 객체
+     * @return 클래스-info 페이징 객체
      */
-    List<LectureInformation> findAllTop10ByIsActiveOrderByIdDesc(boolean isActive);
+    Page<LectureInformation> findAllTop10ByIsActiveOrderByIdDesc(boolean isActive, Pageable pageable);
 
     /**
      * 클래스-info들을 카테고리와 활성화 여부로 검색
      * @param isActive 활성화 여부
      * @param category 카테고리
+     * @param pageable 페이징 객체
+     * @return 클래스-info 페이징 객체
+     */
+    Page<LectureInformation> findAllByCategoryAndIsActiveOrderByIdDesc(Category category, boolean isActive, Pageable pageable);
+
+    /**
+     * 클래스-info들을 카테고리 이름과 활성화 여부로 검색
+     * @param isActive 활성화 여부
+     * @param categoryName 카테고리 이름
      * @return 클래스-info List
      */
-    List<LectureInformation> findAllByCategoryAndIsActiveOrderByIdDesc(Category category, boolean isActive);
+    List<LectureInformation> findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc(String categoryName, boolean isActive);
 
     /**
      * 클래스-info들을 topic과 활성화 여부로 검색
