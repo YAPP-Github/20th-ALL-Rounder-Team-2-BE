@@ -18,4 +18,6 @@ public interface ReviewMapper {
             ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) )")
     @Mapping(target = "isPublic", source = "review.public")
     ReviewDto.ReadOnly toDto(Review review);
+
+    Review toEntity(ReviewDto reviewDto);
 }

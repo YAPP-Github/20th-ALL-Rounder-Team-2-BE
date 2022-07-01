@@ -2,6 +2,7 @@ package kr.co.knowledgerally.api.core.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.knowledgerally.core.core.message.ResponseMessage;
 import lombok.Getter;
 
 /**
@@ -28,7 +29,7 @@ public class ApiResult<T> {
     }
 
     public static <T> ApiResult<T> ok(T data) {
-        return ok(data, "ok");
+        return ok(data, ResponseMessage.OK);
     }
 
     public static <T> ApiResult<T> ok(T data, String message) {

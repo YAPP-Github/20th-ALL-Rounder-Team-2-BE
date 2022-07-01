@@ -2,6 +2,7 @@ package kr.co.knowledgerally.api.coach.component;
 
 import kr.co.knowledgerally.api.coach.component.ReviewMapper;
 import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.coach.util.TestReviewDtoFactory;
 import kr.co.knowledgerally.core.coach.entity.Review;
 import kr.co.knowledgerally.core.coach.util.TestReviewEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -25,5 +26,14 @@ class ReviewMapperTest {
         assertEquals(2L, reviewDto.getReviewee().getId());
         assertTrue(reviewDto.isPublic());
         assertEquals("테스트1 내용", reviewDto.getContent());
+    }
+
+    @Test
+    void DTO에서_엔티티변환_테스트() {
+        ReviewDto reviewDto = new TestReviewDtoFactory().createReadOnlyDto(1L, 1L, 2L);
+
+        Review review = reviewMapper.toEntity(reviewDto);
+        assertEquals("테스트1 내용", review.getContent());
+        assertTrue(review.isPublic());
     }
 }
