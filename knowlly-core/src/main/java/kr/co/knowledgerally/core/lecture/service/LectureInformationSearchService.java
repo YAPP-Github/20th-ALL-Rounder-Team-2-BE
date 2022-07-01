@@ -1,19 +1,19 @@
-package kr.co.knowledgerally.api.lecture.service;
+package kr.co.knowledgerally.core.lecture.service;
 
-import kr.co.knowledgerally.api.user.dto.UserProfileDto;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Validated
 @Service
@@ -29,14 +29,24 @@ public class LectureInformationSearchService {
      * @return 클래스-info 리스트
      */
     @Transactional
-    public List<LectureInformation> searchAllByKeyword(String keyword) {
-        List<LectureInformation> result = new ArrayList<>();
+    public Page<LectureInformation> searchAllByKeyword(String keyword, Pageable pageable) {
+        Set<LectureInformation> result = new LinkedHashSet<>();
         Optional<Category> category = categoryService.findByName(keyword);
 
         if(category.isPresent()) {
             result.addAll(lectureInformationService.findAllByCategory(category.get()));
         }
         result.addAll(lectureInformationService.searchAllByTopic(keyword));
-        return result;
+        List<LectureInformation> lectureInformationList = new ArrayList<>(result);
+
+        return paginateResult(lectureInformationList, pageable);
+    }
+
+    @Transactional
+    public Page<LectureInformation> paginateResult(List<LectureInformation> lectureInformations, Pageable pageable) {
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), lectureInformations.size());
+        final Page<LectureInformation> page = new PageImpl<>(lectureInformations.subList(start, end), pageable, lectureInformations.size());
+        return page;
     }
 }

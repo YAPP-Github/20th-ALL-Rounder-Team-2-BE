@@ -5,6 +5,8 @@ import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +25,7 @@ public class LectureInformationService {
      */
     @Transactional
     public List<LectureInformation> findAll() {
-        return lectureInformationRepository.findAllByIsActiveOrderByIdDesc(true);
+        return lectureInformationRepository.findAllTop10ByIsActiveOrderByIdDesc(true);
     }
 
     /**
@@ -43,6 +45,6 @@ public class LectureInformationService {
      */
     @Transactional
     public List<LectureInformation> searchAllByTopic(String topic) {
-        return lectureInformationRepository.findAllByTopicAndIsActiveOrderByIdDesc(topic, true);
+        return lectureInformationRepository.findAllByTopicContainingAndIsActiveOrderByIdDesc(topic, true);
     }
 }

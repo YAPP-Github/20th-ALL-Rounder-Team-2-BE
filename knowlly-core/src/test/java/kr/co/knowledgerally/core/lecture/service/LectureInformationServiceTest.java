@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         "classpath:dbunit/entity/user.xml",
         "classpath:dbunit/entity/coach.xml",
         "classpath:dbunit/entity/category.xml",
-        "classpath:dbunit/entity/lecture_information.xml"
+        "classpath:dbunit/entity/lecture_information.xml",
+        "classpath:dbunit/entity/lecture_image.xml"
 })
 public class LectureInformationServiceTest {
     @Autowired
@@ -33,6 +34,12 @@ public class LectureInformationServiceTest {
         List<LectureInformation> lectureInformationList = lectureInformationService.findAll();
 
         assertEquals(lectureInformationList.get(0).getTopic(), "요리 클래스");
+        assertEquals(
+                lectureInformationList
+                .get(1)
+                .getLectureImageSet().stream().findFirst().get()
+                .getLectureImgUrl(), "http://lecture3.img.url"
+        );
         assertEquals(lectureInformationList.get(1).getTopic(), "그래픽 디자인");
         assertEquals(lectureInformationList.get(2).getTopic(), "자바 개발");
         assertEquals(lectureInformationList.get(3).getTopic(), "마케팅 수업");

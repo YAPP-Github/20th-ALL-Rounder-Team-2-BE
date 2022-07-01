@@ -40,7 +40,13 @@ class CategoryServiceTest {
 
     @Test
     void Id로_카테고리_조회() {
-        Optional<Category> category= categoryService.findById(1L);
+        Optional<Category> category = categoryService.findById(1L);
         assertEquals(category.get().getCategoryName(), "기획 / PM");
+    }
+
+    @Test
+    void Name으로_카테고리_조회() {
+        Optional<Category> category = categoryService.findByName("디자인");
+        assertEquals(category.get().getId(), 2L);
     }
 }
