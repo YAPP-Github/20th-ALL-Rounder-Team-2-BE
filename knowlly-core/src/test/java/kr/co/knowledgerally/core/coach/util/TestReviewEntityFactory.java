@@ -35,8 +35,8 @@ public class TestReviewEntityFactory implements TestEntityFactory<Review> {
     public Review createEntity(long entityId, long userId, long coachId) {
         return Review.builder()
                 .id(entityId)
-                .user(testUserEntityFactory.createEntity(userId))
-                .coach(testCoachEntityFactory.createEntity(coachId))
+                .writer(testUserEntityFactory.createEntity(userId))
+                .reviewee(testCoachEntityFactory.createEntity(coachId))
                 .content(String.format("테스트%d 내용", entityId))
                 .build();
     }

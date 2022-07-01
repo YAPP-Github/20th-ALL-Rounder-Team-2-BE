@@ -22,11 +22,11 @@ public class Review {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User writer;
 
     @OneToOne
     @JoinColumn(name = "coach_id")
-    private Coach coach;
+    private Coach reviewee;
 
     @Column(nullable = false)
     private String content;
