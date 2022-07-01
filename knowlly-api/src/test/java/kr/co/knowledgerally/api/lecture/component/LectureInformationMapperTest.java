@@ -28,13 +28,6 @@ public class LectureInformationMapperTest {
         assertEquals(1, lectureInformationDto.getPrice());
         assertEquals(1, lectureInformationDto.getCoach().getId());
         assertEquals("테스트 카테고리1", lectureInformationDto.getCategory().getCategoryName());
-
-        Iterator<LectureImageDto> lectureImageDtoIterator = lectureInformationDto.getLectureImageSet().iterator();
-
-        if (lectureImageDtoIterator.hasNext()) {
-            assertEquals("http://lecture1.img1.url", lectureImageDtoIterator.next().getLectureImgUrl());
-            assertEquals("http://lecture1.img2.url", lectureImageDtoIterator.next().getLectureImgUrl());
-        }
-
+        assertEquals(2, lectureInformationDto.getLectureImageSet().size());
     }
 }

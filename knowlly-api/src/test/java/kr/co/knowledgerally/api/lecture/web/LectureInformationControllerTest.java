@@ -74,7 +74,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet[0].lectureImgUrl").value("http://lecture1.img.url")
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2)
         );
     }
 }
