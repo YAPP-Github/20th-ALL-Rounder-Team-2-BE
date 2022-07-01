@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+
 @Validated
 @Service
 @RequiredArgsConstructor
@@ -37,5 +39,14 @@ public class ReviewService {
     @Transactional(readOnly = true)
     public Page<Review> findAllByRevieweeAndIsPublicWithPageable(Coach reviewee, boolean isPublic, Pageable pageable) {
         return reviewRepository.findAllByRevieweeAndIsPublicAndIsActiveOrderByCreatedAtDesc(reviewee, isPublic, true, pageable);
+    }
+
+    /**
+     * 후기를 저장합니다.
+     * @param review 저장하고자 하는 후기 엔티티
+     * @return 저장된 후기 엔티티
+     */
+    public Review saveReview(@Valid Review review) {
+        return reviewRepository.saveAndFlush(review);
     }
 }

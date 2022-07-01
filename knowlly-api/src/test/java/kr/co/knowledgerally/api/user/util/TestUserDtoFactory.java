@@ -19,10 +19,10 @@ public class TestUserDtoFactory implements TestDtoFactory<UserDto> {
     @Override
     public UserDto createDto(long id) {
         return UserDto.builder()
-                .username("테스트1")
-                .intro("안녕하세요. 저는 테스트1이라고 합니다.")
-                .kakaoId("kakao_test1")
-                .portfolio("포트폴리오1")
+                .username(String.format("테스트%d", id))
+                .intro(String.format("안녕하세요. 저는 테스트%d이라고 합니다.", id))
+                .kakaoId(String.format("kakao_test%d", id))
+                .portfolio(String.format("포트폴리오%d", id))
                 .build();
     }
 
@@ -35,11 +35,11 @@ public class TestUserDtoFactory implements TestDtoFactory<UserDto> {
     public UserDto.ReadOnly createReadOnlyDto(long id) {
         return UserDto.ReadOnly.builder()
                 .id(id)
-                .username("테스트1")
-                .intro("안녕하세요. 저는 테스트1이라고 합니다.")
-                .kakaoId("kakao_test1")
-                .portfolio("포트폴리오1")
-                .identifier("identifier1")
+                .username(String.format("테스트%d", id))
+                .intro(String.format("안녕하세요. 저는 테스트%d이라고 합니다.", id))
+                .kakaoId(String.format("kakao_test%d", id))
+                .portfolio(String.format("포트폴리오%d", id))
+                .identifier(String.format("identifier%d", id))
                 .build();
     }
 }

@@ -1,12 +1,13 @@
-package kr.co.knowledgerally.api.coach.web;
+package kr.co.knowledgerally.api.review.web;
 
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
+import kr.co.knowledgerally.core.core.message.ErrorMessage;
+import kr.co.knowledgerally.core.core.message.ResponseMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,11 +20,11 @@ class ReviewUserControllerTest extends AbstractControllerTest {
     @Test
     public void 사용자_리뷰_조회_테스트() throws Exception {
         mockMvc.perform(
-                        get(REVIEW_USER_URL + 3)
+                        get(REVIEW_USER_URL + 4)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("include_private", "false")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ResponseMessage.OK))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writer.username").value("테스트1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewee.id").value(3))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("테스트3은 좋은 코치입니다!"))
@@ -38,11 +39,11 @@ class ReviewUserControllerTest extends AbstractControllerTest {
     @Test
     public void 사용자_리뷰_전체_조회_테스트() throws Exception {
         mockMvc.perform(
-                        get(REVIEW_USER_URL + 3)
+                        get(REVIEW_USER_URL + 4)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("include_private", "true")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ResponseMessage.OK))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writer.username").value("테스트4"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewee.id").value(3))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("테스트3 코치는 좀 별로였습니다"))
@@ -60,13 +61,25 @@ class ReviewUserControllerTest extends AbstractControllerTest {
 
     @WithMockKnowllyUser
     @Test
+    public void 사용자_리뷰_조회_실패_테스트() throws Exception {
+        mockMvc.perform(
+                        get(REVIEW_USER_URL + 2)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .param("include_private", "false")
+                ).andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ErrorMessage.USER_NOT_COACH))
+                .andDo(print());
+    }
+
+    @WithMockKnowllyUser
+    @Test
     public void 로그인된_사용자_리뷰_조회_테스트() throws Exception {
         mockMvc.perform(
                         get(REVIEW_USER_ME_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("include_private", "false")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ResponseMessage.OK))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writer.username").value("테스트3"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewee.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("테스트1 코치가 최고에요~"))
@@ -90,7 +103,7 @@ class ReviewUserControllerTest extends AbstractControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("include_private", "true")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ResponseMessage.OK))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writer.username").value("테스트3"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewee.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("테스트1 코치가 최고에요~"))
