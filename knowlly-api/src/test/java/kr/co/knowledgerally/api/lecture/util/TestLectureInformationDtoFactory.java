@@ -1,11 +1,9 @@
 package kr.co.knowledgerally.api.lecture.util;
 
-import kr.co.knowledgerally.api.coach.util.TestCoachDtoFactory;
 import kr.co.knowledgerally.api.core.util.TestDtoFactory;
 import kr.co.knowledgerally.api.lecture.dto.CategoryDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
-import kr.co.knowledgerally.core.coach.util.TestCoachEntityFactory;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
