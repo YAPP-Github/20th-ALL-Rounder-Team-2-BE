@@ -6,9 +6,13 @@ import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring",
+@Mapper(
+        componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-uses = {CoachMapper.class, CategoryMapper.class })
+        uses = {
+                CoachMapper.class, CategoryMapper.class, LectureImageMapper.class
+        }
+)
 public interface LectureInformationMapper {
     LectureInformationDto.ReadOnly toDto(LectureInformation lectureInformation);
     LectureInformation toEntity(LectureInformationDto lectureInformationDto);

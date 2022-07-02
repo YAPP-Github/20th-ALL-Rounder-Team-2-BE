@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.*;
 
 @Getter @Setter
 @Builder
@@ -27,6 +28,10 @@ public class LectureInformation {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
+    private Set<LectureImage> lectureImageSet = new LinkedHashSet<>();
 
     @Column(nullable = false)
     private String topic;

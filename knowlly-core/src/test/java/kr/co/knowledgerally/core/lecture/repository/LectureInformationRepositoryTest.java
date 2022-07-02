@@ -1,4 +1,4 @@
-package kr.co.knowledgerally.core.lecture.service;
+package kr.co.knowledgerally.core.lecture.repository;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
@@ -7,17 +7,14 @@ import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @KnowllyDataTest
-@Import(LectureInformationService.class)
 @DatabaseSetup({
         "classpath:dbunit/entity/user.xml",
         "classpath:dbunit/entity/coach.xml",
@@ -25,15 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         "classpath:dbunit/entity/lecture_information.xml",
         "classpath:dbunit/entity/lecture_image.xml"
 })
-public class LectureInformationServiceTest {
+public class LectureInformationRepositoryTest {
+
     @Autowired
-    LectureInformationService lectureInformationService;
+    LectureInformationRepository lectureInformationRepository;
 
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
 
     @Test
-    void 클래스_info_목록_조회() {
-        Page<LectureInformation> lectureInformations = lectureInformationService.findAllWithPageable(PageRequest.of(0, 2));
+    void 클래스_info_목록_활성화_여부로_검색() {
+        Page<LectureInformation> lectureInformations = lectureInformationRepository.findAllTop10ByIsActiveOrderByIdDesc(true, PageRequest.of(0, 2));
 
         assertEquals(2, lectureInformations.getNumberOfElements());
         assertEquals(4, lectureInformations.getTotalElements());
@@ -56,24 +54,24 @@ public class LectureInformationServiceTest {
     }
 
     @Test
-    void 클래스_info_카테고리로_목록_조회() {
+    void 클래스_info_목록_카테고리와_활성화_여부로_검색() {
         Category category = testCategoryEntityFactory.createEntity(3L);
-        Page<LectureInformation> lectureInformations = lectureInformationService.findAllByCategoryWithPageable(category, PageRequest.of(0, 2));
+        Page<LectureInformation> lectureInformations = lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true, PageRequest.of(0, 2));
 
         assertEquals(lectureInformations.getContent().get(0).getTopic(), "자바 개발");
     }
 
     @Test
-    void 클래스_info_카테고리_이름으로_검색() {
-        List<LectureInformation> lectureInformationList = lectureInformationService.searchAllByCategoryName("기타");
+    void 클래스_info_목록_카테고리_이름과_활성화_여부로_검색() {
+        List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc("기타", true);
 
         assertEquals(lectureInformationList.get(0).getTopic(), "요리 클래스");
     }
 
     @Test
-    void 클래스_info_제목으로_검색() {
-        List<LectureInformation> lectureInformationList = lectureInformationService.searchAllByTopic("자바");
+    void 클래스_info_목록_Topic과_활성화_여부로_검색() {
+        List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByTopicContainingAndIsActiveOrderByIdDesc("수업", true);
 
-        assertEquals(lectureInformationList.get(0).getTopic(), "자바 개발");
+        assertEquals(lectureInformationList.get(0).getTopic(), "마케팅 수업");
     }
 }

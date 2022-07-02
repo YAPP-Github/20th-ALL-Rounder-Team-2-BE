@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class LectureInformationControllerTest extends AbstractControllerTest {
     private static final String LECTUREINFORMATION_URL = "/api/lectureinfo";
+    private  static final String LECTUREINFORMATION_SEARCH_URL = "/api/lectureinfo/search";
 
     @WithMockKnowllyUser
     @Test
@@ -44,17 +45,50 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
     @WithMockKnowllyUser
     @Test
     public void 클래스_info_카테고리로_목록_조회_테스트() throws Exception {
-        String QueryParam = "categoryId";
+        String categoryId = "categoryId";
 
         mockMvc.perform(
                         get(LECTUREINFORMATION_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .queryParam(QueryParam, String.valueOf(6))
+                                .queryParam(categoryId, String.valueOf(6))
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("요리 클래스"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"));
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_info_keyword로_검색_테스트() throws Exception {
+        String keyword = "keyword";
+
+        //클래스 제목 기반 검색
+        mockMvc.perform(
+                get(LECTUREINFORMATION_SEARCH_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .queryParam(keyword, "수업"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("마케팅 수업"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("효과적인 마케팅에 대해 배웁니다"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2));
+
+        //카테고리 이름 기반 검색
+        mockMvc.perform(
+                        get(LECTUREINFORMATION_SEARCH_URL)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .queryParam(keyword, "기타"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("요리 클래스"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(1));
+
     }
 }

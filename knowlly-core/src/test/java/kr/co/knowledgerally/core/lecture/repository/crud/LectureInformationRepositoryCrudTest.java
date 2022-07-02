@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         "classpath:dbunit/entity/coach.xml",
         "classpath:dbunit/entity/category.xml",
         "classpath:dbunit/entity/lecture_information.xml",
+        "classpath:dbunit/entity/lecture_image.xml"
 })
 class LectureInformationRepositoryCrudTest extends AbstractRepositoryCrudTest {
 
@@ -38,6 +39,7 @@ class LectureInformationRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(4L, lectureInformation.getCategory().getId());
         assertEquals("마케팅 수업", lectureInformation.getTopic());
         assertEquals("효과적인 마케팅에 대해 배웁니다", lectureInformation.getIntroduce());
+        assertEquals(2, lectureInformation.getLectureImageSet().size());
         assertEquals(1, lectureInformation.getPrice());
         assertTrue(lectureInformation.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 39, 40), lectureInformation.getCreatedAt());
@@ -49,7 +51,7 @@ class LectureInformationRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2, 5);
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2, 5, 2);
         lectureInformationRepository.saveAndFlush(lectureInformation);
     }
 

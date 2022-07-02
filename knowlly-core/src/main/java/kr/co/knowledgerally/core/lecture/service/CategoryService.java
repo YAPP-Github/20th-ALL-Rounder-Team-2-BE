@@ -26,12 +26,22 @@ public class CategoryService {
     }
 
     /**
-     * 클래스 카테고리를 조회합니다.
+     * 카테고리 id로 클래스 카테고리를 조회합니다.
      * @param categoryId 카테고리 id
      * @return 카테고리
      */
     @Transactional(readOnly = true)
     public Optional<Category> findById(Long categoryId) {
         return categoryRepository.findByIdAndIsActive(categoryId,true);
+    }
+
+    /**
+     * 카테고리 이름으로 클래스 카테고리를 조회합니다.
+     * @param categoryName 카테고리 이름
+     * @return 카테고리
+     */
+    @Transactional(readOnly = true)
+    public Optional<Category> findByName(String categoryName) {
+        return categoryRepository.findByCategoryNameAndIsActive(categoryName, true);
     }
 }
