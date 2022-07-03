@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String[] EXCLUDED_URLS = {
             "/test-cors",
+            "/healthz/*",
             "/api/test*",
             "/api/user/user-exists",
             "/api/user/signin",
