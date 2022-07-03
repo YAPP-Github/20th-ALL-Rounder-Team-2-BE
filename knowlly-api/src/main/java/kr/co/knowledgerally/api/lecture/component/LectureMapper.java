@@ -18,15 +18,11 @@ import java.time.format.DateTimeFormatter;
         imports = {DateTimeFormatter.class, LocalDateTime.class}
 )
 public interface LectureMapper {
-    @Mapping(target = "startAt", expression = "java(lecture.getStartAt()" +
-            ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")) )")
-    @Mapping(target = "endAt", expression = "java(lecture.getEndAt()" +
-            ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")) )")
+    @Mapping(target = "startAt", expression = "java(lecture.getStartAt().toString())")
+    @Mapping(target = "endAt", expression = "java(lecture.getEndAt().toString())")
     LectureDto.ReadOnly toDto(Lecture lecture);
 
-    @Mapping(target = "startAt", expression = "java(LocalDateTime.parse(lectureDto.getStartAt()" +
-            ", DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")) )")
-    @Mapping(target = "endAt", expression = "java(LocalDateTime.parse(lectureDto.getEndAt()" +
-            ", DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")) )")
+    @Mapping(target = "startAt", expression = "java(LocalDateTime.parse(lectureDto.getStartAt()) )")
+    @Mapping(target = "endAt", expression = "java(LocalDateTime.parse(lectureDto.getEndAt()) )")
     Lecture toEntity(LectureDto lectureDto);
 }

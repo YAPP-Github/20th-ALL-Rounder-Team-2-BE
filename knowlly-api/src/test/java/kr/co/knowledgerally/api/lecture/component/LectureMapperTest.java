@@ -23,8 +23,8 @@ class LectureMapperTest {
 
         LectureDto.ReadOnly lectureDto = lectureMapper.toDto(lecture);
         assertEquals(1L, lectureDto.getId());
-        assertEquals("2022-06-15 10:30:50", lectureDto.getStartAt());
-        assertEquals("2022-06-15 11:30:50", lectureDto.getEndAt());
+        assertEquals("2022-06-15T10:30:50", lectureDto.getStartAt());
+        assertEquals("2022-06-15T11:30:50", lectureDto.getEndAt());
         assertEquals(Lecture.State.ON_BOARD, lectureDto.getState());
         assertFalse(lectureDto.isReviewWritten());
     }

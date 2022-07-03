@@ -16,8 +16,7 @@ public class DateTimeStringValidator implements ConstraintValidator<DateTimeForm
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         try {
-            LocalDateTime.parse(value,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            LocalDateTime.parse(value);
         } catch (Exception e) {
             return false;
         }
