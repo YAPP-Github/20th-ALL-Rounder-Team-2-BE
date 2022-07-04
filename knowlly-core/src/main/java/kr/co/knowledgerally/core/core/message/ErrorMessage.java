@@ -16,4 +16,7 @@ public class ErrorMessage {
 
     // LectureInfo
     public static String NOT_EXIST_LECTURE_INFO = "존재하지 않는 클래스-info 입니다.";
+
+    // Form
+    public static String NOT_EXIST_FORM = "존재하지 않는 신청서입니다.";
 }
