@@ -25,12 +25,12 @@ import java.util.Set;
 public class LectureDto {
 
     @DateTimeFormat
-    @ApiModelProperty(value = "클래스 일정 시작 시간, 형식 yyyy-MM-dd HH:mm:ss", position = PropertyDisplayOrder.START_AT)
+    @ApiModelProperty(value = "클래스 일정 시작 시간, 형식 yyyy-MM-ddTHH:mm (ISO 8601)", position = PropertyDisplayOrder.START_AT)
     @JsonProperty(index = PropertyDisplayOrder.START_AT)
     private String startAt;
 
     @DateTimeFormat
-    @ApiModelProperty(value = "클래스 일정 종료 시간, 형식 yyyy-MM-dd HH:mm:ss", position = PropertyDisplayOrder.END_AT)
+    @ApiModelProperty(value = "클래스 일정 종료 시간, 형식 yyyy-MM-ddTHH:mm (ISO 8601)", position = PropertyDisplayOrder.END_AT)
     @JsonProperty(index = PropertyDisplayOrder.END_AT)
     private String endAt;
 

@@ -19,8 +19,8 @@ public class TestLectureDtoFactory implements TestDtoFactory<LectureDto> {
     @Override
     public LectureDto createDto(long id) {
         return LectureDto.builder()
-                .startAt("2022-06-15 10:30:50")
-                .endAt("2022-06-15 11:30:50")
+                .startAt("2022-06-15T10:30:50")
+                .endAt("2022-06-15T11:30:50")
                 .build();
     }
 
@@ -33,8 +33,8 @@ public class TestLectureDtoFactory implements TestDtoFactory<LectureDto> {
     public LectureDto.ReadOnly createReadOnlyDto(long id) {
         return LectureDto.ReadOnly.builder()
                 .id(id)
-                .startAt("2022-06-15 10:30:50")
-                .endAt("2022-06-15 11:30:50")
+                .startAt("2022-06-15T10:30:50")
+                .endAt("2022-06-15T11:30:50")
                 .state(Lecture.State.ON_BOARD)
                 .isReviewWritten(false)
                 .build();

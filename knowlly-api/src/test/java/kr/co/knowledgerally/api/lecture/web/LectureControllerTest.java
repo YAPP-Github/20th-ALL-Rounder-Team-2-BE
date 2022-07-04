@@ -20,8 +20,8 @@ class LectureControllerTest extends AbstractControllerTest {
     public void 클래스_일정_등록_테스트() throws Exception {
         String json = "{" +
                 "   \"schedules\": [" +
-                "       {\"startAt\": \"2022-06-15 15:30:50\", \"endAt\": \"2022-06-15 16:30:50\"}," +
-                "       {\"startAt\": \"2022-06-15 18:30:50\", \"endAt\": \"2022-06-15 19:30:50\"}" +
+                "       {\"startAt\": \"2022-06-15T15:30\", \"endAt\": \"2022-06-15T16:30\"}," +
+                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15T19:30\"}" +
                 "   ]" +
                 "}";
 
@@ -30,12 +30,12 @@ class LectureControllerTest extends AbstractControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
         ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].startAt").value("2022-06-15 15:30:50"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].endAt").value("2022-06-15 16:30:50"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].startAt").value("2022-06-15T15:30"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].endAt").value("2022-06-15T16:30"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewWritten").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].startAt").value("2022-06-15 18:30:50"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].endAt").value("2022-06-15 19:30:50"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].startAt").value("2022-06-15T18:30"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].endAt").value("2022-06-15T19:30"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].reviewWritten").value(false))
                 .andDo(print());
@@ -46,8 +46,8 @@ class LectureControllerTest extends AbstractControllerTest {
     public void 클래스_일정_등록_테스트_자기거_아니면_400() throws Exception {
         String json = "{" +
                 "   \"schedules\": [" +
-                "       {\"startAt\": \"2022-06-15 15:30:50\", \"endAt\": \"2022-06-15 16:30:50\"}," +
-                "       {\"startAt\": \"2022-06-15 18:30:50\", \"endAt\": \"2022-06-15 19:30:50\"}" +
+                "       {\"startAt\": \"2022-06-15T15:30\", \"endAt\": \"2022-06-15T16:30\"}," +
+                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15T19:30\"}" +
                 "   ]" +
                 "}";
 
@@ -64,8 +64,26 @@ class LectureControllerTest extends AbstractControllerTest {
     public void 클래스_일정_등록_테스트_형식_잘못되면_400() throws Exception {
         String json = "{" +
                 "   \"schedules\": [" +
-                "       {\"startAt\": \"2022-06-15 25:30:50\", \"endAt\": \"2022-06-15 26:30:50\"}," +
-                "       {\"startAt\": \"2022-06-15 18:30:50\", \"endAt\": \"2022-06-15 19:30:50\"}" +
+                "       {\"startAt\": \"2022-06-15T25:30\", \"endAt\": \"2022-06-15 26:30\"}," +
+                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15 19:30\"}" +
+                "   ]" +
+                "}";
+
+        mockMvc.perform(
+                        post(LECTURE_SCHEDULE_LECTUREINFO_URL + 1)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json)
+                ).andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_일정_등록_테스트_시작일이_종료일_넘어가면_400() throws Exception {
+        String json = "{" +
+                "   \"schedules\": [" +
+                "       {\"startAt\": \"2022-06-15T15:30\", \"endAt\": \"2022-06-15 16:30\"}," +
+                "       {\"startAt\": \"2022-06-15T11:30\", \"endAt\": \"2022-06-15 12:30\"}" +
                 "   ]" +
                 "}";
 
