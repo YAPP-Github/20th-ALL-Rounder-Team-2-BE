@@ -78,7 +78,8 @@ public class CoachLectureService {
 
     private void checkForms(CoachLectureDto coachLectureDto) {
         if (coachLectureDto.getLecture().getState() != Lecture.State.ON_BOARD && coachLectureDto.getForms().size() != 1) {
-            log.warn("예정된, 혹은 완료된 클래스의 신청서 숫자가 1이 아님");
+            log.warn("예정된, 혹은 완료된 클래스의 신청서 숫자가 1이 아님. lectureId : {}, form count : {}",
+                    coachLectureDto.getLecture().getId(), coachLectureDto.getForms().size());
         }
     }
 }

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "클래스-info 관련 엔드포인트")
+@Api(value = "클래스-info 관련 엔드포인트", tags = "클래스-info")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/lectureinfo")

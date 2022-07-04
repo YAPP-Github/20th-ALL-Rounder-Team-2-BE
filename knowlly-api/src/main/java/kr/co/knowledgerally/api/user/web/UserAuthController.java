@@ -23,7 +23,7 @@ import javax.validation.Valid;
 /**
  * 회원 인증 관련 엔드포인트
  */
-@Api(value = "회원 인증 관련 엔드포인트")
+@Api(value = "회원 인증 관련 엔드포인트", tags = "회원 인증")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
