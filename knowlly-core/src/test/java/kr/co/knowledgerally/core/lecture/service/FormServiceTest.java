@@ -1,9 +1,12 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Form;
+import kr.co.knowledgerally.core.lecture.util.TestFormEntityFactory;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -90,5 +93,13 @@ class FormServiceTest {
         assertTrue(forms.get(0).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getUpdatedAt());
+    }
+
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/form_insert_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 신청서_삽입_테스트() {
+        Form form = new TestFormEntityFactory().createEntity(7L, 4, 2);
+        formService.saveForm(form);
     }
 }

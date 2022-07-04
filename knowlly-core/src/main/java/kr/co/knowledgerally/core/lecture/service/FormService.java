@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -49,5 +50,15 @@ public class FormService {
     @Transactional(readOnly = true)
     public List<Form> findAllByUserAndState(User user, Form.State state) {
         return formRepository.findAllByUserAndStateAndIsActiveOrderByCreatedAtDesc(user, state,true);
+    }
+
+    /**
+     * 신청서를 저장합니다.
+     * @param form 저장하고자 하는 사용자 엔티티
+     * @return 저장된 신청서 엔티티
+     */
+    @Transactional
+    public Form saveForm(@Valid Form form) {
+        return formRepository.saveAndFlush(form);
     }
 }
