@@ -3,6 +3,7 @@ package kr.co.knowledgerally.core.lecture.service;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Form;
+import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.repository.FormRepository;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -49,5 +50,16 @@ public class FormService {
     @Transactional(readOnly = true)
     public List<Form> findAllByUserAndState(User user, Form.State state) {
         return formRepository.findAllByUserAndStateAndIsActiveOrderByCreatedAtDesc(user, state,true);
+    }
+
+    /**
+     * 사용자로 신청서 목록을 조회합니다.
+     * @param user 사용자
+     * @param state 클래스 일정 상태
+     * @return 신청서 리스트
+     */
+    @Transactional(readOnly = true)
+    public List<Form> findAllByUserAndLectureState(User user, Lecture.State state) {
+        return formRepository.findAllByUserAndLecture_StateAndIsActiveOrderByCreatedAtDesc(user, state,true);
     }
 }
