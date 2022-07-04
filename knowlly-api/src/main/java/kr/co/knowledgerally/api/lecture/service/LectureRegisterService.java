@@ -29,6 +29,13 @@ public class LectureRegisterService {
     private final LectureRepository lectureRepository;
     private final CoachService coachService;
 
+    /**
+     * 클래스 일정을 등록할 수 있다.
+     * @param lectureInfoId 클래스-info 아이디
+     * @param registerDto 일정 등록 dto
+     * @param loggedInUser 로그인한 사용자
+     * @return 등록 결과 dto 리스트
+     */
     @Transactional
     public List<LectureDto.ReadOnly> register(Long lectureInfoId, LectureRegisterDto registerDto, User loggedInUser) {
         LectureInformation lectureInformation = lectureInformationService.findById(lectureInfoId);

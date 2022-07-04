@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @Builder
@@ -51,6 +52,9 @@ public class Lecture {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+    private List<Form> forms;
 
     public enum State {
         ON_BOARD,

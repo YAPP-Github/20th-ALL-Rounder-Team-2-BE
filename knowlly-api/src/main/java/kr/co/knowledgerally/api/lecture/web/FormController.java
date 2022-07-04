@@ -9,6 +9,7 @@ import kr.co.knowledgerally.api.lecture.component.FormMapper;
 import kr.co.knowledgerally.api.lecture.dto.FormDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureRegisterDto;
+import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.service.FormService;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +29,24 @@ public class FormController {
     private final FormMapper formMapper;
     private final FormService formService;
 
-    @ApiOperation(value = "내 신청서 조회", notes = "로그인한 사용자의 신청서 목록을 조회합니다.")
+    @ApiOperation(value = "내 신청서 조회", notes = "로그인한 사용자의 신청서 목록을 조회합니다. 수강 클래스 조회에서 사용 가능합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/me")
-    public ResponseEntity<ApiResult<List<FormDto.ReadOnly>>> getFormMe(@ApiIgnore @CurrentUser User loggedInUser) {
+    public ResponseEntity<ApiResult<List<FormDto.ReadOnly>>> getFormMe(@ApiIgnore @CurrentUser User loggedInUser,
+                                                                       @ApiParam(value = "신청서 상태, 없을 시 전체 조회 \n" +
+                                                                               "REQUEST : 요청된\n" +
+                                                                               "ACCEPT : 수락된\n" +
+                                                                               "REJECT : 거절된", required = false)
+                                                                       @RequestParam(value = "state", required = false)
+                                                                       Form.State state) {
+        if (state != null) {
+            return ResponseEntity.ok(ApiResult.ok(
+                    formService.findAllByUserAndState(loggedInUser, state)
+                            .stream().map(formMapper::toDto).collect(Collectors.toList())));
+        }
+
         return ResponseEntity.ok(ApiResult.ok(
                 formService.findAllByUser(loggedInUser)
                 .stream().map(formMapper::toDto).collect(Collectors.toList())));
