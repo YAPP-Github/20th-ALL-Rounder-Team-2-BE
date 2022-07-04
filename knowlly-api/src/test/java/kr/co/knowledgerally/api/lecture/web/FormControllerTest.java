@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class FormControllerTest extends AbstractControllerTest {
@@ -77,7 +78,7 @@ class FormControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                        get(API_FORM_LECTURE + 1)
+                        post(API_FORM_LECTURE + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                 ).andExpect(status().isOk())

@@ -69,7 +69,7 @@ public class FormController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    @GetMapping("/lecture/{lectureId}")
+    @PostMapping("/lecture/{lectureId}")
     public ResponseEntity<ApiResult<FormDto.ReadOnly>> postForm(
             @ApiIgnore @CurrentUser User loggedInUser,
             @ApiParam(value = "클래스 일정 Id", required = true)

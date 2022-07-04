@@ -22,4 +22,6 @@ public class ErrorMessage {
 
     // Form
     public static String NOT_EXIST_FORM = "존재하지 않는 신청서입니다.";
+    public static String FORM_STATE_NOT_VALID = "유효하지 않은 state 값입니다.";
+    public static String FORM_IS_NOT_BELONG_TO_THIS_COACH = "이 신청서는 로그인한 사용자(코치) 앞으로 작성되지 않았습니다.";
 }
