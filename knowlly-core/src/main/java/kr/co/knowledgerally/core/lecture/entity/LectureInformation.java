@@ -39,8 +39,9 @@ public class LectureInformation {
     @Column(nullable = false)
     private String introduce;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int price;
+    private int price = 1;
 
     @Builder.Default
     @Column(nullable = false)

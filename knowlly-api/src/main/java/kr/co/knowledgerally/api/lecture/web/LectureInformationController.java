@@ -1,11 +1,10 @@
 package kr.co.knowledgerally.api.lecture.web;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
+import kr.co.knowledgerally.api.core.annotation.CurrentUser;
 import kr.co.knowledgerally.api.core.dto.ApiPageRequest;
 import kr.co.knowledgerally.api.core.dto.ApiPageResult;
+import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
@@ -13,13 +12,14 @@ import kr.co.knowledgerally.core.lecture.service.LectureInformationSearchService
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
+import javax.validation.Valid;
 
 @Api(value = "클래스-info 관련 엔드포인트")
 @RestController
@@ -37,6 +37,7 @@ public class LectureInformationController {
     })
     @GetMapping("")
     public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation (
+            @ApiParam(value = "categoryId를 통해 조회하기")
             @RequestParam(name = "categoryId", required = false) Long categoryId, ApiPageRequest pageRequest
     ) {
         Page<LectureInformation> result;
@@ -54,12 +55,37 @@ public class LectureInformationController {
         ));
     }
 
+    @ApiOperation(value = "클래스-info, 태그 등록", notes = "클래스-info와 태그들을 등록합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @PostMapping("")
+    public ResponseEntity<ApiResult<LectureInformationDto.ReadOnly>> postLectureInformation(
+            @ApiIgnore @CurrentUser
+            User loggedInUser,
+            @ApiParam(value = "카테고리 id", required = true)
+            @RequestParam(name = "categoryId")
+            Long categoryId,
+            @ApiParam(value = "입력한 클래스-info 정보", required = true)
+            @RequestBody @Valid
+            LectureInformationDto lectureInformationDto
+    ) {
+        return ResponseEntity.ok(ApiResult.ok(
+                lectureInformationMapper.toDto(
+                        lectureInformationService.saveLectureInformation(
+                                categoryId, lectureInformationMapper.toEntity(lectureInformationDto), loggedInUser
+                        )
+                )
+        ));
+    }
+
     @ApiOperation(value = "클래스-info 검색", notes = "키워드로 클래스-info 목록을 검색합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/search")
     public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> searchAllLectureInformation (
+            @ApiParam(value = "=keyword를 통해 검색하기")
             @RequestParam(name = "keyword") String keyword, ApiPageRequest pageRequest
     ) {
         return ResponseEntity.ok(ApiPageResult.ok(
