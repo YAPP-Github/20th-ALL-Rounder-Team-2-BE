@@ -13,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 회원 정보 관련 엔드포인트
+ * 사용자 프로필 이미지 관련 엔드포인트
  */
-@Api(value = "회원 정보 관련 엔드포인트", tags = "회원 정보")
+@Api(value = "사용자 프로필 이미지 관련 엔드포인트", tags = "사용자 프로필 이미지")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")

@@ -38,7 +38,7 @@ public class CoachFormController {
             @ApiResponse(code = 400, message = "로그인한 사용자가 코치가 아닙니다."),
             @ApiResponse(code = 400, message = "유효하지 않은 state 값입니다."),
     })
-    @PatchMapping("/{formId}")
+    @PatchMapping("/{formId}/state")
     public ResponseEntity<ApiResult<FormDto.ReadOnly>> getFormMe(@ApiIgnore @CurrentUser User loggedInUser,
                                                                        @ApiParam(value = "신청서 ID", required = true)
                                                                        @PathVariable Long formId,
