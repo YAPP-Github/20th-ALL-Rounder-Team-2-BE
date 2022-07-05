@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CoachFormControllerTest extends AbstractControllerTest {
-    private static final String COACH_FORM = "/api/coach/form/";
+    private static final String COACH_FORM_FORMAT_STATE = "/api/coach/form/%d/state";
 
     @WithMockKnowllyUser(userId = 3)
     @Test
@@ -22,7 +22,7 @@ class CoachFormControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                        patch(COACH_FORM + 4)
+                        patch(String.format(COACH_FORM_FORMAT_STATE, 4))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                 ).andExpect(status().isOk())
@@ -40,7 +40,7 @@ class CoachFormControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                        patch(COACH_FORM + 4)
+                        patch(String.format(COACH_FORM_FORMAT_STATE, 4))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                 ).andExpect(status().isBadRequest());
@@ -54,7 +54,7 @@ class CoachFormControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                patch(COACH_FORM + 4)
+                patch(String.format(COACH_FORM_FORMAT_STATE, 4))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
         ).andExpect(status().isBadRequest());
@@ -68,7 +68,7 @@ class CoachFormControllerTest extends AbstractControllerTest {
                 "}";
 
         mockMvc.perform(
-                patch(COACH_FORM + 4)
+                patch(String.format(COACH_FORM_FORMAT_STATE, 4))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
         ).andExpect(status().isBadRequest());
