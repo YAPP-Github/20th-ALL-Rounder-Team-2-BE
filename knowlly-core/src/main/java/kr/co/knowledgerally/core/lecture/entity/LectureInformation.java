@@ -33,6 +33,10 @@ public class LectureInformation {
     @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
     private Set<LectureImage> lectureImageSet = new LinkedHashSet<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
+    private Set<Tag> tagSet = new LinkedHashSet<>();
+
     @Column(nullable = false)
     private String topic;
 

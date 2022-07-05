@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 import java.util.Set;
 
 @SuperBuilder
@@ -28,6 +27,10 @@ public class LectureInformationDto {
     @ApiModelProperty(value = "클래스-info 소개", position = PropertyDisplayOrder.INTRODUCE)
     @JsonProperty(index = PropertyDisplayOrder.INTRODUCE)
     private String introduce;
+
+    @ApiModelProperty(value = "태그 리스트", position = PropertyDisplayOrder.TAG)
+    @JsonProperty(index = PropertyDisplayOrder.TAG)
+    private Set<TagDto> tagSet;
 
     @SuperBuilder
     @Getter
@@ -85,5 +88,6 @@ public class LectureInformationDto {
         private static final int COACH = 4;
         private static final int CATEGORY = 5;
         private static final int IMAGE = 6;
+        private static final int TAG = 7;
     }
 }

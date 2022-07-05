@@ -6,7 +6,9 @@ import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.entity.Tag;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
+import kr.co.knowledgerally.core.lecture.repository.TagRepository;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_LECTURE_INFO;
 
@@ -27,6 +30,7 @@ import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_LECT
 @RequiredArgsConstructor
 public class LectureInformationService {
     private final LectureInformationRepository lectureInformationRepository;
+    private final TagRepository tagRepository;
     private final CoachService coachService;
     private final CategoryService categoryService;
 
@@ -92,6 +96,14 @@ public class LectureInformationService {
         Category category = categoryService.findById(categoryId).orElseThrow();
         lectureInformation.setCoach(coach);
         lectureInformation.setCategory(category);
-        return lectureInformationRepository.saveAndFlush(lectureInformation);
+
+        Set<Tag> tagSet = lectureInformation.getTagSet();
+        tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
+
+        lectureInformationRepository.saveAndFlush(lectureInformation);
+        tagRepository.saveAllAndFlush(tagSet);
+        lectureInformation.setTagSet(tagSet);
+
+        return lectureInformation;
     }
 }

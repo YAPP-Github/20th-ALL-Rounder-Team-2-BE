@@ -2,6 +2,7 @@ package kr.co.knowledgerally.core.lecture.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
+import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @KnowllyDataTest
-@Import(LectureInformationService.class)
+@Import({LectureInformationService.class, CoachService.class, CategoryService.class})
 @DatabaseSetup({
         "classpath:dbunit/entity/user.xml",
         "classpath:dbunit/entity/coach.xml",
