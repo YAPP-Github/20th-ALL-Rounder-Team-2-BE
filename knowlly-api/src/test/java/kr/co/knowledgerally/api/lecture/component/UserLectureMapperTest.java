@@ -2,6 +2,7 @@ package kr.co.knowledgerally.api.lecture.component;
 
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.dto.UserLectureDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.util.TestFormEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class UserLectureMapperTest {
         assertEquals("안녕하세요. 테스트1 입니다.", lectureInformationDto.getIntroduce());
         assertEquals(1, lectureInformationDto.getPrice());
         assertEquals(1, lectureInformationDto.getCoach().getId());
-        assertEquals("테스트 카테고리1", lectureInformationDto.getCategory().getCategoryName());
+        assertEquals(Category.Name.ETC, lectureInformationDto.getCategory());
         assertEquals(2, lectureInformationDto.getLectureImages().size());
     }
 }

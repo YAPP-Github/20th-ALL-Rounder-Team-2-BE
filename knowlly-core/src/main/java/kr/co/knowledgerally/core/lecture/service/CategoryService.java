@@ -41,7 +41,7 @@ public class CategoryService {
      * @return 카테고리
      */
     @Transactional(readOnly = true)
-    public Optional<Category> findByName(String categoryName) {
-        return categoryRepository.findByCategoryNameAndIsActive(categoryName, true);
+    public Optional<Category> findByName(Category.Name categoryName) {
+        return categoryRepository.findByNameAndIsActive(categoryName, true);
     }
 }

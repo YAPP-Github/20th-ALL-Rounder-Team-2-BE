@@ -63,7 +63,7 @@ public class LectureInformationRepositoryTest {
 
     @Test
     void 클래스_info_목록_카테고리_이름과_활성화_여부로_검색() {
-        List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc("기타", true);
+        List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByCategoryNameAndIsActiveOrderByIdDesc(Category.Name.ETC, true);
 
         assertEquals(lectureInformationList.get(0).getTopic(), "요리 클래스");
     }

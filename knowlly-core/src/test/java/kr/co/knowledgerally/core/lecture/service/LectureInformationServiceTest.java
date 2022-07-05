@@ -76,7 +76,7 @@ public class LectureInformationServiceTest {
 
     @Test
     void 클래스_info_카테고리_이름으로_검색() {
-        List<LectureInformation> lectureInformationList = lectureInformationService.searchAllByCategoryName("기타");
+        List<LectureInformation> lectureInformationList = lectureInformationService.searchAllByCategoryName("ETC");
 
         assertEquals(lectureInformationList.get(0).getTopic(), "요리 클래스");
     }
@@ -122,8 +122,9 @@ public class LectureInformationServiceTest {
         tagSet.add(Tag.builder().content("테스트 내용6").build());
         tagSet.add(Tag.builder().content("테스트 내용7").build());
 
-        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2L, 5L,3L, 2);
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2L, 6L,3L, 2);
         lectureInformation.setTags(tagSet);
-        lectureInformationService.saveLectureInformation(5L, lectureInformation, lectureInformation.getCoach().getUser());
+        lectureInformation.setCategory(Category.builder().name(Category.Name.LANGUAGE).build());
+        lectureInformationService.saveLectureInformation(lectureInformation, lectureInformation.getCoach().getUser());
     }
 }

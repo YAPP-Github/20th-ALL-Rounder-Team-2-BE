@@ -3,8 +3,8 @@ package kr.co.knowledgerally.core.lecture.service;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.coach.service.CoachService;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
-import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -35,6 +35,6 @@ public class LectureInformationSearchServiceTest {
         assertEquals(1, lectureInformations.getTotalPages());
         assertEquals(1, lectureInformations.getContent().size());
         assertEquals("마케팅 수업", lectureInformations.getContent().get(0).getTopic());
-        assertEquals("마케팅", lectureInformations.getContent().get(0).getCategory().getCategoryName());
+        assertEquals(Category.Name.MARKETING, lectureInformations.getContent().get(0).getCategory().getName());
     }
 }

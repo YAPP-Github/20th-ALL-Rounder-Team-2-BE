@@ -42,16 +42,16 @@ public class LectureInformationController {
     })
     @GetMapping("")
     public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation(
-            @ApiParam(value = "categoryId를 통해 조회하기")
-            @RequestParam(name = "categoryId", required = false) Long categoryId, ApiPageRequest pageRequest
+            @ApiParam(value = "categoryName를 통해 조회하기")
+            @RequestParam(name = "categoryName", required = false) Category.Name categoryName, ApiPageRequest pageRequest
     ) {
         Page<LectureInformation> result;
 
-        if(categoryId == null) {
+        if(categoryName == null) {
             result = lectureInformationService.findAllWithPageable(pageRequest.convert());
         }
         else {
-            Category category = categoryService.findById(categoryId).get();
+            Category category = categoryService.findByName(categoryName).get();
             result = lectureInformationService.findAllByCategoryWithPageable(category, pageRequest.convert());
         }
         return ResponseEntity.ok(ApiPageResult.ok(
@@ -84,9 +84,6 @@ public class LectureInformationController {
     public ResponseEntity<ApiResult<LectureInformationDto.ReadOnly>> postLectureInformation(
             @ApiIgnore @CurrentUser
             User loggedInUser,
-            @ApiParam(value = "카테고리 id", required = true)
-            @RequestParam(name = "categoryId")
-            Long categoryId,
             @ApiParam(value = "입력한 클래스-info 정보", required = true)
             @RequestBody @Valid
             LectureInformationDto lectureInformationDto
@@ -94,7 +91,7 @@ public class LectureInformationController {
         return ResponseEntity.ok(ApiResult.ok(
                 lectureInformationMapper.toDto(
                         lectureInformationService.saveLectureInformation(
-                                categoryId, lectureInformationMapper.toEntity(lectureInformationDto), loggedInUser
+                                lectureInformationMapper.toEntity(lectureInformationDto), loggedInUser
                         )
                 )
         ));

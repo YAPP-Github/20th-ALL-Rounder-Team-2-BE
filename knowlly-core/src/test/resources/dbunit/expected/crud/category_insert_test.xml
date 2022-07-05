@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <category id="1" category_name="기획 / PM" is_active="true"/>
-    <category id="2" category_name="디자인" is_active="true"/>
-    <category id="3" category_name="개발" is_active="true"/>
-    <category id="4" category_name="마케팅" is_active="true"/>
-    <category id="5" category_name="외국어" is_active="true"/>
-    <category id="6" category_name="기타" is_active="true"/>
-    <category id="7" category_name="테스트 카테고리7" is_active="true"/>
+    <category id="1" category_name="PM" is_active="true"/>
+    <category id="2" category_name="DESIGN" is_active="true"/>
+    <category id="3" category_name="DEVELOP" is_active="true"/>
+    <category id="4" category_name="MARKETING" is_active="true"/>
+    <category id="5" category_name="LANGUAGE" is_active="true"/>
+    <category id="6" category_name="ETC" is_active="true"/>
+    <category id="7" category_name="ETC" is_active="true"/>
 
 </dataset>

@@ -3,6 +3,7 @@ package kr.co.knowledgerally.api.lecture.util;
 import kr.co.knowledgerally.api.core.util.TestDtoFactory;
 import kr.co.knowledgerally.api.lecture.dto.CategoryDto;
 import kr.co.knowledgerally.api.user.dto.UserDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 
 /**
  * 테스트용 카테고리 Dto 생성 팩토리
@@ -18,8 +19,7 @@ public class TestCategoryDtoFactory implements TestDtoFactory<CategoryDto> {
     @Override
     public CategoryDto createDto(long id) {
         return CategoryDto.builder()
-                .id(id)
-                .categoryName(String.format("테스트 카테고리%d", id))
+                .name(Category.Name.ETC)
                 .build();
     }
 }

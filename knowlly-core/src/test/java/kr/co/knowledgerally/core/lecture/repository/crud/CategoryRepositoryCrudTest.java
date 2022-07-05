@@ -10,8 +10,6 @@ import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,7 +29,7 @@ class CategoryRepositoryCrudTest extends AbstractRepositoryCrudTest {
         Category category = categoryRepository.findById(1L).orElseThrow();
 
         assertEquals(1L, category.getId());
-        assertEquals("기획 / PM", category.getCategoryName());
+        assertEquals(Category.Name.PM, category.getName());
         assertTrue(category.isActive());
     }
 
@@ -50,7 +48,7 @@ class CategoryRepositoryCrudTest extends AbstractRepositoryCrudTest {
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void updateTest() {
         Category category = categoryRepository.findById(1L).orElseThrow();
-        category.setCategoryName("카테고리 변경");
+        category.setName(Category.Name.ETC);
         entityManager.flush();
     }
 

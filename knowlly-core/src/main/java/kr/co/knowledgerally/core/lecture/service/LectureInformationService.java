@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +62,11 @@ public class LectureInformationService {
      */
     @Transactional(readOnly = true)
     public List<LectureInformation> searchAllByCategoryName(String categoryName) {
-        return lectureInformationRepository.findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc(categoryName, true);
+        try {
+            return lectureInformationRepository.findAllByCategoryNameAndIsActiveOrderByIdDesc(Category.Name.valueOf(categoryName), true);
+        } catch (IllegalArgumentException e) {
+            return Collections.emptyList();
+        }
     }
 
     /**
@@ -88,15 +93,14 @@ public class LectureInformationService {
 
     /**
      * 클래스-info와 클래스 태그들을 저장합니다.
-     * @param categoryId 클래스-info가 속하는 카테고리
      * @param lectureInformation 저장하고자 하는 클래스-info 엔티티
      * @param user 현재 로그인된 유저
      * @return 저장된 클래스-info 엔티티
      */
     @Transactional
-    public LectureInformation saveLectureInformation(Long categoryId, @Valid LectureInformation lectureInformation, User user) {
+    public LectureInformation saveLectureInformation(@Valid LectureInformation lectureInformation, User user) {
         Coach coach = getOrCreateCoach(user);
-        Category category = categoryService.findById(categoryId).orElseThrow();
+        Category category = categoryService.findByName(lectureInformation.getCategory().getName()).orElseThrow();
         lectureInformation.setCoach(coach);
         lectureInformation.setCategory(category);
         lectureInformationRepository.save(lectureInformation);

@@ -41,12 +41,12 @@ INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updat
 INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (3, 4, 3, '테스트3 코치는 좀 별로였습니다', true, '2022-06-13 22:19:16', '2022-06-13 22:19:16', false);
 INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (4, 3, 1, '테스트1 코치가 최고에요~', true, '2022-06-13 22:19:18', '2022-06-13 22:19:17', true);
 
-INSERT INTO category (id, category_name, is_active) VALUES (1, '기획 / PM', true);
-INSERT INTO category (id, category_name, is_active) VALUES (2, '디자인', true);
-INSERT INTO category (id, category_name, is_active) VALUES (3, '개발', true);
-INSERT INTO category (id, category_name, is_active) VALUES (4, '마케팅', true);
-INSERT INTO category (id, category_name, is_active) VALUES (5, '외국어', true);
-INSERT INTO category (id, category_name, is_active) VALUES (6, '기타', true);
+INSERT INTO category (id, category_name, is_active) VALUES (1, 'PM', true);
+INSERT INTO category (id, category_name, is_active) VALUES (2, 'DESIGN', true);
+INSERT INTO category (id, category_name, is_active) VALUES (3, 'DEVELOP', true);
+INSERT INTO category (id, category_name, is_active) VALUES (4, 'MARKETING', true);
+INSERT INTO category (id, category_name, is_active) VALUES (5, 'LANGUAGE', true);
+INSERT INTO category (id, category_name, is_active) VALUES (6, 'ETC', true);
 
 INSERT INTO lecture_information (id, coach_id, category_id, topic, introduce, price, is_active, created_at, updated_at) VALUES (1, 1, 4, '마케팅 수업', '효과적인 마케팅에 대해 배웁니다', 1, true, '2022-06-13 22:39:40', '2022-06-13 22:39:54');
 INSERT INTO lecture_information (id, coach_id, category_id, topic, introduce, price, is_active, created_at, updated_at) VALUES (2, 2, 3, '자바 개발', '자바를 자바라', 1, true, '2022-06-13 22:39:41', '2022-06-13 22:39:54');
