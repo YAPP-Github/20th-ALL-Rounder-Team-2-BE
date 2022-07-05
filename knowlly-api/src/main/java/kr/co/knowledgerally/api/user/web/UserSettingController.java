@@ -15,7 +15,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /**
  * 사용자 설정 관련 엔드포인트
  */
-@Api(value = "사용자 설정 관련 엔드포인트")
+@Api(value = "사용자 설정 관련 엔드포인트", tags = "사용자 설정")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user/setting")

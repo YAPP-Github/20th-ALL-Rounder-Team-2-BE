@@ -15,7 +15,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /**
  * 회원 정보 관련 엔드포인트
  */
-@Api(value = "회원 정보 관련 엔드포인트")
+@Api(value = "회원 정보 관련 엔드포인트", tags = "회원 정보")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")

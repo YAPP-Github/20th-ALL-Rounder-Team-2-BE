@@ -32,7 +32,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(value = "운영 클래스-info 관련 엔드포인트")
+@Api(value = "운영 클래스 관련 엔드포인트", tags = "운영 클래스")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/coach/lecture")

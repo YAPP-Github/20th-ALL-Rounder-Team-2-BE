@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 /**
  * 클래스 카테고리 관련 엔드포인트
  */
-@Api(value = "클래스 카테고리 관련 엔드포인트")
+@Api(value = "클래스 카테고리 관련 엔드포인트", tags = "클래스 카테고리")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/category")
