@@ -49,7 +49,7 @@ class CoachLectureControllerTest extends AbstractControllerTest {
 
     @WithMockKnowllyUser(userId = 2)
     @Test
-    void 운영_클래스_코치_아니면_400() throws Exception {
+    void 운영_클래스_조회_사용자_코치아님_테스트() throws Exception {
         mockMvc.perform(
                         get(API_COACH_LECTURE_ME)
                                 .contentType(MediaType.APPLICATION_JSON)

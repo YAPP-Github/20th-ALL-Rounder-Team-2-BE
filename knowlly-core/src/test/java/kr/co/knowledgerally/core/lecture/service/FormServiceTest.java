@@ -1,9 +1,12 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Form;
+import kr.co.knowledgerally.core.lecture.util.TestFormEntityFactory;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
@@ -93,6 +96,14 @@ class FormServiceTest {
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getUpdatedAt());
     }
 
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/form_insert_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 신청서_삽입_테스트() {
+        Form form = new TestFormEntityFactory().createEntity(7L, 4, 2);
+        formService.saveForm(form);
+    }
+    
     @Test
     void 사용자로_신청서_목록_찾기_클래스_상태_조회_테스트() {
         User testUser = new TestUserEntityFactory().createEntity(3L);
