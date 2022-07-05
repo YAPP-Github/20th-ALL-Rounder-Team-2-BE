@@ -1,5 +1,6 @@
 package kr.co.knowledgerally.core.lecture.service;
 
+import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Form;
@@ -72,5 +73,15 @@ public class FormService {
     @Transactional(readOnly = true)
     public List<Form> findAllByUserAndLectureState(User user, Lecture.State state) {
         return formRepository.findAllByUserAndLecture_StateAndIsActiveOrderByCreatedAtDesc(user, state,true);
+    }
+
+    /**
+     * 코치로 신청서 목록을 조회합니다.
+     * @param coach 코치
+     * @return 신청서 리스트
+     */
+    @Transactional(readOnly = true)
+    public List<Form> findAllByLectureCoach(Coach coach) {
+        return formRepository.findAllByLecture_LectureInformation_CoachAndIsActiveOrderByCreatedAtDesc(coach, true);
     }
 }

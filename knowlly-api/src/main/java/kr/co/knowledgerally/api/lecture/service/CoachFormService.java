@@ -12,6 +12,7 @@ import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.repository.LectureRepository;
 import kr.co.knowledgerally.core.lecture.service.FormService;
+import kr.co.knowledgerally.core.lecture.service.LectureService;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,11 +55,22 @@ public class CoachFormService {
             throw new BadRequestException(ErrorMessage.FORM_IS_NOT_BELONG_TO_THIS_COACH);
         }
 
+        if (state == Form.State.ACCEPT) {
+            // 해당 클래스의 다른 신청서는 모두 reject 처리해버린다.
+            makeAllFormsToRejectState(coach);
+        }
+
         form.setState(state);
         return formMapper.toDto(formService.saveForm(form));
     }
 
     private boolean isNotFormLectureBelongToCoach(Form form, Coach coach) {
         return ! Objects.equals(form.getLecture().getLectureInformation().getCoach().getId(), coach.getId());
+    }
+
+    private void makeAllFormsToRejectState(Coach coach) {
+        for (Form form : formService.findAllByLectureCoach(coach)) {
+            form.setState(Form.State.REJECT);
+        }
     }
 }

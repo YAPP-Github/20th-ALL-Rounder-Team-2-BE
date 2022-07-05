@@ -6,6 +6,7 @@
     <form id="4" lecture_id="4" user_id="1" content="신청서를 받아주세요!" state="REQUEST" is_active="true" />
     <form id="5" lecture_id="3" user_id="3" content="신청 거절해주세요" state="REJECT" is_active="true" />
     <form id="6" lecture_id="3" user_id="4" content="신청합니다!" state="REQUEST" is_active="true" />
-    <form id="7" lecture_id="4" user_id="2" content="테스트7의 신청 내용" state="REQUEST" is_active="true" />
+    <form id="7" lecture_id="4" user_id="2" content="신청서를 받아주세요!" state="REQUEST" is_active="true" />
+    <form id="8" lecture_id="4" user_id="3" content="테스트8의 신청 내용" state="REQUEST" is_active="true" />
 
 </dataset>

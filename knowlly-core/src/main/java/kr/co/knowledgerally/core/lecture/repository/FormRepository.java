@@ -1,5 +1,6 @@
 package kr.co.knowledgerally.core.lecture.repository;
 
+import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.user.entity.User;
@@ -33,4 +34,12 @@ public interface FormRepository extends JpaRepository<Form, Long> {
      * @return 신청서 목록
      */
     List<Form> findAllByUserAndLecture_StateAndIsActiveOrderByCreatedAtDesc(User user, Lecture.State state, boolean isActive);
+
+    /**
+     * 코치 앞으로 온 신청서 목록 조회
+     * @param coach 코치
+     * @param isActive 활성화 여부
+     * @return 신청서 목록
+     */
+    List<Form> findAllByLecture_LectureInformation_CoachAndIsActiveOrderByCreatedAtDesc(Coach coach, boolean isActive);
 }

@@ -51,7 +51,7 @@ class FormRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/form_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        Form form = testFormEntityFactory.createEntity(7L, 4, 2);
+        Form form = testFormEntityFactory.createEntity(8L, 4, 3);
         formRepository.saveAndFlush(form);
     }
 
