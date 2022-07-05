@@ -2,7 +2,11 @@ package kr.co.knowledgerally.api.lecture.web;
 
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
+import kr.co.knowledgerally.core.lecture.entity.Form;
+import kr.co.knowledgerally.core.lecture.repository.FormRepository;
+import kr.co.knowledgerally.core.lecture.service.FormService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -14,12 +18,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CoachFormControllerTest extends AbstractControllerTest {
     private static final String COACH_FORM_FORMAT_STATE = "/api/coach/form/%d/state";
 
+    @Autowired
+    FormService formService;
+
     @WithMockKnowllyUser(userId = 3)
     @Test
     void 신청서_상태_변경_테스트() throws Exception {
         final String json = "{" +
                 "   \"state\": \"ACCEPT\"" +
                 "}";
+
+        assertEquals(Form.State.REQUEST, formService.findById(4L).getState());
+        assertEquals(Form.State.REQUEST, formService.findById(7L).getState());
 
         mockMvc.perform(
                         patch(String.format(COACH_FORM_FORMAT_STATE, 4))
@@ -30,6 +40,10 @@ class CoachFormControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("ACCEPT"));
+
+        // 다른 신청서는 reject 처리되어야 함
+        assertEquals(Form.State.ACCEPT, formService.findById(4L).getState());
+        assertEquals(Form.State.REJECT, formService.findById(7L).getState());
     }
 
     @WithMockKnowllyUser(userId = 3)

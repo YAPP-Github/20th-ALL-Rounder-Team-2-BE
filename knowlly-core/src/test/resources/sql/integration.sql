@@ -81,4 +81,5 @@ INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at
 INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (4, 4, 1, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-13 22:48:20', '2022-06-13 22:48:20');
 INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (5, 3, 3, '신청 거절해주세요', 'REJECT', true, '2022-06-13 22:51:03', '2022-06-13 22:51:04');
 INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (6, 3, 4, '신청합니다!', 'REQUEST', true, '2022-06-13 22:51:04', '2022-06-13 22:51:05');
+INSERT INTO form (id, lecture_id, user_id, content, state, is_active, created_at, updated_at) VALUES (7, 4, 2, '신청서를 받아주세요!', 'REQUEST', true, '2022-06-13 22:51:05', '2022-06-13 22:51:06');
 
