@@ -4,6 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Form;
+import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -80,6 +81,23 @@ class FormServiceTest {
         User testUser = new TestUserEntityFactory().createEntity(3L);
 
         List<Form> forms = formService.findAllByUserAndState(testUser, Form.State.ACCEPT);
+
+        assertEquals(1, forms.size());
+        assertEquals(2L, forms.get(0).getId());
+        assertEquals(2L, forms.get(0).getLecture().getId());
+        assertEquals(3L, forms.get(0).getUser().getId());
+        assertEquals("제 신청서를 받아주세요!", forms.get(0).getContent());
+        assertEquals(Form.State.ACCEPT, forms.get(0).getState());
+        assertTrue(forms.get(0).isActive());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getCreatedAt());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getUpdatedAt());
+    }
+
+    @Test
+    void 사용자로_신청서_목록_찾기_클래스_상태_조회_테스트() {
+        User testUser = new TestUserEntityFactory().createEntity(3L);
+
+        List<Form> forms = formService.findAllByUserAndLectureState(testUser, Lecture.State.ON_GOING);
 
         assertEquals(1, forms.size());
         assertEquals(2L, forms.get(0).getId());

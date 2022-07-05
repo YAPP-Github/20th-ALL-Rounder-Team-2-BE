@@ -46,4 +46,13 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6));
     }
+
+    @WithMockKnowllyUser(userId = 2)
+    @Test
+    void 운영_클래스_코치_아니면_400() throws Exception {
+        mockMvc.perform(
+                        get(API_COACH_LECTURE_ME)
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isBadRequest());
+    }
 }

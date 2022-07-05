@@ -16,7 +16,7 @@ public class WithMockKnowllyUserSecurityContextFactory implements WithSecurityCo
         TestUserEntityFactory userEntityFactory = new TestUserEntityFactory();
 
         UserDetailsImpl principal =
-                new UserDetailsImpl(userEntityFactory.createEntity(1L));
+                new UserDetailsImpl(userEntityFactory.createEntity(customUser.userId()));
         Authentication auth =
                 new UsernamePasswordAuthenticationToken(principal, "password", principal.getAuthorities());
         context.setAuthentication(auth);
