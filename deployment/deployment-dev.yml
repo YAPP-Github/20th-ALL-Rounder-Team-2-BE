@@ -28,8 +28,8 @@ spec:
             httpGet:
               path: /healthz/startup
               port: 8080
-            periodSeconds: 10
-            failureThreshold: 30
+            periodSeconds: 5
+            failureThreshold: 50
           livenessProbe:
             httpGet:
               path: /healthz/liveness
@@ -40,7 +40,7 @@ spec:
             httpGet:
               path: /healthz/readiness
               port: 8080
-            periodSeconds: 5
+            periodSeconds: 10
             failureThreshold: 3
           env:
             - name: SPRING_PROFILES_ACTIVE
