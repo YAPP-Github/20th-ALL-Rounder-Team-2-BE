@@ -20,7 +20,7 @@ import javax.validation.Valid;
 /**
  * 사용자 온보딩 관련 엔드포인트
  */
-@Api(value = "사용자 온보딩 관련 엔드포인트")
+@Api(value = "사용자 온보딩 관련 엔드포인트", tags = "사용자 온보딩")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")

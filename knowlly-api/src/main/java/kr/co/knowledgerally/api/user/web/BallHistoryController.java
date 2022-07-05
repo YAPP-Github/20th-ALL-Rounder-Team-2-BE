@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 /**
  * 볼 내역 조회 관련 엔드포인트
  */
-@Api(value = "볼 내역 조회 관련 엔드포인트")
+@Api(value = "볼 내역 조회 관련 엔드포인트", tags = "볼 내역 조회")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/ballhistory")

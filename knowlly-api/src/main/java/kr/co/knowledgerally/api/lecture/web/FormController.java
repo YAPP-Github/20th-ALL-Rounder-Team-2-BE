@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(value = "신청서 관련 엔드포인트")
+@Api(value = "신청서 관련 엔드포인트", tags = "신청서")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/form")
@@ -31,6 +31,7 @@ public class FormController {
     private final FormService formService;
     private final FormRegisterService formRegisterService;
 
+    @Deprecated
     @ApiOperation(value = "내 신청서 조회", notes = "로그인한 사용자의 신청서 목록을 조회합니다. 수강 클래스 조회에서 사용 가능합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -54,6 +55,7 @@ public class FormController {
                 .stream().map(formMapper::toDto).collect(Collectors.toList())));
     }
 
+    @Deprecated
     @ApiOperation(value = "신청서 조회", notes = "특정 신청서를 id로 조회합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),

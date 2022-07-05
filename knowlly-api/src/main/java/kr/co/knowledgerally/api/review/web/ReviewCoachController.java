@@ -20,7 +20,7 @@ import javax.validation.Valid;
 /**
  * 코치 리뷰 관련 엔드포인트
  */
-@Api(value = "코치 리뷰 관련 엔드포인트")
+@Api(value = "코치 리뷰 관련 엔드포인트", tags = "코치 리뷰")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/review/coach")

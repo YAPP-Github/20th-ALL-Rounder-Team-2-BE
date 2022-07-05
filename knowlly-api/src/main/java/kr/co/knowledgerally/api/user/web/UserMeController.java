@@ -24,7 +24,7 @@ import javax.validation.Valid;
 /**
  * 내 정보 관련 엔드포인트
  */
-@Api(value = "내 정보 관련 엔드포인트")
+@Api(value = "내 정보 관련 엔드포인트", tags = "내 정보")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
