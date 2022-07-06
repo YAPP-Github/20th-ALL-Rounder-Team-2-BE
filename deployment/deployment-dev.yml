@@ -17,11 +17,11 @@ spec:
           image: <IMAGE>
           resources:
             requests:
-              memory: "300Mi"
-              cpu: "400m"
+              memory: "400Mi"
+              cpu: "500m"
             limits:
-              memory: "300Mi"
-              cpu: "400m"
+              memory: "400Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8080
           startupProbe:
