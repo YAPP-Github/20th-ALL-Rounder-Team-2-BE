@@ -24,7 +24,7 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
      */
     @Override
     public LectureInformation createEntity(long entityId) {
-        return createEntity(entityId, 2L, 5L,3L, 2);
+        return createEntity(entityId, 1L, 1L,1L, 2);
     }
 
     /**
