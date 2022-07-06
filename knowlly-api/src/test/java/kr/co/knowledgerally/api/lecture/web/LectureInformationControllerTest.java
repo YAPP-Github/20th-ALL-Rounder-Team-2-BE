@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class LectureInformationControllerTest extends AbstractControllerTest {
@@ -88,7 +89,30 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(1));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet[0].lectureImgUrl").value("http://lecture5.img.url"));
 
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_info_태그_등록_테스트() throws Exception {
+        String categoryId = "categoryId";
+        final String json =
+                "{\"topic\": \"테스트 제목1\"," +
+                "\"introduce\": \"테스트 소개1\"," +
+                "\"tagSet\":" + "[" +
+                "{\"content\": \"태그1\"}," +
+                "{\"content\": \"태그2\"}" +
+                "]" + "}";
+
+        mockMvc.perform(
+                post(LECTUREINFORMATION_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .queryParam(categoryId, String.valueOf(1))
+                        .content(json)
+        ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("테스트 제목1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("테스트 소개1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tagSet.size()").value(2));
     }
 }

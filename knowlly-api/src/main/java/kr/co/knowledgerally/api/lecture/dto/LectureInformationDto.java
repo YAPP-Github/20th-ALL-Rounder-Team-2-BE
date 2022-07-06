@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kr.co.knowledgerally.api.coach.dto.CoachDto;
-import kr.co.knowledgerally.core.coach.entity.Coach;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +27,7 @@ public class LectureInformationDto {
     @JsonProperty(index = PropertyDisplayOrder.INTRODUCE)
     private String introduce;
 
-    @ApiModelProperty(value = "태그 리스트", position = PropertyDisplayOrder.TAG)
+    @ApiModelProperty(value = "태그 set", position = PropertyDisplayOrder.TAG)
     @JsonProperty(index = PropertyDisplayOrder.TAG)
     private Set<TagDto> tagSet;
 

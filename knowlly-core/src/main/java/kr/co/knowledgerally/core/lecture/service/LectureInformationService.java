@@ -88,33 +88,36 @@ public class LectureInformationService {
     }
 
     /**
-     * 클래스-info를 저장합니다.
+     * 클래스-info와 클래스 태그들을 저장합니다.
+     * @param categoryId 클래스-info가 속하는 카테고리
      * @param lectureInformation 저장하고자 하는 클래스-info 엔티티
+     * @param user 현재 로그인된 유저
      * @return 저장된 클래스-info 엔티티
      */
     @Transactional
-    public LectureInformation saveLectureInformation(Long categoryId, @Valid LectureInformation lectureInformation, User loggedInUser) {
-        Coach coach = getOrCreateCoach(loggedInUser);
+    public LectureInformation saveLectureInformation(Long categoryId, @Valid LectureInformation lectureInformation, User user) {
+        Coach coach = getOrCreateCoach(user);
         Category category = categoryService.findById(categoryId).orElseThrow();
         lectureInformation.setCoach(coach);
         lectureInformation.setCategory(category);
+        lectureInformationRepository.saveAndFlush(lectureInformation);
 
         Set<Tag> tagSet = lectureInformation.getTagSet();
         tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
 
         tagRepository.saveAllAndFlush(tagSet);
-        lectureInformationRepository.saveAndFlush(lectureInformation);
         lectureInformation.setTagSet(tagSet);
 
         return lectureInformation;
     }
 
-    private Coach getOrCreateCoach(User loggedInUser) {
-        Coach coach = coachService.findByUser(loggedInUser);
+    private Coach getOrCreateCoach(User user) {
+        Coach coach = coachService.findByUser(user);
 
         if (coach == null) {
             coach = new Coach();
-            coach.setUser(loggedInUser);
+            coach.setUser(user);
+            user.setCoach(true);
             coachRepository.saveAndFlush(coach);
         }
         return coach;

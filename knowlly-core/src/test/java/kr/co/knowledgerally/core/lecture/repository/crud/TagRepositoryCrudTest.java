@@ -50,8 +50,8 @@ class TagRepositoryCrudTest extends AbstractRepositoryCrudTest {
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
         Set<Tag> tagSet = new LinkedHashSet<>();
-        tagSet.add(testTagEntityFactory.createEntity(6L, 3));
-        tagSet.add(testTagEntityFactory.createEntity(7L, 3));
+        tagSet.add(testTagEntityFactory.createEntity(6L, 3L));
+        tagSet.add(testTagEntityFactory.createEntity(7L, 3L));
         tagRepository.saveAllAndFlush(tagSet);
     }
 
