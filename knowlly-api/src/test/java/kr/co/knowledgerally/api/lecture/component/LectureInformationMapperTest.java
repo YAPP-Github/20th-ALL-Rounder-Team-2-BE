@@ -23,7 +23,7 @@ public class LectureInformationMapperTest {
 
     @Test
     void 엔티티에서_DTO변환_테스트() {
-        LectureInformation lectureInformation = new TestLectureInformationEntityFactory().createEntity(1L, 1L, 1L, 2L);
+        LectureInformation lectureInformation = new TestLectureInformationEntityFactory().createEntity(1L, 1L, 1L,1L, 2L);
 
         LectureInformationDto.ReadOnly lectureInformationDto = lectureInformationMapper.toDto(lectureInformation);
         assertEquals("테스트1 제목", lectureInformationDto.getTopic());

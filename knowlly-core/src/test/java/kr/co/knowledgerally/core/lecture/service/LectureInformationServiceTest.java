@@ -1,12 +1,17 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
 import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.entity.Tag;
 import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
+import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
+import kr.co.knowledgerally.core.lecture.util.TestTagEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -14,7 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,13 +34,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         "classpath:dbunit/entity/coach.xml",
         "classpath:dbunit/entity/category.xml",
         "classpath:dbunit/entity/lecture_information.xml",
-        "classpath:dbunit/entity/lecture_image.xml"
+        "classpath:dbunit/entity/lecture_image.xml",
+        "classpath:dbunit/entity/tag.xml"
 })
 public class LectureInformationServiceTest {
     @Autowired
     LectureInformationService lectureInformationService;
 
+    TestLectureInformationEntityFactory testLectureInformationEntityFactory = new TestLectureInformationEntityFactory();
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
+    TestTagEntityFactory testTagEntityFactory = new TestTagEntityFactory();
 
     @Test
     void 클래스_info_목록_조회() {
@@ -101,5 +112,26 @@ public class LectureInformationServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> {
             lectureInformationService.findById(9999L);
         });
+    }
+
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 클래스_info_등록() {
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2L, 5L,3L, 2);
+        lectureInformationService.saveLectureInformation(5L, lectureInformation, lectureInformation.getCoach().getUser());
+    }
+
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/tag_insert_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 태그_등록() {
+        Set<Tag> tagSet = new LinkedHashSet<>();
+        tagSet.add(testTagEntityFactory.createEntity(6L, 3L));
+        tagSet.add(testTagEntityFactory.createEntity(7L, 3L));
+
+        LectureInformation lectureInformation = lectureInformationService.findById(3L);
+        lectureInformation.setTagSet(tagSet);
+        lectureInformationService.saveLectureInformation(5L, lectureInformation, lectureInformation.getCoach().getUser());
     }
 }

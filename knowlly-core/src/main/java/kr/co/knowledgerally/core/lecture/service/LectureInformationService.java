@@ -1,6 +1,7 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import kr.co.knowledgerally.core.coach.entity.Coach;
+import kr.co.knowledgerally.core.coach.repository.CoachRepository;
 import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
@@ -31,6 +32,7 @@ import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_LECT
 public class LectureInformationService {
     private final LectureInformationRepository lectureInformationRepository;
     private final TagRepository tagRepository;
+    private final CoachRepository coachRepository;
     private final CoachService coachService;
     private final CategoryService categoryService;
 
@@ -92,7 +94,7 @@ public class LectureInformationService {
      */
     @Transactional
     public LectureInformation saveLectureInformation(Long categoryId, @Valid LectureInformation lectureInformation, User loggedInUser) {
-        Coach coach = coachService.findByUser(loggedInUser);
+        Coach coach = getOrCreateCoach(loggedInUser);
         Category category = categoryService.findById(categoryId).orElseThrow();
         lectureInformation.setCoach(coach);
         lectureInformation.setCategory(category);
@@ -100,10 +102,21 @@ public class LectureInformationService {
         Set<Tag> tagSet = lectureInformation.getTagSet();
         tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
 
-        lectureInformationRepository.saveAndFlush(lectureInformation);
         tagRepository.saveAllAndFlush(tagSet);
+        lectureInformationRepository.saveAndFlush(lectureInformation);
         lectureInformation.setTagSet(tagSet);
 
         return lectureInformation;
+    }
+
+    private Coach getOrCreateCoach(User loggedInUser) {
+        Coach coach = coachService.findByUser(loggedInUser);
+
+        if (coach == null) {
+            coach = new Coach();
+            coach.setUser(loggedInUser);
+            coachRepository.saveAndFlush(coach);
+        }
+        return coach;
     }
 }
