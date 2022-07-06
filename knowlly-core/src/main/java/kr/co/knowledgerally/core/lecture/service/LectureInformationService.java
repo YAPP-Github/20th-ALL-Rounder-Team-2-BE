@@ -100,7 +100,7 @@ public class LectureInformationService {
         Category category = categoryService.findById(categoryId).orElseThrow();
         lectureInformation.setCoach(coach);
         lectureInformation.setCategory(category);
-        lectureInformationRepository.saveAndFlush(lectureInformation);
+        lectureInformationRepository.save(lectureInformation);
 
         Set<Tag> tagSet = lectureInformation.getTagSet();
         tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
