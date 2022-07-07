@@ -30,7 +30,6 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
                 .topic("테스트1 제목")
                 .introduce("안녕하세요. 테스트1 입니다.")
                 .build();
-
     }
 
     /**
@@ -41,8 +40,8 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
      */
     public LectureInformationDto.ReadOnly createReadOnlyDto(long id) {
 
-        Set<LectureImageDto> lectureImageDtoSet = new LinkedHashSet<>();
-        lectureImageDtoSet.add(testLectureImageDtoFactory.createDto(1L));
+        Set<LectureImageDto> lectureImageDtos = new LinkedHashSet<>();
+        lectureImageDtos.add(testLectureImageDtoFactory.createDto(1L));
 
         return LectureInformationDto.ReadOnly.builder()
                 .id(id)
@@ -51,7 +50,7 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
                 .price(1)
                 .coach(testCoachDtoFactory.createReadOnlyDto(1L))
                 .category(testCategoryDtoFactory.createDto(1L))
-                .lectureImageSet(lectureImageDtoSet)
+                .lectureImages(lectureImageDtos)
                 .build();
     }
 }

@@ -29,9 +29,11 @@ public class LectureInformation {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Builder.Default
     @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
-    private Set<LectureImage> lectureImageSet = new LinkedHashSet<>();
+    private Set<LectureImage> lectureImages;
+
+    @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
+    private Set<Tag> tags;
 
     @Column(nullable = false)
     private String topic;
@@ -39,8 +41,9 @@ public class LectureInformation {
     @Column(nullable = false)
     private String introduce;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int price;
+    private int price = 1;
 
     @Builder.Default
     @Column(nullable = false)

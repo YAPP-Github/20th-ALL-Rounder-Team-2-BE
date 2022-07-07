@@ -1,33 +1,45 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import kr.co.knowledgerally.core.coach.entity.Coach;
+import kr.co.knowledgerally.core.coach.repository.CoachRepository;
+import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Category;
+import kr.co.knowledgerally.core.lecture.entity.LectureImage;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.entity.Tag;
+import kr.co.knowledgerally.core.lecture.repository.LectureImageRepository;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
+import kr.co.knowledgerally.core.lecture.repository.TagRepository;
+import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
-import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_LECTURE_INFO;
-
-@Validated
+//@Validated
 @Service
 @RequiredArgsConstructor
 public class LectureInformationService {
     private final LectureInformationRepository lectureInformationRepository;
+    private final TagRepository tagRepository;
+    private final CoachRepository coachRepository;
+    private final LectureImageRepository lectureImageRepository;
+    private final CoachService coachService;
+    private final CategoryService categoryService;
 
     /**
      * 클래스-info 목록을 조회합니다.
      * @return 클래스-info 리스트
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<LectureInformation> findAllWithPageable(Pageable pageable) {
         return lectureInformationRepository.findAllTop10ByIsActiveOrderByIdDesc(true, pageable);
     }
@@ -37,7 +49,7 @@ public class LectureInformationService {
      * @param category 검색하고자 하는 카테고리
      * @return 클래스-info 리스트
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<LectureInformation> findAllByCategoryWithPageable(Category category, Pageable pageable) {
         return lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true, pageable);
     }
@@ -47,7 +59,7 @@ public class LectureInformationService {
      * @param categoryName 검색하고자 하는 카테고리 이름
      * @return 클래스-info 리스트
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public List<LectureInformation> searchAllByCategoryName(String categoryName) {
         return lectureInformationRepository.findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc(categoryName, true);
     }
@@ -57,7 +69,7 @@ public class LectureInformationService {
      * @param topic 검색하고자 하는 클래스 제목
      * @return 클래스-info 리스트
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public List<LectureInformation> searchAllByTopic(String topic) {
         return lectureInformationRepository.findAllByTopicContainingAndIsActiveOrderByIdDesc(topic, true);
     }
@@ -72,5 +84,53 @@ public class LectureInformationService {
     public LectureInformation findById(Long id) throws ResourceNotFoundException {
         return lectureInformationRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException(ErrorMessage.NOT_EXIST_LECTURE_INFO));
+    }
+
+    /**
+     * 클래스-info와 클래스 태그들을 저장합니다.
+     * @param categoryId 클래스-info가 속하는 카테고리
+     * @param lectureInformation 저장하고자 하는 클래스-info 엔티티
+     * @param user 현재 로그인된 유저
+     * @return 저장된 클래스-info 엔티티
+     */
+    @Transactional
+    public LectureInformation saveLectureInformation(Long categoryId, @Valid LectureInformation lectureInformation, User user) {
+        Coach coach = getOrCreateCoach(user);
+        Category category = categoryService.findById(categoryId).orElseThrow();
+        lectureInformation.setCoach(coach);
+        lectureInformation.setCategory(category);
+        lectureInformationRepository.save(lectureInformation);
+
+        Set<Tag> tagSet = lectureInformation.getTags();
+        tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
+
+        Set<LectureImage> lectureImageSet = lectureInformation.getLectureImages();
+        Set<LectureImage> newLectureImageSet = new LinkedHashSet<>();
+
+        for (LectureImage element : lectureImageSet) {
+            LectureImage lectureImage = lectureImageRepository.findById(element.getId()).orElseThrow();
+            lectureImage.setLectureInformation(lectureInformation);
+            lectureImageRepository.save(lectureImage);
+            newLectureImageSet.add(lectureImage);
+        }
+
+        tagRepository.saveAllAndFlush(tagSet);
+        lectureInformation.setTags(tagSet);
+        lectureInformation.setLectureImages(newLectureImageSet);
+
+        return lectureInformation;
+    }
+
+    private Coach getOrCreateCoach(User user) {
+        Coach coach = coachService.findByUser(user);
+
+        if (coach == null) {
+            coach = new Coach();
+            coach.setUser(user);
+            coach.setIntroduce(user.getIntro());
+            user.setCoach(true);
+            coachRepository.save(coach);
+        }
+        return coach;
     }
 }

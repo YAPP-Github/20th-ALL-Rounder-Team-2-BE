@@ -1,11 +1,16 @@
 package kr.co.knowledgerally.core.lecture.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import kr.co.knowledgerally.core.annotation.KnowllyDataTest;
+import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.entity.Tag;
 import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
+import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -13,24 +18,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @KnowllyDataTest
-@Import(LectureInformationService.class)
+@Import({LectureInformationService.class, CoachService.class, CategoryService.class})
 @DatabaseSetup({
         "classpath:dbunit/entity/user.xml",
         "classpath:dbunit/entity/coach.xml",
         "classpath:dbunit/entity/category.xml",
         "classpath:dbunit/entity/lecture_information.xml",
-        "classpath:dbunit/entity/lecture_image.xml"
+        "classpath:dbunit/entity/lecture_image.xml",
+        "classpath:dbunit/entity/tag.xml"
 })
 public class LectureInformationServiceTest {
     @Autowired
     LectureInformationService lectureInformationService;
 
+    TestLectureInformationEntityFactory testLectureInformationEntityFactory = new TestLectureInformationEntityFactory();
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
 
     @Test
@@ -46,14 +55,14 @@ public class LectureInformationServiceTest {
                 lectureInformations
                         .getContent()
                         .get(0)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
         assertEquals(lectureInformations.getContent().get(1).getTopic(), "그래픽 디자인");
         assertEquals(
                 lectureInformations
                         .getContent()
                         .get(1)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
     }
 
@@ -88,7 +97,7 @@ public class LectureInformationServiceTest {
         assertEquals(4L, lectureInformation.getCategory().getId());
         assertEquals("마케팅 수업", lectureInformation.getTopic());
         assertEquals("효과적인 마케팅에 대해 배웁니다", lectureInformation.getIntroduce());
-        assertEquals(2, lectureInformation.getLectureImageSet().size());
+        assertEquals(2, lectureInformation.getLectureImages().size());
         assertEquals(1, lectureInformation.getPrice());
         assertTrue(lectureInformation.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 39, 40), lectureInformation.getCreatedAt());
@@ -100,5 +109,21 @@ public class LectureInformationServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> {
             lectureInformationService.findById(9999L);
         });
+    }
+
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/tag_insert_test_2.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 클래스_info와_클래스_태그_등록() {
+        Set<Tag> tagSet = new LinkedHashSet<>();
+
+        tagSet.add(Tag.builder().content("테스트 내용6").build());
+        tagSet.add(Tag.builder().content("테스트 내용7").build());
+
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2L, 5L,3L, 2);
+        lectureInformation.setTags(tagSet);
+        lectureInformationService.saveLectureInformation(5L, lectureInformation, lectureInformation.getCoach().getUser());
     }
 }

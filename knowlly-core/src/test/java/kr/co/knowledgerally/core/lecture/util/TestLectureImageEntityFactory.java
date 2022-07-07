@@ -12,21 +12,25 @@ public class TestLectureImageEntityFactory implements TestEntityFactory<LectureI
 
     /**
      * 테스트용 강의 이미지 엔티티를 생성한다.
+     * lecture_info_id = null
      *
      * @param entityId 생성될 엔티티 Id
      * @return 생성된 강의 이미지 엔티티
      */
     @Override
     public LectureImage createEntity(long entityId) {
-        return createEntity(entityId, 1L);
+        return LectureImage.builder()
+                .id(entityId)
+                .lectureImgUrl(String.format("http://lecture%d.img.url", entityId))
+                .build();
     }
 
     /**
-     * 테스트용 강의 이미지 엔티티를 생성한다.
+     * 테스트용 클래스 이미지 엔티티를 생성한다.
      *
      * @param entityId      생성될 엔티티 Id
-     * @param lectureInfoId 생성될 엔티티의 강의 정보 Id
-     * @return 생성된 강의 이미지 엔티티
+     * @param lectureInfoId 생성될 엔티티의 클래스-info Id
+     * @return 생성된 클래스 이미지 엔티티
      */
     public LectureImage createEntity(long entityId, long lectureInfoId) {
         return LectureImage.builder()

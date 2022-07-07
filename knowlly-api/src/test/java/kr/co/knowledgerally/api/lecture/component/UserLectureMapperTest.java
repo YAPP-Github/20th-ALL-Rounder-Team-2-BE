@@ -33,6 +33,6 @@ class UserLectureMapperTest {
         assertEquals(1, lectureInformationDto.getPrice());
         assertEquals(1, lectureInformationDto.getCoach().getId());
         assertEquals("테스트 카테고리1", lectureInformationDto.getCategory().getCategoryName());
-        assertEquals(2, lectureInformationDto.getLectureImageSet().size());
+        assertEquals(2, lectureInformationDto.getLectureImages().size());
     }
 }

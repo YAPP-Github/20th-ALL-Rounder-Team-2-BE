@@ -7,5 +7,5 @@
     <lecture_image id="5" lecture_info_id="4" lecture_img_url="http://lecture4.img.url" is_active="true" />
     <lecture_image id="6" lecture_info_id="5" lecture_img_url="http://lecture5.img.url" is_active="true" />
     <lecture_image id="7" lecture_info_id="2" lecture_img_url="http://lecture2.img2.url" is_active="true" />
-    <lecture_image id="8" lecture_info_id="3" lecture_img_url="http://lecture8.img.url" is_active="true" />
+    <lecture_image id="8"  lecture_img_url="http://lecture8.img.url" is_active="true" />
 </dataset>

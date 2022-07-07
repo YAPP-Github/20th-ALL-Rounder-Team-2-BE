@@ -1,17 +1,35 @@
 package kr.co.knowledgerally.api.lecture.web;
 
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
+import kr.co.knowledgerally.api.core.component.FileNameGenerator;
+import kr.co.knowledgerally.api.core.component.FileUploader;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class LectureInformationControllerTest extends AbstractControllerTest {
     private static final String LECTUREINFORMATION_URL = "/api/lectureinfo";
     private static final String LECTUREINFORMATION_SEARCH_URL = "/api/lectureinfo/search";
+    private static final String LECTUREIMAGE_URL = "/api/lectureinfo/images";
+
+    @MockBean
+    private FileNameGenerator fileNameGenerator;
+
+    @MockBean
+    private FileUploader fileUploader;
 
     @WithMockKnowllyUser
     @Test
@@ -75,7 +93,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(2));
 
         //카테고리 이름 기반 검색
         mockMvc.perform(
@@ -88,7 +106,78 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(1));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages[0].lectureImgUrl").value("http://lecture5.img.url"));
 
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_info_태그_등록_테스트() throws Exception {
+        String categoryId = "categoryId";
+        final String json =
+                "{\"topic\": \"테스트 제목1\"," +
+                "\"introduce\": \"테스트 소개1\"," +
+                "\"tags\":" + "[" +
+                "{\"content\": \"태그1\"}," +
+                "{\"content\": \"태그2\"}" + "]," +
+                        "\"lectureImages\":" + "[" +
+                        "{\"id\": \"4\"}," +
+                        "{\"id\": \"5\"}" +
+                        "]" +
+                        "}";
+
+        mockMvc.perform(
+                post(LECTUREINFORMATION_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .queryParam(categoryId, "1")
+                        .content(json)
+        ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("테스트 제목1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("테스트 소개1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tags.size()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImages.size()").value(2));
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_이미지_등록_테스트() throws Exception {
+        List<MockMultipartFile> mockMultipartFiles = new ArrayList<>();
+
+        MockMultipartFile mockMultipartFile1 = new MockMultipartFile(
+                "images",
+                "hello1.txt",
+                MediaType.TEXT_PLAIN_VALUE,
+                "Hello, World!".getBytes()
+        );
+
+        MockMultipartFile mockMultipartFile2 = new MockMultipartFile(
+                "images",
+                "hello2.txt",
+                MediaType.TEXT_PLAIN_VALUE,
+                "Hello, World!".getBytes()
+        );
+
+        mockMultipartFiles.add(mockMultipartFile1);
+        mockMultipartFiles.add(mockMultipartFile2);
+
+        when(fileNameGenerator.generate(eq("hello1.txt"))).thenReturn("hello1.txt_generated");
+        when(fileUploader.uploadMultiPartFile(any(), eq("lecture-image/hello1.txt_generated")))
+                .thenReturn("http://testurl.com/lecture-image/hello1.txt_generated");
+        when(fileNameGenerator.generate(eq("hello2.txt"))).thenReturn("hello2.txt_generated");
+        when(fileUploader.uploadMultiPartFile(any(), eq("lecture-image/hello2.txt_generated")))
+                .thenReturn("http://testurl.com/lecture-image/hello2.txt_generated");
+
+        mockMvc.perform(
+                        multipart(LECTUREIMAGE_URL)
+                                .file(mockMultipartFiles.get(0))
+                                .file(mockMultipartFiles.get(1))
+                                .contentType(MediaType.MULTIPART_FORM_DATA)
+                ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImgUrl")
+                        .value("http://testurl.com/lecture-image/hello1.txt_generated"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectureImgUrl")
+                        .value("http://testurl.com/lecture-image/hello2.txt_generated"))
+                .andDo(print());
     }
 }

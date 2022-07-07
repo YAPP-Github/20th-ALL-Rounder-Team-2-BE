@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -47,8 +49,10 @@ class TagRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/tag_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        Tag tag = testTagEntityFactory.createEntity(6L, 3);
-        tagRepository.saveAndFlush(tag);
+        Set<Tag> tagSet = new LinkedHashSet<>();
+        tagSet.add(testTagEntityFactory.createEntity(6L, 3L));
+        tagSet.add(testTagEntityFactory.createEntity(7L, 3L));
+        tagRepository.saveAllAndFlush(tagSet);
     }
 
     @Override

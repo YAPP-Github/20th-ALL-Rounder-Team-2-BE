@@ -5,7 +5,7 @@
     <tag id="3" lecture_info_id="2" content="언어" is_active="true" />
     <tag id="4" lecture_info_id="2" content="자바개발" is_active="true" />
     <tag id="5" lecture_info_id="3" content="전문가" is_active="false" />
-    <tag id="6" lecture_info_id="3" content="테스트 내용6" is_active="true" />
-    <tag id="7" lecture_info_id="3" content="테스트 내용7" is_active="true" />
+    <tag id="6" lecture_info_id="6" content="테스트 내용6" is_active="true" />
+    <tag id="7" lecture_info_id="6" content="테스트 내용7" is_active="true" />
 
 </dataset>
