@@ -47,7 +47,7 @@ class LectureImageRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_image_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        LectureImage lectureImage = testLectureImageEntityFactory.createEntity(8L, 3);
+        LectureImage lectureImage = testLectureImageEntityFactory.createEntity(8);
         lectureImageRepository.saveAndFlush(lectureImage);
     }
 

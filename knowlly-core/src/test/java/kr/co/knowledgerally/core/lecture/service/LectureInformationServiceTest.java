@@ -42,7 +42,6 @@ public class LectureInformationServiceTest {
 
     TestLectureInformationEntityFactory testLectureInformationEntityFactory = new TestLectureInformationEntityFactory();
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
-    TestTagEntityFactory testTagEntityFactory = new TestTagEntityFactory();
 
     @Test
     void 클래스_info_목록_조회() {
