@@ -91,7 +91,7 @@ public class LectureInformationController {
     })
     @GetMapping("/search")
     public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> searchAllLectureInformation (
-            @ApiParam(value = "=keyword를 통해 검색하기")
+            @ApiParam(value = "keyword를 통해 검색하기")
             @RequestParam(name = "keyword") String keyword, ApiPageRequest pageRequest
     ) {
         return ResponseEntity.ok(ApiPageResult.ok(

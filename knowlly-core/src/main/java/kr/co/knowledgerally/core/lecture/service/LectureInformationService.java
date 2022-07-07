@@ -117,8 +117,9 @@ public class LectureInformationService {
         if (coach == null) {
             coach = new Coach();
             coach.setUser(user);
+            coach.setIntroduce(user.getIntro());
             user.setCoach(true);
-            coachRepository.saveAndFlush(coach);
+            coachRepository.save(coach);
         }
         return coach;
     }
