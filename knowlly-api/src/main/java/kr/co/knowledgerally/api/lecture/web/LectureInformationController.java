@@ -6,8 +6,11 @@ import kr.co.knowledgerally.api.core.dto.ApiPageRequest;
 import kr.co.knowledgerally.api.core.dto.ApiPageResult;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
+import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.api.lecture.service.LectureImageUploadService;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
+import kr.co.knowledgerally.core.lecture.service.LectureImageService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationSearchService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
@@ -17,9 +20,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(value = "클래스-info 관련 엔드포인트")
 @RestController
@@ -28,6 +33,7 @@ import javax.validation.Valid;
 public class LectureInformationController {
     private final LectureInformationService lectureInformationService;
     private final LectureInformationSearchService lectureInformationSearchService;
+    private final LectureImageUploadService lectureImageUploadService;
     private final CategoryService categoryService;
     private final LectureInformationMapper lectureInformationMapper;
 
@@ -92,5 +98,17 @@ public class LectureInformationController {
                 lectureInformationSearchService.searchAllByKeyword(keyword, pageRequest.convert())
                         .map(lectureInformationMapper::toDto)
         ));
+    }
+
+    @ApiOperation(value = "클래스 이미지 등록", notes = "여러개의 클래스 이미지들을 등록합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @PostMapping("/image")
+    public ResponseEntity<ApiResult<List<LectureImageDto>>> uploadImage(
+            @ApiParam(value = "업로드할 클래스 이미지 리스트")
+            @RequestParam(name = "imageList") List<MultipartFile> imageList
+            ) {
+        return ResponseEntity.ok(ApiResult.ok(lectureImageUploadService.uploadLectureImage(imageList)));
     }
 }
