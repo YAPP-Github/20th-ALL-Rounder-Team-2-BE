@@ -12,6 +12,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # 6시간마다 재배포 로직
+    - cron: "0 */6 * * *"
 env:
   APP_NAME: knowlly-api
   JAR_NAME: knowlly-api-0.0.1-SNAPSHOT.jar
