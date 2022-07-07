@@ -23,14 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LectureInformationControllerTest extends AbstractControllerTest {
     private static final String LECTUREINFORMATION_URL = "/api/lectureinfo";
     private static final String LECTUREINFORMATION_SEARCH_URL = "/api/lectureinfo/search";
-    private static final String LECTUREIMAGE_URL = "/api/lectureinfo/image";
-
-    @MockBean
-    private FileNameGenerator fileNameGenerator;
-
-    @MockBean
-    private FileUploader fileUploader;
-
+    
     @WithMockKnowllyUser
     @Test
     public void 클래스_info_목록_조회_테스트() throws Exception {
