@@ -6,8 +6,10 @@ import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Category;
+import kr.co.knowledgerally.core.lecture.entity.LectureImage;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.entity.Tag;
+import kr.co.knowledgerally.core.lecture.repository.LectureImageRepository;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
 import kr.co.knowledgerally.core.lecture.repository.TagRepository;
 import kr.co.knowledgerally.core.user.entity.User;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,6 +36,7 @@ public class LectureInformationService {
     private final LectureInformationRepository lectureInformationRepository;
     private final TagRepository tagRepository;
     private final CoachRepository coachRepository;
+    private final LectureImageRepository lectureImageRepository;
     private final CoachService coachService;
     private final CategoryService categoryService;
 
@@ -105,8 +109,19 @@ public class LectureInformationService {
         Set<Tag> tagSet = lectureInformation.getTagSet();
         tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
 
+        Set<LectureImage> lectureImageSet = lectureInformation.getLectureImageSet();
+        Set<LectureImage> newLectureImageSet = new LinkedHashSet<>();
+
+        for (LectureImage element : lectureImageSet) {
+            LectureImage lectureImage = lectureImageRepository.findById(element.getId()).orElseThrow();
+            lectureImage.setLectureInformation(lectureInformation);
+            lectureImageRepository.save(lectureImage);
+            newLectureImageSet.add(lectureImage);
+        }
+
         tagRepository.saveAllAndFlush(tagSet);
         lectureInformation.setTagSet(tagSet);
+        lectureInformation.setLectureImageSet(newLectureImageSet);
 
         return lectureInformation;
     }

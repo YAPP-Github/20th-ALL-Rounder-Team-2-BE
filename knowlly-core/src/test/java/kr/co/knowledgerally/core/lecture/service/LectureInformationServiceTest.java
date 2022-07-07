@@ -11,7 +11,6 @@ import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.entity.Tag;
 import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
 import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
-import kr.co.knowledgerally.core.lecture.util.TestTagEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -117,8 +116,9 @@ public class LectureInformationServiceTest {
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/tag_insert_test_2.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
-    void 클래스_info_태그_등록() {
+    void 클래스_info와_클래스_태그_등록() {
         Set<Tag> tagSet = new LinkedHashSet<>();
+
         tagSet.add(Tag.builder().content("테스트 내용6").build());
         tagSet.add(Tag.builder().content("테스트 내용7").build());
 

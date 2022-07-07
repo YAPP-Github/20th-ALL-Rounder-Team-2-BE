@@ -119,8 +119,12 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 "\"introduce\": \"테스트 소개1\"," +
                 "\"tagSet\":" + "[" +
                 "{\"content\": \"태그1\"}," +
-                "{\"content\": \"태그2\"}" +
-                "]" + "}";
+                "{\"content\": \"태그2\"}" + "]," +
+                        "\"lectureImageSet\":" + "[" +
+                        "{\"id\": \"4\"}," +
+                        "{\"id\": \"5\"}" +
+                        "]" +
+                        "}";
 
         mockMvc.perform(
                 post(LECTUREINFORMATION_URL)
@@ -130,7 +134,8 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
         ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("테스트 제목1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("테스트 소개1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tagSet.size()").value(2));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tagSet.size()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImageSet.size()").value(2));
     }
 
     @WithMockKnowllyUser
