@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         imports = DateTimeFormatter.class)
 public interface BallHistoryMapper {
-    @Mapping(target = "historyDate", expression = "java(ballHistory.getCreatedAt()" +
-            ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) )")
+    @Mapping(target = "historyDate", expression = "java(ballHistory.getCreatedAt().toLocalDate().toString())")
     BallHistoryDto toDto(BallHistory ballHistory);
 }

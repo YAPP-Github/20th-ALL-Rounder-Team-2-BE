@@ -41,6 +41,7 @@ class FormRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(4L, form.getUser().getId());
         assertEquals("신청서를 받아주세요!", form.getContent());
         assertEquals(Form.State.ACCEPT, form.getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 17), form.getExpirationDate());
         assertTrue(form.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getUpdatedAt());
@@ -51,7 +52,7 @@ class FormRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/form_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        Form form = testFormEntityFactory.createEntity(7L, 4, 2);
+        Form form = testFormEntityFactory.createEntity(8L, 4, 3);
         formRepository.saveAndFlush(form);
     }
 

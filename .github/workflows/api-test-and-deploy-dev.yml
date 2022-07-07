@@ -48,7 +48,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Gradle 테스트 및 실행파일 생성
-        run: ./gradlew build test bootJar -Dfile.encoding=UTF-8 -Duser.timezone=Asia/Seoul --info
+        run: ./gradlew build test bootJar -Dfile.encoding=UTF-8
         env:
           TEST_SPRING_PROFILES_ACTIVE: dev
 

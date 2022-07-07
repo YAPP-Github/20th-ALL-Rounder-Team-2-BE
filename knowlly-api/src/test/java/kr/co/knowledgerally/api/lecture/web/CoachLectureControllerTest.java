@@ -21,16 +21,25 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matched").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matchedUser").isEmpty())
 
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lecture.id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lecture.state").value("ON_GOING"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectureInformation.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].forms[0].id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].matched").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].matchedUser").isNotEmpty())
 
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lecture.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lecture.state").value("DONE"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].forms[0].id").value(1));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].forms[0].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].matched").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].matchedUser").isNotEmpty());
     }
 
     @WithMockKnowllyUser
@@ -44,6 +53,17 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(3))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matched").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matchedUser").isEmpty());
+    }
+
+    @WithMockKnowllyUser(userId = 2)
+    @Test
+    void 운영_클래스_조회_사용자_코치아님_테스트() throws Exception {
+        mockMvc.perform(
+                        get(API_COACH_LECTURE_ME)
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isBadRequest());
     }
 }

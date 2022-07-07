@@ -33,6 +33,9 @@ public class ReviewCoachService {
         Review review = reviewMapper.toEntity(reviewDto);
         review.setReviewee(coach);
         review.setWriter(loggedInUser);
+
+        // TODO 볼 지급 로직 작성
+
         return reviewMapper.toDto(reviewService.saveReview(review));
     }
 }

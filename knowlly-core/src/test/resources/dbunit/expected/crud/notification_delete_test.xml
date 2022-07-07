@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <notification id="2" user_id="3" coach_id="1" content="알림 내용2" noti_type="COACH" is_read="true" is_active="true"
-                  created_at="2022-06-13 22:17:08" updated_at="2022-06-13 22:17:09"/>
-    <notification id="3" user_id="1" coach_id="2" content="알림 내용" noti_type="PLAYER" is_read="false" is_active="true"
-                  created_at="2022-06-13 22:17:08" updated_at="2022-06-13 22:17:09"/>
-    <notification id="4" user_id="4" coach_id="3" content="알림 내용" noti_type="PLAYER" is_read="true" is_active="true"
-                  created_at="2022-06-13 22:17:08" updated_at="2022-06-13 22:17:09"/>
+    <notification id="2" user_id="3" coach_id="1" title="제목2" content="알림 내용2" noti_type="COACH" is_read="true" is_active="true"
+                  created_at="2022-06-13 22:17:18" updated_at="2022-06-13 22:17:19"/>
+    <notification id="3" user_id="1" coach_id="2" title="제목3" content="알림 내용" noti_type="PLAYER" is_read="false" is_active="true"
+                  created_at="2022-06-13 22:17:28" updated_at="2022-06-13 22:17:29"/>
+    <notification id="4" user_id="4" coach_id="3" title="제목4" content="알림 내용" noti_type="PLAYER" is_read="true" is_active="true"
+                  created_at="2022-06-13 22:17:38" updated_at="2022-06-13 22:17:39"/>
 </dataset>

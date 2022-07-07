@@ -8,11 +8,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class FormControllerTest extends AbstractControllerTest {
     private static final String API_FORM = "/api/form/";
     private static final String API_FORM_ME = "/api/form/me";
+    private static final String API_FORM_LECTURE = "/api/form/lecture/";
 
     @WithMockKnowllyUser
     @Test
@@ -25,7 +28,9 @@ class FormControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("신청서를 받아주세요!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].user.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].expirationDate").value("2022-06-16T22:48:20"))
+                .andDo(print());
     }
 
     @WithMockKnowllyUser
@@ -40,7 +45,9 @@ class FormControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("신청서를 받아주세요!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].user.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].expirationDate").value("2022-06-16T22:48:20"))
+                .andDo(print());
     }
 
     @WithMockKnowllyUser
@@ -65,6 +72,26 @@ class FormControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.content").value("신청서를 받아주세요!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.lecture.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.id").value(4))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("ACCEPT"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("ACCEPT"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.expirationDate").value("2022-06-16T22:48:17"))
+                .andDo(print());
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    void 신청서_등록_테스트() throws Exception {
+        final String json = "{" +
+                "   \"content\": \"테스트 내용\"" +
+                "}";
+
+        mockMvc.perform(
+                        post(API_FORM_LECTURE + 1)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json)
+                ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.content").value("테스트 내용"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lecture.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("REQUEST"));
     }
 }

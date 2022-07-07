@@ -64,8 +64,8 @@ class LectureControllerTest extends AbstractControllerTest {
     public void 클래스_일정_등록_테스트_형식_잘못되면_400() throws Exception {
         String json = "{" +
                 "   \"schedules\": [" +
-                "       {\"startAt\": \"2022-06-15T25:30\", \"endAt\": \"2022-06-15 26:30\"}," +
-                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15 19:30\"}" +
+                "       {\"startAt\": \"2022-06-15T25:30\", \"endAt\": \"2022-06-15T26:30\"}," +
+                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15T19:30\"}" +
                 "   ]" +
                 "}";
 
@@ -82,8 +82,8 @@ class LectureControllerTest extends AbstractControllerTest {
     public void 클래스_일정_등록_테스트_시작일이_종료일_넘어가면_400() throws Exception {
         String json = "{" +
                 "   \"schedules\": [" +
-                "       {\"startAt\": \"2022-06-15T15:30\", \"endAt\": \"2022-06-15 16:30\"}," +
-                "       {\"startAt\": \"2022-06-15T11:30\", \"endAt\": \"2022-06-15 12:30\"}" +
+                "       {\"startAt\": \"2022-06-15T18:30\", \"endAt\": \"2022-06-15T16:30\"}," +
+                "       {\"startAt\": \"2022-06-15T11:30\", \"endAt\": \"2022-06-15T12:30\"}" +
                 "   ]" +
                 "}";
 

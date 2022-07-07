@@ -26,7 +26,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 import java.util.List;
 
-@Api(value = "클래스-info 관련 엔드포인트")
+@Api(value = "클래스-info 관련 엔드포인트", tags = "클래스-info")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/lectureinfo")
