@@ -1,8 +1,11 @@
 package kr.co.knowledgerally.api.lecture.web;
 
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
+import kr.co.knowledgerally.api.core.component.FileNameGenerator;
+import kr.co.knowledgerally.api.core.component.FileUploader;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,6 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LectureInformationControllerTest extends AbstractControllerTest {
     private static final String LECTUREINFORMATION_URL = "/api/lectureinfo";
     private static final String LECTUREINFORMATION_SEARCH_URL = "/api/lectureinfo/search";
+    private static final String LECTUREIMAGE_URL = "/api/lectureinfo/image";
+
+    @MockBean
+    private FileNameGenerator fileNameGenerator;
+
+    @MockBean
+    private FileUploader fileUploader;
 
     @WithMockKnowllyUser
     @Test
