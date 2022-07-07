@@ -36,6 +36,9 @@ public class Form {
     @Enumerated(EnumType.STRING)
     private State state = State.REQUEST;
 
+    @Column
+    private LocalDateTime expirationDate;
+
     @Builder.Default
     @Column(nullable = false)
     private boolean isActive = true;

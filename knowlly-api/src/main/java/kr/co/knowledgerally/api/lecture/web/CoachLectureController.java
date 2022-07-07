@@ -32,20 +32,20 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(value = "운영 클래스-info 관련 엔드포인트")
+@Api(value = "운영 클래스 관련 엔드포인트", tags = "운영 클래스")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/coach/lecture")
 public class CoachLectureController {
     private final CoachLectureService coachLectureService;
 
-    @ApiOperation(value = "내 신청서 조회", notes = "로그인한 사용자의 신청서 목록을 조회합니다. 수강 클래스 조회에서 사용 가능합니다.")
+    @ApiOperation(value = "운영 클래스 조회", notes = "로그인한 사용자의 운영 클래스를 조회합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/me")
     public ResponseEntity<ApiResult<List<CoachLectureDto>>> getCoachLectureMe(@ApiIgnore @CurrentUser User loggedInUser,
-                                                                              @ApiParam(value = "신청서 상태, 없을 시 전체 조회\n" +
+                                                                              @ApiParam(value = "클래스 진행 상태, 없을 시 전체 조회\n" +
                                                                                       "ON_BOARD : 예정\n" +
                                                                                       "ON_GOING : 진행 중\n" +
                                                                                       "DONE : 완료", required = false)

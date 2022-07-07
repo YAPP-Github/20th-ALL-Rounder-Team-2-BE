@@ -28,6 +28,9 @@ public class Notification {
     @JoinColumn(name = "coach_id")
     private Coach coach;
 
+    @Column
+    private String title;
+
     @Column(nullable = false)
     private String content;
 

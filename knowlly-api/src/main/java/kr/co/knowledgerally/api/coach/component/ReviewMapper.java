@@ -11,11 +11,9 @@ import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        imports = DateTimeFormatter.class,
         uses = { CoachMapper.class, UserMapper.class })
 public interface ReviewMapper {
-    @Mapping(target = "writtenDate", expression = "java(review.getCreatedAt()" +
-            ".format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) )")
+    @Mapping(target = "writtenDate", expression = "java(review.getCreatedAt().toLocalDate().toString())")
     @Mapping(target = "isPublic", source = "review.public")
     ReviewDto.ReadOnly toDto(Review review);
 

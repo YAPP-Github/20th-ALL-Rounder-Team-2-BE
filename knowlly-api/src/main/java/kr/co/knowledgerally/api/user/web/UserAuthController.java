@@ -21,9 +21,9 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 회원 인증 관련 엔드포인트
+ * 사용자 인증 관련 엔드포인트
  */
-@Api(value = "회원 인증 관련 엔드포인트")
+@Api(value = "사용자 인증 관련 엔드포인트", tags = "사용자 인증")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
