@@ -13,21 +13,16 @@ import kr.co.knowledgerally.core.lecture.repository.LectureImageRepository;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
 import kr.co.knowledgerally.core.lecture.repository.TagRepository;
 import kr.co.knowledgerally.core.user.entity.User;
-import kr.co.knowledgerally.core.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static kr.co.knowledgerally.core.core.message.ErrorMessage.NOT_EXIST_LECTURE_INFO;
 
 //@Validated
 @Service
@@ -106,10 +101,10 @@ public class LectureInformationService {
         lectureInformation.setCategory(category);
         lectureInformationRepository.save(lectureInformation);
 
-        Set<Tag> tagSet = lectureInformation.getTagSet();
+        Set<Tag> tagSet = lectureInformation.getTags();
         tagSet.stream().forEach(tag-> tag.setLectureInformation(lectureInformation));
 
-        Set<LectureImage> lectureImageSet = lectureInformation.getLectureImageSet();
+        Set<LectureImage> lectureImageSet = lectureInformation.getLectureImages();
         Set<LectureImage> newLectureImageSet = new LinkedHashSet<>();
 
         for (LectureImage element : lectureImageSet) {
@@ -120,8 +115,8 @@ public class LectureInformationService {
         }
 
         tagRepository.saveAllAndFlush(tagSet);
-        lectureInformation.setTagSet(tagSet);
-        lectureInformation.setLectureImageSet(newLectureImageSet);
+        lectureInformation.setTags(tagSet);
+        lectureInformation.setLectureImages(newLectureImageSet);
 
         return lectureInformation;
     }

@@ -10,7 +10,6 @@ import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.service.LectureImageUploadService;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
-import kr.co.knowledgerally.core.lecture.service.LectureImageService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationSearchService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
@@ -104,11 +103,11 @@ public class LectureInformationController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    @PostMapping("/image")
+    @PostMapping("/images")
     public ResponseEntity<ApiResult<List<LectureImageDto>>> uploadImage(
             @ApiParam(value = "업로드할 클래스 이미지 리스트")
-            @RequestParam(name = "imageList") List<MultipartFile> imageList
+            @RequestParam(name = "images") List<MultipartFile> images
             ) {
-        return ResponseEntity.ok(ApiResult.ok(lectureImageUploadService.uploadLectureImage(imageList)));
+        return ResponseEntity.ok(ApiResult.ok(lectureImageUploadService.uploadLectureImage(images)));
     }
 }

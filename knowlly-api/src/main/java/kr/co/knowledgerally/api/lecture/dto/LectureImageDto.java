@@ -21,7 +21,7 @@ public class LectureImageDto {
     @JsonProperty
     private Long id;
 
-    @ApiModelProperty(value = "클래스 이미지 경로")
+    @ApiModelProperty(value = "클래스 이미지 경로", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @JsonProperty
     private String lectureImgUrl;
 }

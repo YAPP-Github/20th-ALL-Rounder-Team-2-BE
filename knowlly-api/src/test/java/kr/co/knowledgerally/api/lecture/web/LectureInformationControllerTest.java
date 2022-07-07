@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LectureInformationControllerTest extends AbstractControllerTest {
     private static final String LECTUREINFORMATION_URL = "/api/lectureinfo";
     private static final String LECTUREINFORMATION_SEARCH_URL = "/api/lectureinfo/search";
-    private static final String LECTUREIMAGE_URL = "/api/lectureinfo/image";
+    private static final String LECTUREIMAGE_URL = "/api/lectureinfo/images";
 
     @MockBean
     private FileNameGenerator fileNameGenerator;
@@ -93,7 +93,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet.size()").value(2));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(2));
 
         //카테고리 이름 기반 검색
         mockMvc.perform(
@@ -106,7 +106,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImageSet[0].lectureImgUrl").value("http://lecture5.img.url"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages[0].lectureImgUrl").value("http://lecture5.img.url"));
 
     }
 
@@ -117,10 +117,10 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
         final String json =
                 "{\"topic\": \"테스트 제목1\"," +
                 "\"introduce\": \"테스트 소개1\"," +
-                "\"tagSet\":" + "[" +
+                "\"tags\":" + "[" +
                 "{\"content\": \"태그1\"}," +
                 "{\"content\": \"태그2\"}" + "]," +
-                        "\"lectureImageSet\":" + "[" +
+                        "\"lectureImages\":" + "[" +
                         "{\"id\": \"4\"}," +
                         "{\"id\": \"5\"}" +
                         "]" +
@@ -129,36 +129,36 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
         mockMvc.perform(
                 post(LECTUREINFORMATION_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .queryParam(categoryId, String.valueOf(1))
+                        .queryParam(categoryId, "1")
                         .content(json)
         ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("테스트 제목1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("테스트 소개1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tagSet.size()").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImageSet.size()").value(2));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tags.size()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImages.size()").value(2));
     }
 
     @WithMockKnowllyUser
     @Test
     public void 클래스_이미지_등록_테스트() throws Exception {
-        List<MockMultipartFile> mockMultipartFileList = new ArrayList<>();
+        List<MockMultipartFile> mockMultipartFiles = new ArrayList<>();
 
         MockMultipartFile mockMultipartFile1 = new MockMultipartFile(
-                "imageList",
+                "images",
                 "hello1.txt",
                 MediaType.TEXT_PLAIN_VALUE,
                 "Hello, World!".getBytes()
         );
 
         MockMultipartFile mockMultipartFile2 = new MockMultipartFile(
-                "imageList",
+                "images",
                 "hello2.txt",
                 MediaType.TEXT_PLAIN_VALUE,
                 "Hello, World!".getBytes()
         );
 
-        mockMultipartFileList.add(mockMultipartFile1);
-        mockMultipartFileList.add(mockMultipartFile2);
+        mockMultipartFiles.add(mockMultipartFile1);
+        mockMultipartFiles.add(mockMultipartFile2);
 
         when(fileNameGenerator.generate(eq("hello1.txt"))).thenReturn("hello1.txt_generated");
         when(fileUploader.uploadMultiPartFile(any(), eq("lecture-image/hello1.txt_generated")))
@@ -169,8 +169,8 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(
                         multipart(LECTUREIMAGE_URL)
-                                .file(mockMultipartFileList.get(0))
-                                .file(mockMultipartFileList.get(1))
+                                .file(mockMultipartFiles.get(0))
+                                .file(mockMultipartFiles.get(1))
                                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))

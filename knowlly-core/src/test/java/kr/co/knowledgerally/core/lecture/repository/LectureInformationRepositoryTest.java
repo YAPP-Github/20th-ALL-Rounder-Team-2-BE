@@ -42,14 +42,14 @@ public class LectureInformationRepositoryTest {
                 lectureInformations
                         .getContent()
                         .get(0)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
         assertEquals(lectureInformations.getContent().get(1).getTopic(), "그래픽 디자인");
         assertEquals(
                 lectureInformations
                         .getContent()
                         .get(1)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
     }
 

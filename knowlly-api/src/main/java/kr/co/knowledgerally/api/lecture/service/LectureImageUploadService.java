@@ -5,9 +5,7 @@ import kr.co.knowledgerally.api.core.component.FileUploader;
 import kr.co.knowledgerally.api.lecture.component.LectureImageMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.core.lecture.entity.LectureImage;
-import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.service.LectureImageService;
-import kr.co.knowledgerally.core.user.entity.UserImage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,25 +29,25 @@ public class LectureImageUploadService {
     /**
      * Multipart File 들을 저장하고, 저장 경로들을 리턴한다.
      *
-     * @param imageFileList 요청으로 들어온 Multipart File List
+     * @param imageFiles 요청으로 들어온 Multipart File List
      * @return 저장 결과 LectureImageDto 리스트
      */
     @Transactional
-    public List<LectureImageDto> uploadLectureImage(List<MultipartFile> imageFileList) {
-        List<LectureImage> lectureImageList = new ArrayList<>();
+    public List<LectureImageDto> uploadLectureImage(List<MultipartFile> imageFiles) {
+        List<LectureImage> lectureImages = new ArrayList<>();
 
-        for (MultipartFile imageFile : imageFileList) {
+        for (MultipartFile imageFile : imageFiles) {
             String generatedFileName = fileNameGenerator.generate(imageFile.getOriginalFilename());
             generatedFileName = LECTURE_IMAGE_DIR_NAME + DASH + generatedFileName;
             String downloadableUrl = fileUploader.uploadMultiPartFile(imageFile, generatedFileName);
 
-            lectureImageList.add(LectureImage.builder()
+            lectureImages.add(LectureImage.builder()
                     .lectureImgUrl(downloadableUrl)
                     .build());
         }
-        lectureImageList = lectureImageService.saveAllLectureImage(lectureImageList);
+        lectureImages = lectureImageService.saveAllLectureImage(lectureImages);
 
-        return lectureImageList
+        return lectureImages
                 .stream()
                 .map(s->lectureImageMapper.toDto(s))
                 .collect(Collectors.toList());

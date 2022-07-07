@@ -29,11 +29,11 @@ public class LectureInformationDto {
 
     @ApiModelProperty(value = "클래스-info 이미지", position = PropertyDisplayOrder.IMAGE)
     @JsonProperty(index = PropertyDisplayOrder.IMAGE)
-    private Set<LectureImageDto> lectureImageSet;
+    private Set<LectureImageDto> lectureImages;
 
     @ApiModelProperty(value = "태그 set", position = PropertyDisplayOrder.TAG)
     @JsonProperty(index = PropertyDisplayOrder.TAG)
-    private Set<TagDto> tagSet;
+    private Set<TagDto> tags;
 
     @SuperBuilder
     @Getter

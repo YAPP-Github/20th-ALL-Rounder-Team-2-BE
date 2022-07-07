@@ -39,7 +39,7 @@ class LectureInformationRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(4L, lectureInformation.getCategory().getId());
         assertEquals("마케팅 수업", lectureInformation.getTopic());
         assertEquals("효과적인 마케팅에 대해 배웁니다", lectureInformation.getIntroduce());
-        assertEquals(2, lectureInformation.getLectureImageSet().size());
+        assertEquals(2, lectureInformation.getLectureImages().size());
         assertEquals(1, lectureInformation.getPrice());
         assertTrue(lectureInformation.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 39, 40), lectureInformation.getCreatedAt());

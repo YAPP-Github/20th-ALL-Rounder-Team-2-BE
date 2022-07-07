@@ -55,14 +55,14 @@ public class LectureInformationServiceTest {
                 lectureInformations
                         .getContent()
                         .get(0)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
         assertEquals(lectureInformations.getContent().get(1).getTopic(), "그래픽 디자인");
         assertEquals(
                 lectureInformations
                         .getContent()
                         .get(1)
-                        .getLectureImageSet().size(), 1
+                        .getLectureImages().size(), 1
         );
     }
 
@@ -97,7 +97,7 @@ public class LectureInformationServiceTest {
         assertEquals(4L, lectureInformation.getCategory().getId());
         assertEquals("마케팅 수업", lectureInformation.getTopic());
         assertEquals("효과적인 마케팅에 대해 배웁니다", lectureInformation.getIntroduce());
-        assertEquals(2, lectureInformation.getLectureImageSet().size());
+        assertEquals(2, lectureInformation.getLectureImages().size());
         assertEquals(1, lectureInformation.getPrice());
         assertTrue(lectureInformation.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 39, 40), lectureInformation.getCreatedAt());
@@ -123,7 +123,7 @@ public class LectureInformationServiceTest {
         tagSet.add(Tag.builder().content("테스트 내용7").build());
 
         LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2L, 5L,3L, 2);
-        lectureInformation.setTagSet(tagSet);
+        lectureInformation.setTags(tagSet);
         lectureInformationService.saveLectureInformation(5L, lectureInformation, lectureInformation.getCoach().getUser());
     }
 }

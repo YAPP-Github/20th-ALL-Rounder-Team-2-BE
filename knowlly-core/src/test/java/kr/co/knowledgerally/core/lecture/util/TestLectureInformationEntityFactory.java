@@ -4,8 +4,8 @@ import kr.co.knowledgerally.core.core.util.TestEntityFactory;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureImage;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
-import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.coach.util.TestCoachEntityFactory;
+import kr.co.knowledgerally.core.lecture.entity.Tag;
 
 import java.util.*;
 
@@ -36,9 +36,14 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
      * @return 생성된 강의정보 엔티티
      */
     public LectureInformation createEntity(long entityId, long coachId, long categoryId, long userId, long lectureImageNum) {
-        Set<LectureImage> lectureImageSet = new LinkedHashSet<>();
+        Set<LectureImage> lectureImages = new LinkedHashSet<>();
+        Set<Tag> tags = new LinkedHashSet<>();
+        tags.add(Tag.builder()
+                .lectureInformation(LectureInformation.builder().build())
+                .build());
+
         for (long index=1; index<=lectureImageNum; index++) {
-            lectureImageSet.add(
+            lectureImages.add(
                     LectureImage.builder()
                             .id(index)
                             .lectureInformation(LectureInformation.builder().build())
@@ -51,7 +56,8 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
                 .id(entityId)
                 .coach(testCoachEntityFactory.createEntity(coachId, userId))
                 .category(testCategoryEntityFactory.createEntity(categoryId))
-                .lectureImageSet(lectureImageSet)
+                .lectureImages(lectureImages)
+                .tags(tags)
                 .topic(String.format("테스트%d 제목", entityId))
                 .introduce(String.format("안녕하세요. 테스트%d 입니다.", entityId))
                 .price(1)
