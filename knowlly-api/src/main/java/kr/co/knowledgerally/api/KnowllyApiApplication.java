@@ -13,11 +13,6 @@ import java.util.TimeZone;
 @SpringBootApplication(scanBasePackageClasses = { CoreBasePackage.class, ApiBasePackage.class })
 public class KnowllyApiApplication {
 
-	@PostConstruct
-	public void initialize() {
-		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(KnowllyApiApplication.class, args);
 	}

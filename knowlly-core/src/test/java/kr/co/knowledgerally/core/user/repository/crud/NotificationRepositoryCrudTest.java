@@ -35,6 +35,7 @@ class NotificationRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(1L, notification.getId());
         assertEquals(1L, notification.getUser().getId());
         assertEquals(3L, notification.getCoach().getId());
+        assertEquals("제목1", notification.getTitle());
         assertEquals("알림 내용", notification.getContent());
         assertEquals(Notification.NotiType.PLAYER, notification.getNotiType());
         assertFalse(notification.isRead());

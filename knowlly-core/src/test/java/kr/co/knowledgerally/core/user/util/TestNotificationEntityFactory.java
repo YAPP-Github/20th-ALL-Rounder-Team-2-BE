@@ -11,7 +11,7 @@ import kr.co.knowledgerally.core.user.entity.User;
  */
 public class TestNotificationEntityFactory implements TestEntityFactory<Notification> {
     private final TestEntityFactory<User> testUserEntityFactory = new TestUserEntityFactory();
-    private final TestEntityFactory<Coach> testCoachEntityFactory = new TestCoachEntityFactory();
+    private final TestCoachEntityFactory testCoachEntityFactory = new TestCoachEntityFactory();
 
     /**
      * 테스트용 알림내역 엔티티를 생성한다.
@@ -49,7 +49,8 @@ public class TestNotificationEntityFactory implements TestEntityFactory<Notifica
         return Notification.builder()
                 .id(entityId)
                 .user(testUserEntityFactory.createEntity(userId))
-                .coach(testCoachEntityFactory.createEntity(coachId))
+                .coach(testCoachEntityFactory.createEntity(coachId, coachId))
+                .title(String.format("제목%d", entityId))
                 .content(String.format("테스트%d 내용", entityId))
                 .notiType(notiType)
                 .build();

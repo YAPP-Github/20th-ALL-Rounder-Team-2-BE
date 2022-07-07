@@ -21,7 +21,7 @@ public class UserProfileDto {
     @JsonProperty
     private UserImageDto userImage;
 
-    @ApiModelProperty(value = "코치 정보")
+    @ApiModelProperty(value = "코치 정보, 코치 아닐시 null")
     @JsonProperty
     private CoachDto.ReadOnly coach;
 }

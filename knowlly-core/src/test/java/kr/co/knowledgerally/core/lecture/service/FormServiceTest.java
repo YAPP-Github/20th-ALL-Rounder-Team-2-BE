@@ -44,6 +44,7 @@ class FormServiceTest {
         assertEquals(4L, form.getUser().getId());
         assertEquals("신청서를 받아주세요!", form.getContent());
         assertEquals(Form.State.ACCEPT, form.getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 17), form.getExpirationDate());
         assertTrue(form.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), form.getUpdatedAt());
@@ -68,6 +69,7 @@ class FormServiceTest {
         assertEquals(3L, forms.get(0).getUser().getId());
         assertEquals("신청 거절해주세요", forms.get(0).getContent());
         assertEquals(Form.State.REJECT, forms.get(0).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 51, 3), forms.get(0).getExpirationDate());
         assertTrue(forms.get(0).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 51, 3), forms.get(0).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 51, 4), forms.get(0).getUpdatedAt());
@@ -76,6 +78,7 @@ class FormServiceTest {
         assertEquals(3L, forms.get(1).getUser().getId());
         assertEquals("제 신청서를 받아주세요!", forms.get(1).getContent());
         assertEquals(Form.State.ACCEPT, forms.get(1).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 18), forms.get(1).getExpirationDate());
         assertTrue(forms.get(1).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(1).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(1).getUpdatedAt());
@@ -93,6 +96,7 @@ class FormServiceTest {
         assertEquals(3L, forms.get(0).getUser().getId());
         assertEquals("제 신청서를 받아주세요!", forms.get(0).getContent());
         assertEquals(Form.State.ACCEPT, forms.get(0).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 18), forms.get(0).getExpirationDate());
         assertTrue(forms.get(0).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getUpdatedAt());
@@ -118,6 +122,7 @@ class FormServiceTest {
         assertEquals(3L, forms.get(0).getUser().getId());
         assertEquals("제 신청서를 받아주세요!", forms.get(0).getContent());
         assertEquals(Form.State.ACCEPT, forms.get(0).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 18), forms.get(0).getExpirationDate());
         assertTrue(forms.get(0).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 18), forms.get(0).getUpdatedAt());
@@ -136,6 +141,7 @@ class FormServiceTest {
         assertEquals(2L, forms.get(0).getUser().getId());
         assertEquals("신청서를 받아주세요!", forms.get(0).getContent());
         assertEquals(Form.State.REQUEST, forms.get(0).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 51, 5), forms.get(0).getExpirationDate());
         assertTrue(forms.get(0).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 51, 5), forms.get(0).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 51, 6), forms.get(0).getUpdatedAt());
@@ -145,6 +151,7 @@ class FormServiceTest {
         assertEquals(1L, forms.get(1).getUser().getId());
         assertEquals("신청서를 받아주세요!", forms.get(1).getContent());
         assertEquals(Form.State.REQUEST, forms.get(1).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 20), forms.get(1).getExpirationDate());
         assertTrue(forms.get(1).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 20), forms.get(1).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 20), forms.get(1).getUpdatedAt());
