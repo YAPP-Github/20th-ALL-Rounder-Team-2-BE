@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kr.co.knowledgerally.api.user.dto.UserDto;
+import kr.co.knowledgerally.api.user.dto.UserImageDto;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,6 +53,10 @@ public class FormDto {
         )
         @JsonProperty(index = PropertyDisplayOrder.USER)
         private UserDto.ReadOnly user;
+
+        @ApiModelProperty(value = "신청자 프로필 이미지", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
+        @JsonProperty
+        private UserImageDto userImage;
 
         @ApiModelProperty(
                 value = "클래스 일정 현재 상태 \n" +

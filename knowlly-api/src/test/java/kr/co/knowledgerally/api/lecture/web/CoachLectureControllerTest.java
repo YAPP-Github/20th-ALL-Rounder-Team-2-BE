@@ -24,6 +24,7 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].userImage.userImgUrl").value("http://test4.img.url"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matched").value(false))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matchedUser").isEmpty())
 

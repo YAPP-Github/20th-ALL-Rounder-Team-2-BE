@@ -3,6 +3,7 @@ package kr.co.knowledgerally.api.lecture.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.knowledgerally.api.user.dto.UserDto;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,7 +58,7 @@ public class CoachLectureDto {
             accessMode = ApiModelProperty.AccessMode.READ_ONLY
     )
     @JsonProperty(index = PropertyDisplayOrder.MATCHED_USER)
-    private User matchedUser;
+    private UserDto.ReadOnly matchedUser;
 
     private static class PropertyDisplayOrder {
         private static final int LECTURE = 0;
