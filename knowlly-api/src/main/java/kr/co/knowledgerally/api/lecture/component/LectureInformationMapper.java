@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         uses = {
-                CoachMapper.class, CategoryMapper.class, LectureImageMapper.class, TagMapper.class
+                CoachMapper.class, CategoryMapper.class, LectureImageMapper.class, TagMapper.class, LectureMapper.class
         }
 )
 public interface LectureInformationMapper {

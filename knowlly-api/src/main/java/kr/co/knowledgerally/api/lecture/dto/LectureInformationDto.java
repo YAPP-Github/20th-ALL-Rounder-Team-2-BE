@@ -31,7 +31,7 @@ public class LectureInformationDto {
     @JsonProperty(index = PropertyDisplayOrder.IMAGE)
     private Set<LectureImageDto> lectureImages;
 
-    @ApiModelProperty(value = "태그 set", position = PropertyDisplayOrder.TAG)
+    @ApiModelProperty(value = "클래스 태그", position = PropertyDisplayOrder.TAG)
     @JsonProperty(index = PropertyDisplayOrder.TAG)
     private Set<TagDto> tags;
 
@@ -73,6 +73,14 @@ public class LectureInformationDto {
         )
         @JsonProperty(index = PropertyDisplayOrder.CATEGORY)
         private CategoryDto category;
+
+        @ApiModelProperty(
+                value = "클래스 일정",
+                position = PropertyDisplayOrder.TAG,
+                accessMode = ApiModelProperty.AccessMode.READ_ONLY
+        )
+        @JsonProperty(index = PropertyDisplayOrder.LECTURE)
+        private Set<LectureDto> lectures;
     }
 
     private static class PropertyDisplayOrder {
@@ -84,5 +92,6 @@ public class LectureInformationDto {
         private static final int CATEGORY = 5;
         private static final int IMAGE = 6;
         private static final int TAG = 7;
+        private static final int LECTURE = 8;
     }
 }
