@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
+
 //TODO: N+1 문제 해결을 위한 join fetch 도입
 public interface LectureInformationRepository extends JpaRepository<LectureInformation, Long> {
     /**
@@ -44,4 +46,12 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
      * @return 클래스-info List
      */
     List<LectureInformation> findAllByTopicContainingAndIsActiveOrderByIdDesc(@Param("topic") String topic, boolean isActive);
+
+    /**
+     * 클래스-info를 활성화 여부로 검색
+     * @param lectureInfoId 클래스-info id
+     * @param isActive 활성화 여부
+     * @return 클래스-info 객체
+     */
+    Optional<LectureInformation> findByIdAndIsActive(Long lectureInfoId, boolean isActive);
 }

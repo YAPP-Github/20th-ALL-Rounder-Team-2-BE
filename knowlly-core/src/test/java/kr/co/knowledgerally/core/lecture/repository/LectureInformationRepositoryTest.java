@@ -74,4 +74,11 @@ public class LectureInformationRepositoryTest {
 
         assertEquals(lectureInformationList.get(0).getTopic(), "마케팅 수업");
     }
+
+    @Test
+    void 클래스_info_활성화_여부로_상세조회() {
+        LectureInformation lectureInformation = lectureInformationRepository.findByIdAndIsActive(1L, true).orElseThrow();
+
+        assertEquals(lectureInformation.getTopic(), "마케팅 수업");
+    }
 }

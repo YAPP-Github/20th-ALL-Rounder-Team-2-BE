@@ -82,7 +82,7 @@ public class LectureInformationService {
      */
     @Transactional(readOnly = true)
     public LectureInformation findById(Long id) throws ResourceNotFoundException {
-        return lectureInformationRepository.findById(id).orElseThrow(() ->
+        return lectureInformationRepository.findByIdAndIsActive(id, true).orElseThrow(() ->
                 new ResourceNotFoundException(ErrorMessage.NOT_EXIST_LECTURE_INFO));
     }
 

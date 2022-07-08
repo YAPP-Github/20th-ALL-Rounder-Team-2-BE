@@ -41,7 +41,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("")
-    public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation (
+    public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation(
             @ApiParam(value = "categoryId를 통해 조회하기")
             @RequestParam(name = "categoryId", required = false) Long categoryId, ApiPageRequest pageRequest
     ) {
@@ -57,6 +57,22 @@ public class LectureInformationController {
         return ResponseEntity.ok(ApiPageResult.ok(
                 result
                         .map(lectureInformationMapper::toDto)
+        ));
+    }
+
+    @ApiOperation(value = "클래스-info", notes = "클래스-info 객체를 상세조회합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @GetMapping("/{lectureInfoId}")
+    public ResponseEntity<ApiResult<LectureInformationDto.ReadOnly>> getLectureInformation(
+            @ApiParam(value = "lectureInfoId를 통해 상세조회")
+            @PathVariable Long lectureInfoId
+    ) {
+        return ResponseEntity.ok(ApiResult.ok(
+                lectureInformationMapper.toDto(
+                        lectureInformationService.findById(lectureInfoId)
+                )
         ));
     }
 
@@ -84,6 +100,18 @@ public class LectureInformationController {
         ));
     }
 
+    @ApiOperation(value = "클래스 이미지 등록", notes = "여러개의 클래스 이미지들을 등록합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @PostMapping("/images")
+    public ResponseEntity<ApiResult<List<LectureImageDto>>> uploadImage(
+            @ApiParam(value = "업로드할 클래스 이미지 리스트")
+            @RequestParam(name = "images") List<MultipartFile> images
+    ) {
+        return ResponseEntity.ok(ApiResult.ok(lectureImageUploadService.uploadLectureImage(images)));
+    }
+
     @ApiOperation(value = "클래스-info 검색", notes = "키워드로 클래스-info 목록을 검색합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -97,17 +125,5 @@ public class LectureInformationController {
                 lectureInformationSearchService.searchAllByKeyword(keyword, pageRequest.convert())
                         .map(lectureInformationMapper::toDto)
         ));
-    }
-
-    @ApiOperation(value = "클래스 이미지 등록", notes = "여러개의 클래스 이미지들을 등록합니다.")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "성공"),
-    })
-    @PostMapping("/images")
-    public ResponseEntity<ApiResult<List<LectureImageDto>>> uploadImage(
-            @ApiParam(value = "업로드할 클래스 이미지 리스트")
-            @RequestParam(name = "images") List<MultipartFile> images
-            ) {
-        return ResponseEntity.ok(ApiResult.ok(lectureImageUploadService.uploadLectureImage(images)));
     }
 }

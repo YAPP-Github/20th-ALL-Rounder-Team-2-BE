@@ -62,6 +62,23 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
 
     @WithMockKnowllyUser
     @Test
+    public void 클래스_info_상세_조회_테스트() throws Exception {
+        mockMvc.perform(
+                        get(LECTUREINFORMATION_URL + "/3")
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("그래픽 디자인"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("그래픽을 그래그래"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.price").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.coach.id").value("3"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.category.categoryName").value("디자인"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImages.size()").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.tags.size()").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectures.size()").value("1"));
+    }
+
+    @WithMockKnowllyUser
+    @Test
     public void 클래스_info_카테고리로_목록_조회_테스트() throws Exception {
         String categoryId = "categoryId";
 

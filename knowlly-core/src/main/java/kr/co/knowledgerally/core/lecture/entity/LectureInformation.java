@@ -35,6 +35,9 @@ public class LectureInformation {
     @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
     private Set<Tag> tags;
 
+    @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
+    private Set<Lecture> lectures;
+
     @Column(nullable = false)
     private String topic;
 
