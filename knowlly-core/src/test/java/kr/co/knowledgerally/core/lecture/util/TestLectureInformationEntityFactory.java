@@ -1,12 +1,10 @@
 package kr.co.knowledgerally.core.lecture.util;
 
 import kr.co.knowledgerally.core.core.util.TestEntityFactory;
-import kr.co.knowledgerally.core.lecture.entity.Category;
-import kr.co.knowledgerally.core.lecture.entity.LectureImage;
-import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.entity.*;
 import kr.co.knowledgerally.core.coach.util.TestCoachEntityFactory;
-import kr.co.knowledgerally.core.lecture.entity.Tag;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -38,8 +36,16 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
     public LectureInformation createEntity(long entityId, long coachId, long categoryId, long userId, long lectureImageNum) {
         Set<LectureImage> lectureImages = new LinkedHashSet<>();
         Set<Tag> tags = new LinkedHashSet<>();
+        Set<Lecture> lectures = new LinkedHashSet<>();
+
         tags.add(Tag.builder()
                 .lectureInformation(LectureInformation.builder().build())
+                .build());
+
+        lectures.add(Lecture.builder()
+                .lectureInformation(LectureInformation.builder().build())
+                .startAt(LocalDateTime.of(2022, 6, 15, 10, 30, 50))
+                .endAt(LocalDateTime.of(2022, 6, 15, 11, 30, 50))
                 .build());
 
         for (long index=1; index<=lectureImageNum; index++) {
@@ -58,6 +64,7 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
                 .category(testCategoryEntityFactory.createEntity(categoryId))
                 .lectureImages(lectureImages)
                 .tags(tags)
+                .lectures(lectures)
                 .topic(String.format("테스트%d 제목", entityId))
                 .introduce(String.format("안녕하세요. 테스트%d 입니다.", entityId))
                 .price(1)

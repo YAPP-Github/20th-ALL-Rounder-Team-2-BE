@@ -27,6 +27,7 @@ public class LectureInformationMapperTest {
         assertEquals("테스트 카테고리1", lectureInformationDto.getCategory().getCategoryName());
         assertEquals(2, lectureInformationDto.getLectureImages().size());
         assertEquals(1, lectureInformationDto.getTags().size());
+        assertEquals(1, lectureInformationDto.getLectures().size());
     }
 
     @Test
