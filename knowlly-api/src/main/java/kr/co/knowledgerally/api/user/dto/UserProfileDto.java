@@ -17,7 +17,8 @@ public class UserProfileDto {
     @JsonProperty
     private UserDto.ReadOnly user;
 
-    @ApiModelProperty(value = "프로필 이미지", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
+    @Deprecated
+    @ApiModelProperty(value = "프로필 이미지 (삭제 예정)", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @JsonProperty
     private UserImageDto userImage;
 

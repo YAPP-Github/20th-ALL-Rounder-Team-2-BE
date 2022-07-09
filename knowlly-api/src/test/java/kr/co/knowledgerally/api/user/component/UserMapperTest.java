@@ -4,25 +4,35 @@ import kr.co.knowledgerally.api.user.dto.UserDto;
 import kr.co.knowledgerally.api.user.util.TestUserDtoFactory;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.entity.UserImage;
+import kr.co.knowledgerally.core.user.service.UserImageService;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import kr.co.knowledgerally.core.user.util.TestUserImageEntityFactory;
 import liquibase.pro.packaged.T;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
 
+    @MockBean
+    private UserImageService userImageService;
+
     @Test
     void 엔티티에서_DTO변환_테스트() {
         User user = new TestUserEntityFactory().createEntity(1L);
+        when(userImageService.findByUser(any()))
+                .thenReturn(new TestUserImageEntityFactory().createEntity(1L));
 
         UserDto.ReadOnly userDto = userMapper.toDto(user);
+
         assertEquals(1L, userDto.getId());
         assertEquals("테스트1", userDto.getUsername());
         assertEquals(1, userDto.getBallCnt());
@@ -32,6 +42,7 @@ class UserMapperTest {
         assertEquals("identifier1", userDto.getIdentifier());
         assertFalse(userDto.isCoach());
         assertTrue(userDto.isPushActive());
+        assertEquals("http://test1.userimg.url", userDto.getUserImgUrl());
     }
 
     @Test

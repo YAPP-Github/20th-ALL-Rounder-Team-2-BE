@@ -54,7 +54,8 @@ public class FormDto {
         @JsonProperty(index = PropertyDisplayOrder.USER)
         private UserDto.ReadOnly user;
 
-        @ApiModelProperty(value = "신청자 프로필 이미지", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
+        @Deprecated
+        @ApiModelProperty(value = "신청자 프로필 이미지 (삭제 예정)", accessMode = ApiModelProperty.AccessMode.READ_ONLY)
         @JsonProperty
         private UserImageDto userImage;
 
