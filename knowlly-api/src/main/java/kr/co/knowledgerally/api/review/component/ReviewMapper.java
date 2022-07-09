@@ -1,13 +1,12 @@
-package kr.co.knowledgerally.api.coach.component;
+package kr.co.knowledgerally.api.review.component;
 
+import kr.co.knowledgerally.api.coach.component.CoachMapper;
 import kr.co.knowledgerally.api.user.component.UserMapper;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.review.dto.ReviewDto;
 import kr.co.knowledgerally.core.coach.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-
-import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,

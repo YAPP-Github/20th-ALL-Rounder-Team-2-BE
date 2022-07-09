@@ -1,7 +1,6 @@
 package kr.co.knowledgerally.api.coach.util;
 
 import kr.co.knowledgerally.api.coach.dto.CoachDto;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
 import kr.co.knowledgerally.api.core.util.TestDtoFactory;
 import kr.co.knowledgerally.api.user.util.TestUserDtoFactory;
 

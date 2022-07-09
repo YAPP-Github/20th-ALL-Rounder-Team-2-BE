@@ -15,4 +15,5 @@
     <include file="config/liquibase/changelog/20220625_add_is_onboard_column.xml"/>
     <include file="config/liquibase/changelog/20220703_drop_constraint_from_lecture_image.xml"/>
     <include file="config/liquibase/changelog/20220707_add_title_and_expired_column.xml"/>
+    <include file="config/liquibase/changelog/20220709_add_class_name_column.xml"/>
 </databaseChangeLog>

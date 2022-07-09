@@ -28,6 +28,9 @@ public class Review {
     @JoinColumn(name = "coach_id")
     private Coach reviewee;
 
+    @Column
+    private String lectureName;
+
     @Column(nullable = false)
     private String content;
 
