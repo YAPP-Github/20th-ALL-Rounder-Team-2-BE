@@ -66,6 +66,10 @@ public class UserDto {
         @ApiModelProperty(value = "사용자 식별값", position = PropertyDisplayOrder.IDENTIFIER)
         @JsonProperty(index = PropertyDisplayOrder.IDENTIFIER)
         private String identifier;
+
+        @ApiModelProperty(value = "사용자 대표 이미지", position = PropertyDisplayOrder.USER_IMG_URL)
+        @JsonProperty(index = PropertyDisplayOrder.USER_IMG_URL)
+        private String userImgUrl;
     }
 
     private static class PropertyDisplayOrder {
@@ -78,5 +82,6 @@ public class UserDto {
         private static final int IDENTIFIER = 6;
         private static final int IS_COACH = 7;
         private static final int IS_PUSH_ACTIVE = 8;
+        private static final int USER_IMG_URL = 9;
     }
 }

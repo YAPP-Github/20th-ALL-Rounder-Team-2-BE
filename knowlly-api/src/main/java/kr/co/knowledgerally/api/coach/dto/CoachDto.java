@@ -22,8 +22,7 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @ApiModel(value = "코치 모델", description = "코치를 나타내는 모델")
 public class CoachDto {
-    @ApiModelProperty(value = "코치 소개", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
-            position = PropertyDisplayOrder.INTRODUCE)
+    @ApiModelProperty(value = "코치 소개", position = PropertyDisplayOrder.INTRODUCE)
     @JsonProperty(index = PropertyDisplayOrder.INTRODUCE)
     private String introduce;
 
@@ -43,11 +42,23 @@ public class CoachDto {
                 position = PropertyDisplayOrder.USER)
         @JsonProperty(index = PropertyDisplayOrder.USER)
         private UserDto.ReadOnly user;
+
+        @ApiModelProperty(value = "매칭중, 혹은 운영 중인 클래스 갯수", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
+                position = PropertyDisplayOrder.ON_GOING_LECTURE_COUNT)
+        @JsonProperty(index = PropertyDisplayOrder.ON_GOING_LECTURE_COUNT)
+        private int currentLectureCount;
+
+        @ApiModelProperty(value = "코치에게 달린 후기 갯수", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
+                position = PropertyDisplayOrder.REVIEW_COUNT)
+        @JsonProperty(index = PropertyDisplayOrder.REVIEW_COUNT)
+        private int reviewCount;
     }
 
     private static class PropertyDisplayOrder {
         private static final int ID = 0;
         private static final int INTRODUCE = 1;
         private static final int USER = 2;
+        private static final int ON_GOING_LECTURE_COUNT = 3;
+        private static final int REVIEW_COUNT = 4;
     }
 }
