@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kr.co.knowledgerally.api.coach.dto.CoachDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,13 @@ public class LectureInformationDto {
     @JsonProperty(index = PropertyDisplayOrder.TAG)
     private Set<TagDto> tags;
 
+    @ApiModelProperty(
+            value = "카테고리 정보",
+            position = PropertyDisplayOrder.CATEGORY
+    )
+    @JsonProperty(index = PropertyDisplayOrder.CATEGORY)
+    private Category.Name category;
+
     @SuperBuilder
     @Getter
     @Setter
@@ -65,14 +73,6 @@ public class LectureInformationDto {
         )
         @JsonProperty(index = PropertyDisplayOrder.COACH)
         private CoachDto.ReadOnly coach;
-
-        @ApiModelProperty(
-                value = "카테고리 정보",
-                position = PropertyDisplayOrder.CATEGORY,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.CATEGORY)
-        private CategoryDto category;
 
         @ApiModelProperty(
                 value = "클래스 일정",

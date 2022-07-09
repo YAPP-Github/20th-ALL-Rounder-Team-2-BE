@@ -42,22 +42,22 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category").value("ETC"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].topic").value("그래픽 디자인"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].introduce").value("그래픽을 그래그래"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].coach.id").value("3"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].category.categoryName").value("디자인"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].category").value("DESIGN"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].topic").value("자바 개발"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].introduce").value("자바를 자바라"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].coach.id").value("2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].category.categoryName").value("개발"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].category").value("DEVELOP"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].topic").value("마케팅 수업"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].introduce").value("효과적인 마케팅에 대해 배웁니다"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].coach.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].category.categoryName").value("마케팅"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].category").value("MARKETING"));
     }
 
     @WithMockKnowllyUser
@@ -71,7 +71,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.introduce").value("그래픽을 그래그래"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.coach.id").value("3"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.category.categoryName").value("디자인"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.category").value("DESIGN"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectureImages.size()").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.tags.size()").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.lectures.size()").value("1"));
@@ -91,7 +91,7 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category").value("ETC"));
     }
 
     @WithMockKnowllyUser
@@ -109,20 +109,20 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("효과적인 마케팅에 대해 배웁니다"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("마케팅"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category").value("MARKETING"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(2));
 
         //카테고리 이름 기반 검색
         mockMvc.perform(
                         get(LECTUREINFORMATION_SEARCH_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .queryParam(keyword, "기타"))
+                                .queryParam(keyword, "ETC"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].topic").value("요리 클래스"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].introduce").value("맛있는 요리 만들기"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].price").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].coach.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category.categoryName").value("기타"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category").value("ETC"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages[0].lectureImgUrl").value("http://lecture5.img.url"));
 
     }
@@ -130,10 +130,10 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
     @WithMockKnowllyUser
     @Test
     public void 클래스_info_태그_등록_테스트() throws Exception {
-        String categoryId = "categoryId";
         final String json =
                 "{\"topic\": \"테스트 제목1\"," +
                 "\"introduce\": \"테스트 소개1\"," +
+                "\"category\": \"PM\"," +
                 "\"tags\":" + "[" +
                 "{\"content\": \"태그1\"}," +
                 "{\"content\": \"태그2\"}" + "]," +
@@ -146,7 +146,6 @@ public class LectureInformationControllerTest extends AbstractControllerTest {
         mockMvc.perform(
                 post(LECTUREINFORMATION_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .queryParam(categoryId, "1")
                         .content(json)
         ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.topic").value("테스트 제목1"))

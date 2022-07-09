@@ -5,6 +5,7 @@ import kr.co.knowledgerally.api.core.util.TestDtoFactory;
 import kr.co.knowledgerally.api.lecture.dto.CategoryDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
         return LectureInformationDto.builder()
                 .topic("테스트1 제목")
                 .introduce("안녕하세요. 테스트1 입니다.")
+                .category(Category.Name.ETC)
                 .build();
     }
 
@@ -49,7 +51,7 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
                 .introduce("안녕하세요. 테스트1 입니다.")
                 .price(1)
                 .coach(testCoachDtoFactory.createReadOnlyDto(1L))
-                .category(testCategoryDtoFactory.createDto(1L))
+                .category(Category.Name.ETC)
                 .lectureImages(lectureImageDtos)
                 .build();
     }

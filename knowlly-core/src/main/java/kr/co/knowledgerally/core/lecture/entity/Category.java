@@ -16,10 +16,20 @@ public class Category {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String categoryName;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "category_name")
+    private Name name;
 
     @Builder.Default
     @Column(nullable = false)
     private boolean isActive = true;
+
+    public enum Name {
+        PM,
+        DESIGN,
+        DEVELOP,
+        MARKETING,
+        LANGUAGE,
+        ETC
+    }
 }

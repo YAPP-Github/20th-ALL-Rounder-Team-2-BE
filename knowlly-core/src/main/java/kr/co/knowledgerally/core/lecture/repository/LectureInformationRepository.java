@@ -1,7 +1,5 @@
 package kr.co.knowledgerally.core.lecture.repository;
 
-import com.sun.xml.bind.v2.TODO;
-import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import org.springframework.data.domain.Page;
@@ -34,10 +32,10 @@ public interface LectureInformationRepository extends JpaRepository<LectureInfor
     /**
      * 클래스-info들을 카테고리 이름과 활성화 여부로 검색
      * @param isActive 활성화 여부
-     * @param categoryName 카테고리 이름
+     * @param name 카테고리 이름
      * @return 클래스-info List
      */
-    List<LectureInformation> findAllByCategoryCategoryNameAndIsActiveOrderByIdDesc(String categoryName, boolean isActive);
+    List<LectureInformation> findAllByCategoryNameAndIsActiveOrderByIdDesc(Category.Name name, boolean isActive);
 
     /**
      * 클래스-info들을 topic과 활성화 여부로 검색

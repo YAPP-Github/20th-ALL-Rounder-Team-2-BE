@@ -1,6 +1,7 @@
 package kr.co.knowledgerally.api.lecture.component;
 
 import kr.co.knowledgerally.api.lecture.dto.CoachLectureDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.util.TestFormEntityFactory;
@@ -40,7 +41,7 @@ class CoachLectureMapperTest {
         assertEquals("안녕하세요. 테스트1 입니다.", coachLectureDto.getLectureInformation().getIntroduce());
         assertEquals(1, coachLectureDto.getLectureInformation().getPrice());
         assertEquals(1, coachLectureDto.getLectureInformation().getCoach().getId());
-        assertEquals("테스트 카테고리1", coachLectureDto.getLectureInformation().getCategory().getCategoryName());
+        assertEquals(Category.Name.ETC, coachLectureDto.getLectureInformation().getCategory());
         assertEquals(2, coachLectureDto.getLectureInformation().getLectureImages().size());
 
         assertEquals(2, coachLectureDto.getForms().size());
@@ -79,7 +80,7 @@ class CoachLectureMapperTest {
         assertEquals("안녕하세요. 테스트1 입니다.", coachLectureDto.getLectureInformation().getIntroduce());
         assertEquals(1, coachLectureDto.getLectureInformation().getPrice());
         assertEquals(1, coachLectureDto.getLectureInformation().getCoach().getId());
-        assertEquals("테스트 카테고리1", coachLectureDto.getLectureInformation().getCategory().getCategoryName());
+        assertEquals(Category.Name.ETC, coachLectureDto.getLectureInformation().getCategory());
         assertEquals(2, coachLectureDto.getLectureInformation().getLectureImages().size());
 
         assertEquals(1, coachLectureDto.getForms().size());

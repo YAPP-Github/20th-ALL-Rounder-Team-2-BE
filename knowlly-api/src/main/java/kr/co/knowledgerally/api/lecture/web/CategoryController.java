@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.CategoryMapper;
 import kr.co.knowledgerally.api.lecture.dto.CategoryDto;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,13 +35,9 @@ public class CategoryController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("")
-    public ResponseEntity<ApiResult<List<CategoryDto>>> getAllCategory() {
+    public ResponseEntity<ApiResult<List<Category.Name>>> getAllCategory() {
         return ResponseEntity.ok(
-                ApiResult.ok(
-                        categoryService.findAll().stream()
-                                .map(x-> categoryMapper.toDto(x))
-                                .collect(Collectors.toList())
-                )
+                ApiResult.ok(Arrays.asList(Category.Name.values()))
         );
     }
 }

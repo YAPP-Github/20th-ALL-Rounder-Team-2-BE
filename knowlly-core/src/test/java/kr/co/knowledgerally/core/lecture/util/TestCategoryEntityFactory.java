@@ -18,7 +18,7 @@ public class TestCategoryEntityFactory implements TestEntityFactory<Category> {
     public Category createEntity(long entityId) {
         return Category.builder()
                 .id(entityId)
-                .categoryName(String.format("테스트 카테고리%d", entityId))
+                .name(Category.Name.ETC)
                 .build();
     }
 }

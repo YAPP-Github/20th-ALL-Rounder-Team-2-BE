@@ -20,12 +20,12 @@ class CategoryControllerTest extends AbstractControllerTest {
                 get(CATEGORY_URL)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].categoryName").value("기획 / PM"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].categoryName").value("디자인"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].categoryName").value("개발"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[3].categoryName").value("마케팅"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[4].categoryName").value("외국어"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[5].categoryName").value("기타"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[0]").value("PM"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[1]").value("DESIGN"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[2]").value("DEVELOP"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[3]").value("MARKETING"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[4]").value("LANGUAGE"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[5]").value("ETC"));
     }
 
 }

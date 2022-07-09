@@ -2,6 +2,7 @@ package kr.co.knowledgerally.api.lecture.component;
 
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.util.TestLectureInformationDtoFactory;
+import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class LectureInformationMapperTest {
         assertEquals("안녕하세요. 테스트1 입니다.", lectureInformationDto.getIntroduce());
         assertEquals(1, lectureInformationDto.getPrice());
         assertEquals(1, lectureInformationDto.getCoach().getId());
-        assertEquals("테스트 카테고리1", lectureInformationDto.getCategory().getCategoryName());
+        assertEquals(Category.Name.ETC, lectureInformationDto.getCategory());
         assertEquals(2, lectureInformationDto.getLectureImages().size());
         assertEquals(1, lectureInformationDto.getTags().size());
         assertEquals(1, lectureInformationDto.getLectures().size());
@@ -37,5 +38,6 @@ public class LectureInformationMapperTest {
         LectureInformation lectureInformation = lectureInformationMapper.toEntity(lectureInformationDto);
         assertEquals("테스트1 제목", lectureInformation.getTopic());
         assertEquals("안녕하세요. 테스트1 입니다.", lectureInformation.getIntroduce());
+        assertEquals(lectureInformation.getCategory().getName(), Category.Name.ETC);
     }
 }
