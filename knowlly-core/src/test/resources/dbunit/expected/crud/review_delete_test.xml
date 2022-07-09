@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <review id="2" user_id="2" coach_id="1" content="테스트1 코치는 친절했어요~" is_active="true" created_at="2022-06-13 22:19:14"
+    <review id="2" user_id="2" coach_id="1" class_name="클래스2" content="테스트1 코치는 친절했어요~" is_active="true" created_at="2022-06-13 22:19:14"
             updated_at="2022-06-13 22:19:15" is_public="true"/>
-    <review id="3" user_id="4" coach_id="3" content="테스트3 코치는 좀 별로였습니다" is_active="true"
+    <review id="3" user_id="4" coach_id="3" class_name="클래스3" content="테스트3 코치는 좀 별로였습니다" is_active="true"
             created_at="2022-06-13 22:19:16" updated_at="2022-06-13 22:19:16" is_public="false"/>
-    <review id="4" user_id="3" coach_id="1" content="테스트1 코치가 최고에요~" is_active="true" created_at="2022-06-13 22:19:18"
+    <review id="4" user_id="3" coach_id="1" class_name="클래스4" content="테스트1 코치가 최고에요~" is_active="true" created_at="2022-06-13 22:19:18"
             updated_at="2022-06-13 22:19:17" is_public="true"/>
 
 </dataset>

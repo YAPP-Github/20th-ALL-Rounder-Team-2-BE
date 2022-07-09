@@ -12,9 +12,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    # 6시간마다 재배포 로직
-    - cron: "0 */6 * * *"
 env:
   APP_NAME: knowlly-api
   JAR_NAME: knowlly-api-0.0.1-SNAPSHOT.jar
@@ -50,6 +47,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: liquibase 스키마 업데이트
+        run: ./gradlew dbMigration update ${{ secrets.DB_MIGRATION_PARAMS_DEV }}
+
       - name: Gradle 테스트 및 실행파일 생성
         run: ./gradlew build test bootJar -Dfile.encoding=UTF-8
         env:

@@ -36,10 +36,10 @@ INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_r
 INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (3, 1, 2, '제목3', '알림 내용', 'PLAYER', false, true, '2022-06-13 22:17:28', '2022-06-13 22:17:29');
 INSERT INTO notification (id, user_id, coach_id, title, content, noti_type, is_read, is_active, created_at, updated_at) VALUES (4, 4, 3, '제목4', '알림 내용', 'PLAYER', true, true, '2022-06-13 22:17:38', '2022-06-13 22:17:39');
 
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (1, 1, 3, '테스트3은 좋은 코치입니다!', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (2, 2, 1, '테스트1 코치는 친절했어요~', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (3, 4, 3, '테스트3 코치는 좀 별로였습니다', true, '2022-06-13 22:19:16', '2022-06-13 22:19:16', false);
-INSERT INTO review (id, user_id, coach_id, content, is_active, created_at, updated_at, is_public) VALUES (4, 3, 1, '테스트1 코치가 최고에요~', true, '2022-06-13 22:19:18', '2022-06-13 22:19:17', true);
+INSERT INTO review (id, user_id, coach_id, class_name, content, is_active, created_at, updated_at, is_public) VALUES (1, 1, 3, '클래스1', '테스트3은 좋은 코치입니다!', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
+INSERT INTO review (id, user_id, coach_id, class_name, content, is_active, created_at, updated_at, is_public) VALUES (2, 2, 1, '클래스2', '테스트1 코치는 친절했어요~', true, '2022-06-13 22:19:14', '2022-06-13 22:19:15', true);
+INSERT INTO review (id, user_id, coach_id, class_name, content, is_active, created_at, updated_at, is_public) VALUES (3, 4, 3, '클래스3', '테스트3 코치는 좀 별로였습니다', true, '2022-06-13 22:19:16', '2022-06-13 22:19:16', false);
+INSERT INTO review (id, user_id, coach_id, class_name, content, is_active, created_at, updated_at, is_public) VALUES (4, 3, 1, '클래스4', '테스트1 코치가 최고에요~', true, '2022-06-13 22:19:18', '2022-06-13 22:19:17', true);
 
 INSERT INTO category (id, category_name, is_active) VALUES (1, 'PM', true);
 INSERT INTO category (id, category_name, is_active) VALUES (2, 'DESIGN', true);
