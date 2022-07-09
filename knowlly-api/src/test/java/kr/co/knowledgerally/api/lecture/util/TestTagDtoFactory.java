@@ -14,8 +14,8 @@ public class TestTagDtoFactory implements TestDtoFactory<TagDto> {
      * @return 생성된 태그 Dto
      */
     @Override
-    public TagDto createDto(long id) {
-        return TagDto.builder()
+    public TagDto.ReadOnly createDto(long id) {
+        return TagDto.ReadOnly.builder()
                 .id(id)
                 .content(String.format("테스트 내용%d", id))
                 .build();

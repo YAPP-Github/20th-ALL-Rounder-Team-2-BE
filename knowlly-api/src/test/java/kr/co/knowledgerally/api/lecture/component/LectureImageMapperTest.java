@@ -23,7 +23,7 @@ public class LectureImageMapperTest {
     void 엔티티에서_DTO변환_테스트() {
         LectureImage lectureImage = new TestLectureImageEntityFactory().createEntity(1L);
 
-        LectureImageDto lectureImageDto = lectureImageMapper.toDto(lectureImage);
+        LectureImageDto.ReadOnly lectureImageDto = lectureImageMapper.toDto(lectureImage);
         assertEquals("http://lecture1.img.url", lectureImageDto.getLectureImgUrl());
     }
 
@@ -32,7 +32,7 @@ public class LectureImageMapperTest {
         LectureImageDto lectureImageDto = new TestLectureImageDtoFactory().createDto(1L);
 
         LectureImage lectureImage = lectureImageMapper.toEntity(lectureImageDto);
-        assertEquals("http://lecture.img1.url", lectureImage.getLectureImgUrl());
+        assertEquals(1, lectureImage.getId());
     }
 
 }

@@ -7,6 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LectureImageMapper {
-    LectureImageDto toDto(LectureImage lectureImage);
+    LectureImageDto.ReadOnly toDto(LectureImage lectureImage);
     LectureImage toEntity(LectureImageDto lectureImageDto);
 }

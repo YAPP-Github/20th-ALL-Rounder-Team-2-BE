@@ -17,7 +17,6 @@ public class TestLectureImageDtoFactory implements TestDtoFactory<LectureImageDt
     public LectureImageDto createDto(long id) {
         return LectureImageDto.builder()
                 .id(id)
-                .lectureImgUrl(String.format("http://lecture.img%d.url", id))
                 .build();
     }
 }
