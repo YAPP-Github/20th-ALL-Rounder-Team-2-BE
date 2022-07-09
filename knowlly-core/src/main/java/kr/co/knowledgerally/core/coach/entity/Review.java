@@ -29,7 +29,7 @@ public class Review {
     private Coach reviewee;
 
     @Column
-    private String className;
+    private String lectureName;
 
     @Column(nullable = false)
     private String content;

@@ -1,21 +1,17 @@
 package kr.co.knowledgerally.api.review.web;
 
 import io.swagger.annotations.*;
-import kr.co.knowledgerally.api.coach.component.ReviewMapper;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.review.component.ReviewMapper;
+import kr.co.knowledgerally.api.review.dto.ReviewDto;
 import kr.co.knowledgerally.api.core.annotation.CurrentUser;
 import kr.co.knowledgerally.api.core.dto.ApiPageRequest;
 import kr.co.knowledgerally.api.core.dto.ApiPageResult;
 import kr.co.knowledgerally.api.review.service.ReviewUserService;
-import kr.co.knowledgerally.core.coach.entity.Review;
-import kr.co.knowledgerally.core.coach.service.ReviewService;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-
-import javax.validation.Valid;
 
 /**
  * 사용자 리뷰 관련 엔드포인트

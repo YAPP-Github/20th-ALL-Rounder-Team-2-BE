@@ -9,7 +9,7 @@
 
     <changeSet id="20220709" author="hkpark">
         <addColumn tableName="review" >
-            <column name="class_name" type="varchar(255)" />
+            <column name="lecture_name" type="varchar(255)" />
         </addColumn>
     </changeSet>
 

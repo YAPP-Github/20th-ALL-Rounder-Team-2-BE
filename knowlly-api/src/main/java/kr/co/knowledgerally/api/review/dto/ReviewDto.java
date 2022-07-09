@@ -1,8 +1,9 @@
-package kr.co.knowledgerally.api.coach.dto;
+package kr.co.knowledgerally.api.review.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.knowledgerally.api.coach.dto.CoachDto;
 import kr.co.knowledgerally.api.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,7 +47,7 @@ public class ReviewDto {
         @ApiModelProperty(value = "클래스 명", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
                 position = PropertyDisplayOrder.CLASS_NAME)
         @JsonProperty(index = PropertyDisplayOrder.CLASS_NAME)
-        private String className;
+        private String lectureName;
 
         @ApiModelProperty(value = "작성된 날짜", accessMode = ApiModelProperty.AccessMode.READ_ONLY,
                 position = PropertyDisplayOrder.WRITTEN_DATE)

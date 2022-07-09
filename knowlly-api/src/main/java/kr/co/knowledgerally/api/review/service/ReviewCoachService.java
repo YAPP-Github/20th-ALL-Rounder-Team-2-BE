@@ -1,11 +1,10 @@
 package kr.co.knowledgerally.api.review.service;
 
-import kr.co.knowledgerally.api.coach.component.ReviewMapper;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.review.component.ReviewMapper;
+import kr.co.knowledgerally.api.review.dto.ReviewDto;
 import kr.co.knowledgerally.api.review.event.ReviewWrittenEvent;
 import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.coach.entity.Review;
-import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.coach.service.ReviewService;
 import kr.co.knowledgerally.core.core.exception.BadRequestException;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
@@ -13,8 +12,6 @@ import kr.co.knowledgerally.core.lecture.service.LectureService;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +44,7 @@ public class ReviewCoachService {
         Review review = reviewMapper.toEntity(reviewDto);
         review.setReviewee(coach);
         review.setWriter(loggedInUser);
+        review.setLectureName(lecture.getLectureInformation().getTopic());
 
         eventPublisher.publishEvent(new ReviewWrittenEvent(lecture));
 

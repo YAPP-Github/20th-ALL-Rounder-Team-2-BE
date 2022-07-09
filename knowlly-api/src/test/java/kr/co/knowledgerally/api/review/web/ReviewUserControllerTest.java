@@ -27,6 +27,7 @@ class ReviewUserControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ResponseMessage.OK))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writer.username").value("테스트1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].reviewee.id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureName").value("클래스1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("테스트3은 좋은 코치입니다!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].public").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].writtenDate").value("2022-06-13"))

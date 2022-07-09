@@ -1,7 +1,7 @@
 package kr.co.knowledgerally.api.coach.component;
 
-import kr.co.knowledgerally.api.coach.component.ReviewMapper;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.review.component.ReviewMapper;
+import kr.co.knowledgerally.api.review.dto.ReviewDto;
 import kr.co.knowledgerally.api.coach.util.TestReviewDtoFactory;
 import kr.co.knowledgerally.core.coach.entity.Review;
 import kr.co.knowledgerally.core.coach.util.TestReviewEntityFactory;

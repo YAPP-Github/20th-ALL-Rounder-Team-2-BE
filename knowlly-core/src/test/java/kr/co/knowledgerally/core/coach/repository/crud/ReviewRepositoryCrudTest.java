@@ -35,7 +35,7 @@ class ReviewRepositoryCrudTest extends AbstractRepositoryCrudTest {
         assertEquals(1L, review.getWriter().getId());
         assertEquals(3L, review.getReviewee().getId());
         assertEquals(4L, review.getReviewee().getUser().getId());
-        assertEquals("클래스1", review.getClassName());
+        assertEquals("클래스1", review.getLectureName());
         assertEquals("테스트3은 좋은 코치입니다!", review.getContent());
         assertTrue(review.isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 19, 14), review.getCreatedAt());

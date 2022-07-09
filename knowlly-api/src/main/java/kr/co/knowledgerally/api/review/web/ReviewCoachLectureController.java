@@ -1,7 +1,7 @@
 package kr.co.knowledgerally.api.review.web;
 
 import io.swagger.annotations.*;
-import kr.co.knowledgerally.api.coach.dto.ReviewDto;
+import kr.co.knowledgerally.api.review.dto.ReviewDto;
 import kr.co.knowledgerally.api.core.annotation.CurrentUser;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.review.service.ReviewCoachService;
