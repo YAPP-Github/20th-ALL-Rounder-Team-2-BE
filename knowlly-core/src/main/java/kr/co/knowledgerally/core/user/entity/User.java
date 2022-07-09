@@ -72,4 +72,8 @@ public class User {
         this.kakaoId = user.kakaoId;
         this.portfolio = user.portfolio;
     }
+
+    public void ballIncrement(int ballCnt) {
+        this.ballCnt += ballCnt;
+    }
 }

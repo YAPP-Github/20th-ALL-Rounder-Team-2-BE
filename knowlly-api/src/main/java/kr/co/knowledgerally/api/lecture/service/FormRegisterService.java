@@ -5,6 +5,7 @@ import kr.co.knowledgerally.api.lecture.component.LectureMapper;
 import kr.co.knowledgerally.api.lecture.dto.FormDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureRegisterDto;
+import kr.co.knowledgerally.api.lecture.event.FormRegisterEvent;
 import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.BadRequestException;
 import kr.co.knowledgerally.core.lecture.entity.Form;
@@ -16,6 +17,7 @@ import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
 import kr.co.knowledgerally.core.lecture.service.LectureService;
 import kr.co.knowledgerally.core.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,14 +32,16 @@ public class FormRegisterService {
     private final FormService formService;
     private final FormMapper formMapper;
     private final LectureService lectureService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public FormDto.ReadOnly register(Long lectureId, FormDto formDto, User loggedInUser) {
         Form newForm = formMapper.toEntity(formDto);
-        newForm.setLecture(lectureService.findById(lectureId));
+        Lecture lecture = lectureService.findById(lectureId);
+        newForm.setLecture(lecture);
         newForm.setUser(loggedInUser);
         setFormExpirationDate(newForm);
 
-        // TODO 볼 차감
+        eventPublisher.publishEvent(new FormRegisterEvent(lecture));
 
         return formMapper.toDto(formService.saveForm(newForm));
     }
