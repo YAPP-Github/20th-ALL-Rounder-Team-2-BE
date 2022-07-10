@@ -39,14 +39,6 @@ public class FormDto {
         private Long id;
 
         @ApiModelProperty(
-                value = "클래스 일정 읽기 모델",
-                position = PropertyDisplayOrder.LECTURE,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.LECTURE)
-        private LectureDto.ReadOnly lecture;
-
-        @ApiModelProperty(
                 value = "신청자 읽기 모델",
                 position = PropertyDisplayOrder.USER,
                 accessMode = ApiModelProperty.AccessMode.READ_ONLY

@@ -21,7 +21,7 @@ class UserLectureControllerTest extends AbstractControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].form.id").value(4))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].form.lecture.id").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(2));
     }
 
@@ -34,8 +34,8 @@ class UserLectureControllerTest extends AbstractControllerTest {
                                 .param("state", "ON_BOARD")
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].form.id").value(4))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].form.lecture.id").value(4))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].form.lecture.state").value("ON_BOARD"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(2));
     }
 }

@@ -4,10 +4,7 @@ import kr.co.knowledgerally.api.lecture.component.CoachLectureMapper;
 import kr.co.knowledgerally.api.lecture.component.FormMapper;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.component.LectureMapper;
-import kr.co.knowledgerally.api.lecture.dto.CoachLectureDto;
-import kr.co.knowledgerally.api.lecture.dto.FormDto;
-import kr.co.knowledgerally.api.lecture.dto.LectureDto;
-import kr.co.knowledgerally.api.lecture.dto.LectureRegisterDto;
+import kr.co.knowledgerally.api.lecture.dto.*;
 import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.coach.service.CoachService;
 import kr.co.knowledgerally.core.core.exception.BadRequestException;
@@ -15,6 +12,7 @@ import kr.co.knowledgerally.core.core.message.ErrorMessage;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
 import kr.co.knowledgerally.core.lecture.repository.LectureRepository;
 import kr.co.knowledgerally.core.lecture.service.FormService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationService;
@@ -34,7 +32,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CoachLectureService {
     private final CoachLectureMapper coachLectureMapper;
+    private final LectureInformationMapper lectureInformationMapper;
     private final LectureRepository lectureRepository;
+    private final LectureInformationRepository lectureInformationRepository;
     private final CoachService coachService;
 
     /**
@@ -44,28 +44,32 @@ public class CoachLectureService {
      * @return 운영 클래스 dto 목록
      */
     @Transactional(readOnly = true)
-    public List<CoachLectureDto> getCoachLecture(User loggedInUser, @Nullable Lecture.State state) {
+    public List<LectureInformationDto.ReadOnly> getCoachLecture(User loggedInUser, @Nullable Lecture.State state) {
         Coach coach = coachService.findByUser(loggedInUser);
         if (coach == null) {
             throw new BadRequestException(ErrorMessage.USER_NOT_COACH);
         }
 
         return getLectures(coach, state).stream()
-                .map(coachLectureMapper::toDto)
-                .peek(x -> x.setForms(filterLectureForms(x.getForms())))
-                .peek(this::checkForms)
+                .peek(x -> {
+                    for (Lecture lecture : x.getLectures()) {
+                        lecture.setForms(filterLectureForms(lecture.getForms()));
+                        checkForms(lecture);
+                    }
+                })
+                .map(lectureInformationMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    private List<Lecture> getLectures(Coach coach, Lecture.State state) {
+    private List<LectureInformation> getLectures(Coach coach, Lecture.State state) {
         if (state != null) {
-            return lectureRepository.findAllByCoachAndState(coach, state);
+            return lectureInformationRepository.findAllByCoachAndState(coach, state);
         }
 
-        return lectureRepository.findAllByCoach(coach);
+        return lectureInformationRepository.findAllByCoach(coach);
     }
 
-    private List<FormDto.ReadOnly> filterLectureForms(List<FormDto.ReadOnly> forms) {
+    private List<Form> filterLectureForms(List<Form> forms) {
         return forms.stream()
                 .filter(x -> {
                     if (x.getLecture().getState() == Lecture.State.ON_BOARD) { // 클래스 일정이 매칭 중일 경우
@@ -76,10 +80,10 @@ public class CoachLectureService {
                 }).collect(Collectors.toList());
     }
 
-    private void checkForms(CoachLectureDto coachLectureDto) {
-        if (coachLectureDto.getLecture().getState() != Lecture.State.ON_BOARD && coachLectureDto.getForms().size() != 1) {
+    private void checkForms(Lecture lecture) {
+        if (lecture.getState() != Lecture.State.ON_BOARD && lecture.getForms().size() != 1) {
             log.warn("예정된, 혹은 완료된 클래스의 신청서 숫자가 1이 아님. lectureId : {}, form count : {}",
-                    coachLectureDto.getLecture().getId(), coachLectureDto.getForms().size());
+                    lecture.getId(), lecture.getForms().size());
         }
     }
 }

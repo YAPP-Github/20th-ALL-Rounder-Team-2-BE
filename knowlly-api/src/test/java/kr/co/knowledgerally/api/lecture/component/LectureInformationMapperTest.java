@@ -3,11 +3,15 @@ package kr.co.knowledgerally.api.lecture.component;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.util.TestLectureInformationDtoFactory;
 import kr.co.knowledgerally.core.lecture.entity.Category;
+import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
+import kr.co.knowledgerally.core.lecture.util.TestLectureEntityFactory;
 import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +23,8 @@ public class LectureInformationMapperTest {
     @Test
     void 엔티티에서_DTO변환_테스트() {
         LectureInformation lectureInformation = new TestLectureInformationEntityFactory().createEntity(1L, 1L, 1L,1L, 2L);
+        Lecture lecture = new TestLectureEntityFactory().createEntity(1L);
+        lectureInformation.setLectures(List.of(lecture));
 
         LectureInformationDto.ReadOnly lectureInformationDto = lectureInformationMapper.toDto(lectureInformation);
         assertEquals("테스트1 제목", lectureInformationDto.getTopic());
@@ -29,6 +35,7 @@ public class LectureInformationMapperTest {
         assertEquals(2, lectureInformationDto.getLectureImages().size());
         assertEquals(1, lectureInformationDto.getTags().size());
         assertEquals(1, lectureInformationDto.getLectures().size());
+        assertEquals(1, lectureInformationDto.getLectures().stream().findFirst().orElseThrow().getId());
     }
 
     @Test

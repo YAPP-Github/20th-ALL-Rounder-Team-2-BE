@@ -32,7 +32,6 @@ class FormMapperTest {
         FormDto.ReadOnly formDto = formMapper.toDto(form);
 
         assertEquals(1L, formDto.getId());
-        assertEquals(1L, formDto.getLecture().getId());
         assertEquals(4L, formDto.getUser().getId());
         assertEquals("http://test4.img.url", formDto.getUserImage().getUserImgUrl());
         assertEquals("테스트1의 신청 내용", formDto.getContent());

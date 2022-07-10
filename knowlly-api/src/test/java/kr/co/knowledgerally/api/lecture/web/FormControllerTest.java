@@ -26,7 +26,6 @@ class FormControllerTest extends AbstractControllerTest {
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("신청서를 받아주세요!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].user.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].expirationDate").value("2022-06-16T22:48:20"))
@@ -43,7 +42,6 @@ class FormControllerTest extends AbstractControllerTest {
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].content").value("신청서를 받아주세요!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].user.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].state").value("REQUEST"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].expirationDate").value("2022-06-16T22:48:20"))
@@ -70,7 +68,6 @@ class FormControllerTest extends AbstractControllerTest {
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.content").value("신청서를 받아주세요!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lecture.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("ACCEPT"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.expirationDate").value("2022-06-16T22:48:17"))
@@ -90,7 +87,6 @@ class FormControllerTest extends AbstractControllerTest {
                                 .content(json)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.content").value("테스트 내용"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.lecture.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.state").value("REQUEST"));
     }

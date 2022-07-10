@@ -36,7 +36,7 @@ public class LectureInformation {
     private Set<Tag> tags;
 
     @OneToMany(mappedBy = "lectureInformation", cascade = CascadeType.REMOVE)
-    private Set<Lecture> lectures;
+    private List<Lecture> lectures;
 
     @Column(nullable = false)
     private String topic;

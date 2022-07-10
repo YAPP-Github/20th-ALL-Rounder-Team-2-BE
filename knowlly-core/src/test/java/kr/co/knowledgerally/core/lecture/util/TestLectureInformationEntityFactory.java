@@ -36,7 +36,7 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
     public LectureInformation createEntity(long entityId, long coachId, long categoryId, long userId, long lectureImageNum) {
         Set<LectureImage> lectureImages = new LinkedHashSet<>();
         Set<Tag> tags = new LinkedHashSet<>();
-        Set<Lecture> lectures = new LinkedHashSet<>();
+        List<Lecture> lectures = new ArrayList<>();
 
         tags.add(Tag.builder()
                 .lectureInformation(LectureInformation.builder().build())
