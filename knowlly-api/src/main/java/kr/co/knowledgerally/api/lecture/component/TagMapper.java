@@ -7,6 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TagMapper {
-    TagDto toDto(Tag tag);
+    TagDto.ReadOnly toDto(Tag tag);
     Tag toEntity(TagDto tagDto);
 }
