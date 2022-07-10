@@ -36,7 +36,7 @@ public class UserSettingController {
 
     @ApiModel(value = "사용자 푸시 알림 모델", description = "사용자 푸시 알림 설정 여부를 나타내는 모델")
     @NoArgsConstructor
-    @Getter
+    @Getter @Setter
     public static class PushSettingDto {
         private boolean isPushActive;
     }
