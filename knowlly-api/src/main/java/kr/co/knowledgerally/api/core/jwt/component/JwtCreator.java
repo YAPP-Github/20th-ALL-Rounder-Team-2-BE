@@ -18,9 +18,12 @@ import java.util.Date;
  */
 @Component
 @RequiredArgsConstructor
-public class JwtCreator { // TODO 유효시간 설정 외부 설정값으로 변경
-    private static final long ACCESS_TOKEN_VALID_MILISECOND = 1000 * 60 * 60 * 24; // 24 시간
-    private static final long REFRESH_TOKEN_VALID_MILISECOND = 1000L * 60 * 60 * 24 * 30 * 2; // 2달
+public class JwtCreator {
+    @Value("${spring.jwt.access-token-valid-miliseconds}")
+    private long ACCESS_TOKEN_VALID_MILISECONDS;
+
+    @Value("${spring.jwt.refresh-token-valid-miliseconds}")
+    private long REFRESH_TOKEN_VALID_MILISECONDS;
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
@@ -38,7 +41,7 @@ public class JwtCreator { // TODO 유효시간 설정 외부 설정값으로 변
      * @return Jwt 토큰
      */
     public String createAccessToken(User user) {
-        return createToken(user, ACCESS_TOKEN_VALID_MILISECOND);
+        return createToken(user, ACCESS_TOKEN_VALID_MILISECONDS);
     }
 
     /**
@@ -47,7 +50,7 @@ public class JwtCreator { // TODO 유효시간 설정 외부 설정값으로 변
      * @return Jwt 토큰
      */
     public String createRefreshToken(User user) {
-        return createToken(user, REFRESH_TOKEN_VALID_MILISECOND);
+        return createToken(user, REFRESH_TOKEN_VALID_MILISECONDS);
     }
 
     private String createToken(User user, long expirationMilisecond) {
