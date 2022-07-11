@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kr.co.knowledgerally.api.user.dto.UserDto;
-import kr.co.knowledgerally.core.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,7 @@ public class CoachLectureDto {
             accessMode = ApiModelProperty.AccessMode.READ_ONLY
     )
     @JsonProperty(index = PropertyDisplayOrder.LECTURE_INFORMATION)
-    private LectureInformationDto.ReadOnly lectureInformation;
+    private LectureInformationDtoReadOnly lectureInformation;
 
     @ApiModelProperty(
             value = "신청서 읽기 모델 목록. 이때 예정된, 혹은 완료된 상태일 경우 크기는 1",

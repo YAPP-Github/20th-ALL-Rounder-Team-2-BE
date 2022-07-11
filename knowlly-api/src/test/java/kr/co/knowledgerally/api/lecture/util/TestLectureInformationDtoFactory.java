@@ -5,6 +5,7 @@ import kr.co.knowledgerally.api.core.util.TestDtoFactory;
 import kr.co.knowledgerally.api.lecture.dto.CategoryDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.api.lecture.dto.LectureInformationDtoReadOnly;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 
 import java.util.LinkedHashSet;
@@ -40,12 +41,12 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
      * @param id 생성될 Dto Id
      * @return 생성된 읽기전용 클래스 info Dto
      */
-    public LectureInformationDto.ReadOnly createReadOnlyDto(long id) {
+    public LectureInformationDtoReadOnly createReadOnlyDto(long id) {
 
         Set<LectureImageDto> lectureImageDtos = new LinkedHashSet<>();
         lectureImageDtos.add(testLectureImageDtoFactory.createDto(1L));
 
-        return LectureInformationDto.ReadOnly.builder()
+        return LectureInformationDtoReadOnly.builder()
                 .id(id)
                 .topic("테스트1 제목")
                 .introduce("안녕하세요. 테스트1 입니다.")

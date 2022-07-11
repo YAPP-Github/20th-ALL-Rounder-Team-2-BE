@@ -44,55 +44,11 @@ public class LectureInformationDto {
     @JsonProperty(index = PropertyDisplayOrder.CATEGORY)
     private Category.Name category;
 
-    @SuperBuilder
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @ApiModel(value = "클래스-info 읽기 모델", description = "읽기 전용 클래스-info 모델")
-    public static class ReadOnly extends LectureInformationDto {
-        @ApiModelProperty(
-                value = "클래스-info id",
-                position = PropertyDisplayOrder.ID,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.ID)
-        private Long id;
-
-        @ApiModelProperty(
-                value = "클래스-info 가격",
-                position = PropertyDisplayOrder.PRICE,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.PRICE)
-        private int price;
-
-        @ApiModelProperty(
-                value = "코치 정보",
-                position = PropertyDisplayOrder.COACH,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.COACH)
-        private CoachDto.ReadOnly coach;
-
-        @ApiModelProperty(
-                value = "클래스 일정",
-                position = PropertyDisplayOrder.TAG,
-                accessMode = ApiModelProperty.AccessMode.READ_ONLY
-        )
-        @JsonProperty(index = PropertyDisplayOrder.LECTURE)
-        private List<LectureDto.ReadOnly> lectures;
-    }
-
     private static class PropertyDisplayOrder {
-        private static final int ID = 0;
-        private static final int TOPIC = 1;
-        private static final int INTRODUCE = 2;
-        private static final int PRICE = 3;
-        private static final int COACH = 4;
-        private static final int CATEGORY = 5;
-        private static final int IMAGE = 6;
-        private static final int TAG = 7;
-        private static final int LECTURE = 8;
+        private static final int TOPIC = 0;
+        private static final int INTRODUCE = 1;
+        private static final int CATEGORY = 2;
+        private static final int IMAGE = 3;
+        private static final int TAG = 4;
     }
 }

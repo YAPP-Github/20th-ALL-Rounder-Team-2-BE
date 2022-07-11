@@ -8,6 +8,7 @@ import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureImageDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.api.lecture.dto.LectureInformationDtoReadOnly;
 import kr.co.knowledgerally.api.lecture.service.LectureImageUploadService;
 import kr.co.knowledgerally.core.lecture.service.CategoryService;
 import kr.co.knowledgerally.core.lecture.service.LectureInformationSearchService;
@@ -41,7 +42,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("")
-    public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> getAllLectureInformation(
+    public ResponseEntity<ApiPageResult<LectureInformationDtoReadOnly>> getAllLectureInformation(
             @ApiParam(value = "categoryName를 통해 조회하기")
             @RequestParam(name = "categoryName", required = false) Category.Name categoryName, ApiPageRequest pageRequest
     ) {
@@ -65,7 +66,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/{lectureInfoId}")
-    public ResponseEntity<ApiResult<LectureInformationDto.ReadOnly>> getLectureInformation(
+    public ResponseEntity<ApiResult<LectureInformationDtoReadOnly>> getLectureInformation(
             @ApiParam(value = "lectureInfoId를 통해 상세조회")
             @PathVariable Long lectureInfoId
     ) {
@@ -81,7 +82,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @PostMapping("")
-    public ResponseEntity<ApiResult<LectureInformationDto.ReadOnly>> postLectureInformation(
+    public ResponseEntity<ApiResult<LectureInformationDtoReadOnly>> postLectureInformation(
             @ApiIgnore @CurrentUser
             User loggedInUser,
             @ApiParam(value = "입력한 클래스-info 정보", required = true)
@@ -114,7 +115,7 @@ public class LectureInformationController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/search")
-    public ResponseEntity<ApiPageResult<LectureInformationDto.ReadOnly>> searchAllLectureInformation (
+    public ResponseEntity<ApiPageResult<LectureInformationDtoReadOnly>> searchAllLectureInformation (
             @ApiParam(value = "keyword를 통해 검색하기")
             @RequestParam(name = "keyword") String keyword, ApiPageRequest pageRequest
     ) {

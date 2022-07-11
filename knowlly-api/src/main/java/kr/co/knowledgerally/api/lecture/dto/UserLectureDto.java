@@ -3,14 +3,11 @@ package kr.co.knowledgerally.api.lecture.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.util.List;
 
 @SuperBuilder
 @Getter
@@ -41,7 +38,7 @@ public class UserLectureDto {
             accessMode = ApiModelProperty.AccessMode.READ_ONLY
     )
     @JsonProperty(index = PropertyDisplayOrder.LECTURE_INFORMATION)
-    private LectureInformationDto.ReadOnly lectureInformation;
+    private LectureInformationDtoReadOnly lectureInformation;
 
     private static class PropertyDisplayOrder {
         private static final int FORM = 0;

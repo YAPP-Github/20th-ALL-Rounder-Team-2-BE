@@ -44,7 +44,7 @@ public class CoachLectureService {
      * @return 운영 클래스 dto 목록
      */
     @Transactional(readOnly = true)
-    public List<LectureInformationDto.ReadOnly> getCoachLecture(User loggedInUser, @Nullable Lecture.State state) {
+    public List<LectureInformationDtoReadOnly> getCoachLecture(User loggedInUser, @Nullable Lecture.State state) {
         Coach coach = coachService.findByUser(loggedInUser);
         if (coach == null) {
             throw new BadRequestException(ErrorMessage.USER_NOT_COACH);

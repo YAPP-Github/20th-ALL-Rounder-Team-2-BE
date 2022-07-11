@@ -21,6 +21,7 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures.size()").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(1))
 
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].id").value(1))

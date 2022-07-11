@@ -1,6 +1,7 @@
 package kr.co.knowledgerally.api.lecture.component;
 
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
+import kr.co.knowledgerally.api.lecture.dto.LectureInformationDtoReadOnly;
 import kr.co.knowledgerally.api.lecture.util.TestLectureInformationDtoFactory;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
@@ -26,7 +27,7 @@ public class LectureInformationMapperTest {
         Lecture lecture = new TestLectureEntityFactory().createEntity(1L);
         lectureInformation.setLectures(List.of(lecture));
 
-        LectureInformationDto.ReadOnly lectureInformationDto = lectureInformationMapper.toDto(lectureInformation);
+        LectureInformationDtoReadOnly lectureInformationDto = lectureInformationMapper.toDto(lectureInformation);
         assertEquals("테스트1 제목", lectureInformationDto.getTopic());
         assertEquals("안녕하세요. 테스트1 입니다.", lectureInformationDto.getIntroduce());
         assertEquals(1, lectureInformationDto.getPrice());
