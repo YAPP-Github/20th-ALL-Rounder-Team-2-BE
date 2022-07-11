@@ -19,4 +19,11 @@ public class TestLectureImageDtoFactory implements TestDtoFactory<LectureImageDt
                 .id(id)
                 .build();
     }
+
+    public LectureImageDto.ReadOnly createReadonlyDto(long id) {
+        return LectureImageDto.ReadOnly.builder()
+                .id(id)
+                .lectureImgUrl(id + " : url")
+                .build();
+    }
 }

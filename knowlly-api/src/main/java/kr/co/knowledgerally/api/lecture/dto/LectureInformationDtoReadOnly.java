@@ -45,13 +45,13 @@ public class LectureInformationDtoReadOnly {
             position = PropertyDisplayOrder.IMAGE,
             accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @JsonProperty(index = PropertyDisplayOrder.IMAGE)
-    private Set<LectureImageDto> lectureImages;
+    private Set<LectureImageDto.ReadOnly> lectureImages;
 
     @ApiModelProperty(value = "클래스 태그",
             position = PropertyDisplayOrder.TAG,
             accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @JsonProperty(index = PropertyDisplayOrder.TAG)
-    private Set<TagDto> tags;
+    private Set<TagDto.ReadOnly> tags;
 
     @ApiModelProperty(
             value = "카테고리 정보",

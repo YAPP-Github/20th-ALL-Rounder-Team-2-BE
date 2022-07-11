@@ -18,7 +18,7 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
 
     private final TestCoachDtoFactory testCoachDtoFactory = new TestCoachDtoFactory();
     private final TestDtoFactory<CategoryDto> testCategoryDtoFactory = new TestCategoryDtoFactory();
-    private final TestDtoFactory<LectureImageDto> testLectureImageDtoFactory = new TestLectureImageDtoFactory();
+    private final TestLectureImageDtoFactory testLectureImageDtoFactory = new TestLectureImageDtoFactory();
 
     /**
      * 테스트용 클래스 info Dto를 생성한다.
@@ -43,8 +43,8 @@ public class TestLectureInformationDtoFactory implements TestDtoFactory<LectureI
      */
     public LectureInformationDtoReadOnly createReadOnlyDto(long id) {
 
-        Set<LectureImageDto> lectureImageDtos = new LinkedHashSet<>();
-        lectureImageDtos.add(testLectureImageDtoFactory.createDto(1L));
+        Set<LectureImageDto.ReadOnly> lectureImageDtos = new LinkedHashSet<>();
+        lectureImageDtos.add(testLectureImageDtoFactory.createReadonlyDto(1L));
 
         return LectureInformationDtoReadOnly.builder()
                 .id(id)
