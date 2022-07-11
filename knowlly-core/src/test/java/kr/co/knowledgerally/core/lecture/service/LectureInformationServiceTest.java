@@ -11,6 +11,8 @@ import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import kr.co.knowledgerally.core.lecture.entity.Tag;
 import kr.co.knowledgerally.core.lecture.util.TestCategoryEntityFactory;
 import kr.co.knowledgerally.core.lecture.util.TestLectureInformationEntityFactory;
+import kr.co.knowledgerally.core.user.entity.User;
+import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -41,6 +43,7 @@ public class LectureInformationServiceTest {
 
     TestLectureInformationEntityFactory testLectureInformationEntityFactory = new TestLectureInformationEntityFactory();
     TestCategoryEntityFactory testCategoryEntityFactory = new TestCategoryEntityFactory();
+    TestUserEntityFactory testUserEntityFactory = new TestUserEntityFactory();
 
     @Test
     void 클래스_info_목록_조회() {
@@ -126,5 +129,18 @@ public class LectureInformationServiceTest {
         lectureInformation.setTags(tagSet);
         lectureInformation.setCategory(Category.builder().name(Category.Name.LANGUAGE).build());
         lectureInformationService.saveLectureInformation(lectureInformation, lectureInformation.getCoach().getUser());
+    }
+
+    @Test
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_without_coach_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    void 가입후_첫_클래스_info와_클래스_태그_등록() {
+
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntityWithoutCoach(7L, 2L,2);
+        lectureInformation.setCategory(Category.builder().name(Category.Name.LANGUAGE).build());
+        User user = testUserEntityFactory.createEntity(2L);
+        assertFalse(user.isCoach());
+        LectureInformation newLectureInfo = lectureInformationService.saveLectureInformation(lectureInformation, user);
+        assertTrue(newLectureInfo.getCoach().getUser().isCoach());
     }
 }

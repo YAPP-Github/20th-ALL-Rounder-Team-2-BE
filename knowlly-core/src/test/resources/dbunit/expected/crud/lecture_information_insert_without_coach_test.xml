@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <lecture_information id="1" coach_id="1" category_id="4" topic="마케팅 수업" introduce="효과적인 마케팅에 대해 배웁니다" price="1"
+                         is_active="true" />
+    <lecture_information id="2" coach_id="2" category_id="3" topic="자바 개발" introduce="자바를 자바라" price="1"
+                         is_active="true" />
+    <lecture_information id="3" coach_id="3" category_id="2" topic="그래픽 디자인" introduce="그래픽을 그래그래" price="1"
+                         is_active="true" />
+    <lecture_information id="4" coach_id="4" category_id="1" topic="좋은 기획이란 무엇인가" introduce="기획이 제일 쉬웠어요 사실 뻥이야"
+                         price="1" is_active="false" />
+    <lecture_information id="5" coach_id="1" category_id="6" topic="요리 클래스" introduce="맛있는 요리 만들기" price="1"
+                         is_active="true" />
+    <lecture_information id="7" coach_id="5" category_id="5" topic="테스트7 제목" introduce="안녕하세요. 테스트7 입니다." price="1"
+                         is_active="true" />
+</dataset>

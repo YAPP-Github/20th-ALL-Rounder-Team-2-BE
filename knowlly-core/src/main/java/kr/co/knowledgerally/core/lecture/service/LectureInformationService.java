@@ -13,7 +13,10 @@ import kr.co.knowledgerally.core.lecture.repository.LectureImageRepository;
 import kr.co.knowledgerally.core.lecture.repository.LectureInformationRepository;
 import kr.co.knowledgerally.core.lecture.repository.TagRepository;
 import kr.co.knowledgerally.core.user.entity.User;
+import kr.co.knowledgerally.core.user.repository.UserRepository;
+import kr.co.knowledgerally.core.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,7 @@ public class LectureInformationService {
     private final LectureImageRepository lectureImageRepository;
     private final CoachService coachService;
     private final CategoryService categoryService;
+    private final UserRepository userRepository;
 
     /**
      * 클래스-info 목록을 조회합니다.
@@ -134,6 +138,7 @@ public class LectureInformationService {
             coach.setIntroduce(user.getIntro());
             user.setCoach(true);
             coachRepository.save(coach);
+            userRepository.save(user);
         }
         return coach;
     }
