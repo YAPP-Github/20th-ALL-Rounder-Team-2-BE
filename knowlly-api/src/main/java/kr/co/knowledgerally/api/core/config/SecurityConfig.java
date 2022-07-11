@@ -1,5 +1,6 @@
 package kr.co.knowledgerally.api.core.config;
 
+import kr.co.knowledgerally.api.core.component.RequestLogFilter;
 import kr.co.knowledgerally.api.core.jwt.component.JwtAuthenticationEntryPoint;
 import kr.co.knowledgerally.api.core.jwt.component.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final RequestLogFilter requestLogFilter;
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -48,7 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(EXCLUDED_URLS).permitAll()
                         .anyRequest().authenticated()
                 .and()
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(requestLogFilter, JwtAuthenticationFilter.class)
+        ;
     }
 
     @Override

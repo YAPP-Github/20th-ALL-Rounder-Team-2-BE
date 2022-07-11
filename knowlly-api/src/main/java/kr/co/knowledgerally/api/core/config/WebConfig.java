@@ -17,13 +17,14 @@ public class WebConfig implements WebMvcConfigurer {
                 .maxAge(3000);
     }
 
-    @Bean
-    public FilterRegistrationBean<RequestLogFilter> requestLogFilter(){
-        FilterRegistrationBean<RequestLogFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new RequestLogFilter());
-        registrationBean.addUrlPatterns("/api/*");
-        registrationBean.setOrder(1);
-        registrationBean.setName("request-log-filter");
-        return registrationBean;
-    }
+//    @Bean
+//    public RequestLogFilter requestLogFilter(){
+//        FilterRegistrationBean<RequestLogFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new RequestLogFilter());
+//        registrationBean.addUrlPatterns("/api/*");
+//        registrationBean.setOrder(1);
+//        registrationBean.setName("request-log-filter");
+//        return registrationBean.getFilter();
+//        return new RequestLogFilter();
+//    }
 }
