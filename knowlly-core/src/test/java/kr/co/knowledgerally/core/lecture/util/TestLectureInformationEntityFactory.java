@@ -79,6 +79,7 @@ public class TestLectureInformationEntityFactory implements TestEntityFactory<Le
 
         tags.add(Tag.builder()
                 .lectureInformation(LectureInformation.builder().build())
+                .content("test tag")
                 .build());
 
         lectures.add(Lecture.builder()

@@ -10,6 +10,6 @@
                          price="1" is_active="false" />
     <lecture_information id="5" coach_id="1" category_id="6" topic="요리 클래스" introduce="맛있는 요리 만들기" price="1"
                          is_active="true" />
-    <lecture_information id="6" coach_id="2" category_id="5" topic="테스트6 제목" introduce="안녕하세요. 테스트6 입니다." price="1"
+    <lecture_information id="7" coach_id="5" category_id="5" topic="테스트7 제목" introduce="안녕하세요. 테스트7 입니다." price="1"
                          is_active="true" />
 </dataset>

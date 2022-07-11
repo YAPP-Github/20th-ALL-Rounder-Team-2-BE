@@ -132,16 +132,11 @@ public class LectureInformationServiceTest {
     }
 
     @Test
-//    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_test.xml",
-//            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_without_coach_test.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
     void 가입후_첫_클래스_info와_클래스_태그_등록() {
-        Set<Tag> tagSet = new LinkedHashSet<>();
 
-        tagSet.add(Tag.builder().content("테스트 내용6").build());
-        tagSet.add(Tag.builder().content("테스트 내용7").build());
-
-        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntityWithoutCoach(6L, 2L,2);
-        lectureInformation.setTags(tagSet);
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntityWithoutCoach(7L, 2L,2);
         lectureInformation.setCategory(Category.builder().name(Category.Name.LANGUAGE).build());
         User user = testUserEntityFactory.createEntity(2L);
         assertFalse(user.isCoach());

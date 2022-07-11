@@ -51,7 +51,7 @@ class LectureInformationRepositoryCrudTest extends AbstractRepositoryCrudTest {
     @ExpectedDatabase(value = "classpath:dbunit/expected/crud/lecture_information_insert_test.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     protected void insertTest() {
-        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2, 5,3, 2);
+        LectureInformation lectureInformation = testLectureInformationEntityFactory.createEntity(6L, 2, 5, 3, 2);
         lectureInformationRepository.saveAndFlush(lectureInformation);
     }
 
