@@ -37,6 +37,8 @@ class FormMapperTest {
         assertEquals("테스트1의 신청 내용", formDto.getContent());
         assertEquals(Form.State.REQUEST, formDto.getState());
         assertEquals("2022-06-16T22:48:17", formDto.getExpirationDate());
+        assertEquals("2022-06-15T10:30:50", formDto.getStartAt());
+        assertEquals("2022-06-15T11:30:50", formDto.getEndAt());
     }
 
     @Test

@@ -62,19 +62,36 @@ public class FormDto {
         @JsonProperty(index = PropertyDisplayOrder.STATE)
         private Form.State state;
 
-        @ApiModelProperty(value = "신청 내용",
+        @ApiModelProperty(value = "만료일",
                 position = PropertyDisplayOrder.EXPIRATION_DATE,
                 accessMode = ApiModelProperty.AccessMode.READ_ONLY)
         @JsonProperty(index = PropertyDisplayOrder.EXPIRATION_DATE)
         private String expirationDate;
+
+        @ApiModelProperty(
+                value = "클래스 일정 시작 시간",
+                position = PropertyDisplayOrder.LECTURE_START,
+                accessMode = ApiModelProperty.AccessMode.READ_ONLY
+        )
+        @JsonProperty(index = PropertyDisplayOrder.LECTURE_START)
+        private String startAt;
+
+        @ApiModelProperty(
+                value = "클래스 일정 시작 시간",
+                position = PropertyDisplayOrder.LECTURE_END,
+                accessMode = ApiModelProperty.AccessMode.READ_ONLY
+        )
+        @JsonProperty(index = PropertyDisplayOrder.LECTURE_END)
+        private String endAt;
     }
 
     private static class PropertyDisplayOrder {
         private static final int ID = 0;
         private static final int CONTENT = 1;
-        private static final int LECTURE = 2;
         private static final int USER = 3;
         private static final int STATE = 4;
         private static final int EXPIRATION_DATE = 5;
+        private static final int LECTURE_START = 6;
+        private static final int LECTURE_END = 7;
     }
 }

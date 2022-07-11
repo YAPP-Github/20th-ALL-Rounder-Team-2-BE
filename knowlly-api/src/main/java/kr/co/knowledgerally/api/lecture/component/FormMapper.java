@@ -29,6 +29,8 @@ public abstract class FormMapper {
 
     @Mapping(target = "expirationDate", expression = "java(form.getExpirationDate().toString())")
     @Mapping(target = "userImage", expression = "java(userImageMapper.toDto(userImageService.findByUser(form.getUser())))")
+    @Mapping(target = "startAt", expression = "java(form.getLecture().getStartAt().toString())")
+    @Mapping(target = "endAt", expression = "java(form.getLecture().getEndAt().toString())")
     public abstract FormDto.ReadOnly toDto(Form form);
     public abstract Form toEntity(FormDto lectureDto);
 }
