@@ -20,43 +20,49 @@ class CoachLectureControllerTest extends AbstractControllerTest {
                         get(API_COACH_LECTURE_ME)
                                 .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(3))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].userImage.userImgUrl").value("http://test4.img.url"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matched").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matchedUser").isEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(1))
 
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lecture.id").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lecture.state").value("ON_GOING"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].forms[0].id").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].matched").value(true))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].matchedUser").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].tags.size()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectureImages.size()").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].state").value("ON_BOARD"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].matched").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].matchedUser").isEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].forms[0].id").value(6))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[0].forms[0].user.userImgUrl").value("http://test4.img.url"))
 
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lecture.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lecture.state").value("DONE"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].forms[0].id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].matched").value(true))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].matchedUser").isNotEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[1].id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[1].state").value("ON_GOING"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[1].matched").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[1].matchedUser").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[1].forms[0].id").value(2))
+
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[2].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[2].state").value("DONE"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[2].forms[0].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[2].matched").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].lectures[2].matchedUser").isNotEmpty());
     }
 
     @WithMockKnowllyUser
     @Test
-    void 운영_클래스_완료된_조회_테스트() throws Exception {
+    void 운영_클래스_매칭중_조회_테스트() throws Exception {
         mockMvc.perform(
                         get(API_COACH_LECTURE_ME)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("state", "ON_BOARD")
                 ).andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.id").value(3))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lecture.state").value("ON_BOARD"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureInformation.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].forms[0].id").value(6))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matched").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].matchedUser").isEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].tags.size()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectureImages.size()").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].state").value("ON_BOARD"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].matched").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].matchedUser").isEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].forms[0].id").value(6))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].lectures[0].forms[0].user.userImgUrl").value("http://test4.img.url"));
     }
 
     @WithMockKnowllyUser(userId = 2)

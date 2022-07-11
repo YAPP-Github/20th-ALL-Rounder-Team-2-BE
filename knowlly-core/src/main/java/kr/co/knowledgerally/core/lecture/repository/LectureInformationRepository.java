@@ -1,17 +1,22 @@
 package kr.co.knowledgerally.core.lecture.repository;
 
+import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.lecture.entity.Category;
+import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 //TODO: N+1 문제 해결을 위한 join fetch 도입
-public interface LectureInformationRepository extends JpaRepository<LectureInformation, Long> {
+public interface LectureInformationRepository extends
+        JpaRepository<LectureInformation, Long>, ExtendedLectureInformationRepository {
+
     /**
      * 클래스-info들을 활성화 여부로 검색
      * @param isActive 활성화 여부

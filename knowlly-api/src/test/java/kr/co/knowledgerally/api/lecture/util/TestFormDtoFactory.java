@@ -40,7 +40,7 @@ public class TestFormDtoFactory implements TestDtoFactory<FormDto> {
                 .id(id)
                 .content(String.format("테스트%d의 신청 내용", id))
                 .user(testUserDtoFactory.createReadOnlyDto(userId))
-                .lecture(testLectureDtoFactory.createReadOnlyDto(lectureId))
+//                .lecture(testLectureDtoFactory.createReadOnlyDto(lectureId))
                 .state(Form.State.REQUEST)
                 .build();
     }

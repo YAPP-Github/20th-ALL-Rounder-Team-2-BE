@@ -44,7 +44,7 @@ public class CoachLectureController {
             @ApiResponse(code = 200, message = "성공"),
     })
     @GetMapping("/me")
-    public ResponseEntity<ApiResult<List<CoachLectureDto>>> getCoachLectureMe(@ApiIgnore @CurrentUser User loggedInUser,
+    public ResponseEntity<ApiResult<List<LectureInformationDto.ReadOnly>>> getCoachLectureMe(@ApiIgnore @CurrentUser User loggedInUser,
                                                                               @ApiParam(value = "클래스 진행 상태, 없을 시 전체 조회\n" +
                                                                                       "ON_BOARD : 예정\n" +
                                                                                       "ON_GOING : 진행 중\n" +

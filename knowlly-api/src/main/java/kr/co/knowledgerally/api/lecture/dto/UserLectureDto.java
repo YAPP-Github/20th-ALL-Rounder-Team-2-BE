@@ -3,6 +3,7 @@ package kr.co.knowledgerally.api.lecture.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,14 @@ public class UserLectureDto {
     private FormDto.ReadOnly form;
 
     @ApiModelProperty(
+            value = "클래스 일정 읽기 모델",
+            position = PropertyDisplayOrder.LECTURE,
+            accessMode = ApiModelProperty.AccessMode.READ_ONLY
+    )
+    @JsonProperty(index = PropertyDisplayOrder.LECTURE)
+    private LectureDto.ReadOnly lecture;
+
+    @ApiModelProperty(
             value = "클래스-info 읽기 모델",
             position = PropertyDisplayOrder.LECTURE_INFORMATION,
             accessMode = ApiModelProperty.AccessMode.READ_ONLY
@@ -36,6 +45,7 @@ public class UserLectureDto {
 
     private static class PropertyDisplayOrder {
         private static final int FORM = 0;
-        private static final int LECTURE_INFORMATION = 1;
+        private static final int LECTURE = 1;
+        private static final int LECTURE_INFORMATION = 2;
     }
 }

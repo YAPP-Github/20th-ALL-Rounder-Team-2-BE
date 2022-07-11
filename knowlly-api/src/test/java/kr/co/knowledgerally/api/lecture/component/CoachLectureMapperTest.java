@@ -46,12 +46,10 @@ class CoachLectureMapperTest {
 
         assertEquals(2, coachLectureDto.getForms().size());
         assertEquals(1L, coachLectureDto.getForms().get(0).getId());
-        assertEquals(1L, coachLectureDto.getForms().get(0).getLecture().getId());
         assertEquals(1L, coachLectureDto.getForms().get(0).getUser().getId());
         assertEquals("테스트1의 신청 내용", coachLectureDto.getForms().get(0).getContent());
         assertEquals(Form.State.REQUEST, coachLectureDto.getForms().get(0).getState());
         assertEquals(2L, coachLectureDto.getForms().get(1).getId());
-        assertEquals(1L, coachLectureDto.getForms().get(1).getLecture().getId());
         assertEquals(1L, coachLectureDto.getForms().get(1).getUser().getId());
         assertEquals("테스트2의 신청 내용", coachLectureDto.getForms().get(1).getContent());
         assertEquals(Form.State.REQUEST, coachLectureDto.getForms().get(1).getState());
@@ -85,7 +83,6 @@ class CoachLectureMapperTest {
 
         assertEquals(1, coachLectureDto.getForms().size());
         assertEquals(1L, coachLectureDto.getForms().get(0).getId());
-        assertEquals(1L, coachLectureDto.getForms().get(0).getLecture().getId());
         assertEquals(1L, coachLectureDto.getForms().get(0).getUser().getId());
         assertEquals("테스트1의 신청 내용", coachLectureDto.getForms().get(0).getContent());
         assertEquals(Form.State.ACCEPT, coachLectureDto.getForms().get(0).getState());

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 @SuperBuilder
@@ -80,7 +81,7 @@ public class LectureInformationDto {
                 accessMode = ApiModelProperty.AccessMode.READ_ONLY
         )
         @JsonProperty(index = PropertyDisplayOrder.LECTURE)
-        private Set<LectureDto> lectures;
+        private List<LectureDto.ReadOnly> lectures;
     }
 
     private static class PropertyDisplayOrder {
