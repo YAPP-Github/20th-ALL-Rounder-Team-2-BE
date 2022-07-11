@@ -2,6 +2,8 @@ package kr.co.knowledgerally.api.core.component;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.WebUtils;
@@ -14,16 +16,18 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  *  <a href="https://velog.io/@sixhustle/log">소스코드 출처</a>
  */
 @Slf4j
-public class RequestLogFilter implements Filter {
+@Component
+public class RequestLogFilter extends OncePerRequestFilter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper((HttpServletRequest) request);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper((HttpServletResponse) response);
 
@@ -34,14 +38,16 @@ public class RequestLogFilter implements Filter {
         log.info("\n" +
                         "[REQUEST] {} - {} {} - {}\n" +
                         "Headers : {}\n" +
-                        "Request : {}\n" +
+                        "Request Body : {}\n" +
+                        "Request Params : {}\n" +
                         "Response : {}\n",
-                ((HttpServletRequest) request).getMethod(),
-                ((HttpServletRequest) request).getRequestURI(),
+                request.getMethod(),
+                request.getRequestURI(),
                 responseWrapper.getStatus(),
                 (end - start) / 1000.0,
-                getHeaders((HttpServletRequest) request),
+                getHeaders(request),
                 getRequestBody(requestWrapper),
+                getRequestParams(requestWrapper),
                 getResponseBody(responseWrapper));
     }
 
@@ -71,6 +77,23 @@ public class RequestLogFilter implements Filter {
         return " - ";
     }
 
+    private String getRequestParams(ContentCachingRequestWrapper request) {
+        ContentCachingRequestWrapper wrapper = WebUtils.getNativeRequest(request, ContentCachingRequestWrapper.class);
+        if (wrapper != null) {
+            StringBuilder builder = new StringBuilder();
+            for (Iterator<String> it = wrapper.getParameterNames().asIterator(); it.hasNext(); ) {
+                String paramName = it.next();
+                builder.append(paramName);
+                builder.append("=");
+                builder.append(String.join(",", wrapper.getParameterValues(paramName)));
+                builder.append(" ");
+            }
+            String result = builder.toString();
+            return StringUtils.hasLength(result)? result : " - ";
+        }
+        return " - ";
+    }
+
     private String getResponseBody(final HttpServletResponse response) throws IOException {
         String payload = null;
         ContentCachingResponseWrapper wrapper =
@@ -83,5 +106,11 @@ public class RequestLogFilter implements Filter {
             }
         }
         return null == payload ? " - " : payload;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return !path.startsWith("/api/");
     }
 }
