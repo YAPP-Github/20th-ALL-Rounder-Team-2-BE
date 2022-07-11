@@ -77,7 +77,7 @@ public class FormDto {
         private String startAt;
 
         @ApiModelProperty(
-                value = "클래스 일정 시작 시간",
+                value = "클래스 일정 종료 시간",
                 position = PropertyDisplayOrder.LECTURE_END,
                 accessMode = ApiModelProperty.AccessMode.READ_ONLY
         )
