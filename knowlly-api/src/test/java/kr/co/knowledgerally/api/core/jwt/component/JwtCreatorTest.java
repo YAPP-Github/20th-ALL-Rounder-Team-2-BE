@@ -28,6 +28,8 @@ class JwtCreatorTest extends AbstractJwtTest {
     @BeforeEach
     void setUp() {
         ReflectionTestUtils.setField(jwtCreator, "secretKey", TEST_SECRET_KEY);
+        ReflectionTestUtils.setField(jwtCreator, "ACCESS_TOKEN_VALID_MILISECONDS", 86400000L);
+        ReflectionTestUtils.setField(jwtCreator, "REFRESH_TOKEN_VALID_MILISECONDS", 5184000000L);
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"), Locale.KOREA);
         calendar.set(2080, Calendar.OCTOBER, 21, 11, 58, 30);
         when(dateFactory.now()).thenReturn(calendar.getTime());
