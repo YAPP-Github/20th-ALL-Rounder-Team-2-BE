@@ -16,7 +16,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
      * @return 클래스 일정 목록
      */
     @Query("select distinct lec from Lecture lec " +
-            "left join fetch lec.forms f join fetch f.user " +
+            "left join fetch lec.forms f left join fetch f.user " +
             "join fetch lec.lectureInformation li join fetch li.category join fetch li.coach co join fetch co.user " +
             "where lec.lectureInformation.coach = :coach " +
             "and lec.isActive = true " +
@@ -31,7 +31,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
      * @return 클래스 일정 목록
      */
     @Query("select distinct lec from Lecture lec " +
-            "left join fetch lec.forms f join fetch f.user " +
+            "left join fetch lec.forms f left join fetch f.user " +
             "join fetch lec.lectureInformation li join fetch li.category join fetch li.coach co join fetch co.user " +
             "where lec.lectureInformation.coach = :coach " +
             "and lec.state = :state " +
