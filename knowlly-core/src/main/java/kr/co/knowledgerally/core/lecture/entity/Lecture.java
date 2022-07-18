@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Getter @Setter
 @Builder
@@ -60,5 +61,13 @@ public class Lecture {
         ON_BOARD,
         ON_GOING,
         DONE
+    }
+
+    /**
+     * ACCEPT 상태의 Form을 리턴하는 편의 메소드
+     * @return State가 ACCEPT인 Form Optional을 리턴함, 없으면 Optional.null
+     */
+    public Optional<Form> getAcceptedForm() {
+        return forms.stream().filter(x -> x.getState() == Form.State.ACCEPT).findFirst();
     }
 }

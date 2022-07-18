@@ -9,23 +9,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @KnowllyDataTest
-@Import({BallService.class, UserService.class})
+@Import({BallTransactionService.class, UserService.class})
 @DatabaseSetup({
         "classpath:dbunit/entity/user.xml",
         "classpath:dbunit/entity/ball_history.xml",
 })
-class BallServiceTest {
+class BallTransactionServiceTest {
     @Autowired
-    BallService ballService;
+    BallTransactionService ballTransactionService;
 
     @Test
     @ExpectedDatabase(value = "classpath:dbunit/expected/사용자_볼_증가_테스트.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     void 사용자_볼_증가_테스트() {
-        ballService.giveBall(BallTransactionVo.builder()
+        ballTransactionService.makeBallTransaction(BallTransactionVo.builder()
                         .targetUserId(1L)
                         .title("testTitle")
                         .content("testContent")
