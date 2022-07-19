@@ -17,10 +17,10 @@ spec:
           image: <IMAGE>
           resources:
             requests:
-              memory: "500Mi"
+              memory: "300Mi"
               cpu: "500m"
             limits:
-              memory: "500Mi"
+              memory: "300Mi"
               cpu: "500m"
           ports:
             - containerPort: 8080
@@ -29,7 +29,8 @@ spec:
               path: /healthz/startup
               port: 8080
             periodSeconds: 5
-            failureThreshold: 50
+            failureThreshold: 40
+            initialDelaySeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz/liveness
@@ -40,8 +41,8 @@ spec:
             httpGet:
               path: /healthz/readiness
               port: 8080
-            periodSeconds: 30
-            failureThreshold: 2
+            periodSeconds: 10
+            failureThreshold: 3
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "dev"
