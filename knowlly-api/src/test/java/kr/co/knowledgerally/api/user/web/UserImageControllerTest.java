@@ -15,12 +15,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserImageControllerTest extends AbstractControllerTest {
-    private static final String USER_IMAGE_UPLOAD_URL = "/api/user/image";
+    private static final String USER_IMAGE_URL = "/api/user/image";
 
     @MockBean
     private FileNameGenerator fileNameGenerator;
@@ -43,13 +44,26 @@ class UserImageControllerTest extends AbstractControllerTest {
                 .thenReturn("http://testurl.com/user-image/1/hello.txt_generated");
 
         mockMvc.perform(
-                        multipart(USER_IMAGE_UPLOAD_URL)
+                        multipart(USER_IMAGE_URL)
                                 .file(mockMultipartFile)
                                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.userImgUrl")
                         .value("http://testurl.com/user-image/1/hello.txt_generated"))
+                .andDo(print());
+    }
+
+    @Test
+    @WithMockKnowllyUser
+    public void 이미지_삭제_테스트() throws Exception{
+        mockMvc.perform(
+                delete(USER_IMAGE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.userImgUrl")
+                        .value("http://test1.img.url"))
                 .andDo(print());
     }
 }
