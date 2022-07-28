@@ -5,6 +5,8 @@ import kr.co.knowledgerally.batch.config.TestBatchConfig;
 import kr.co.knowledgerally.core.core.component.DateFactory;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
 import kr.co.knowledgerally.core.lecture.repository.LectureRepository;
+import kr.co.knowledgerally.core.user.entity.BallHistory;
+import kr.co.knowledgerally.core.user.repository.BallHistoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.ExitStatus;
@@ -21,6 +23,9 @@ class LectureDoneJobTest extends AbstractJobTest {
     @Autowired
     LectureRepository lectureRepository;
 
+    @Autowired
+    BallHistoryRepository ballHistoryRepository;
+
     @BeforeEach
     public void clearMetadata() {
         jobRepositoryTestUtils.removeJobExecutions();
@@ -35,11 +40,13 @@ class LectureDoneJobTest extends AbstractJobTest {
         // when
         JobExecution jobExecution =
                 jobLauncherTestUtils.launchJob(jobParameters);
+        Thread.sleep(1000);
 
         // then
         assertEquals(ExitStatus.COMPLETED,
                 jobExecution.getExitStatus());
         assertEquals(3, lectureRepository.findAll().stream()
                 .filter(x -> x.getState() == Lecture.State.DONE).count());
+        assertEquals(8, ballHistoryRepository.count());
     }
 }

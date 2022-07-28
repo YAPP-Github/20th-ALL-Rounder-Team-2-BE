@@ -18,13 +18,13 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class LectureStateChangedEventListener {
+public class LectureDoneEventListener {
     private final List<Notifier> notifiers;
     private final BallTransactionService ballTransactionService;
 
     @Async
     @TransactionalEventListener
-    public void sendNotificationFromEvent(LectureStateChangedEvent event) {
+    public void sendNotificationFromEvent(LectureDoneEvent event) {
         Lecture lecture = event.getValue();
         if (lecture.getState() != Lecture.State.DONE || lecture.getAcceptedForm().isEmpty()) {
             log.warn("Lecture id : {} 완료되지 않거나, Accept된 Form이 없음", lecture.getId());
@@ -51,7 +51,7 @@ public class LectureStateChangedEventListener {
 
     @Async
     @TransactionalEventListener
-    public void giveBallFromEvent(LectureStateChangedEvent event) {
+    public void giveBallFromEvent(LectureDoneEvent event) {
         Lecture lecture = event.getValue();
         if (lecture.getState() != Lecture.State.DONE) {
             log.warn("Lecture id : {} 완료되지 않음", lecture.getId());

@@ -1,18 +1,14 @@
 package kr.co.knowledgerally.batch.lecture;
 
-import kr.co.knowledgerally.core.core.component.DateFactory;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
-import kr.co.knowledgerally.core.lecture.event.FormStateChangedEvent;
-import kr.co.knowledgerally.core.lecture.event.LectureStateChangedEvent;
+import kr.co.knowledgerally.core.lecture.event.LectureDoneEvent;
 import kr.co.knowledgerally.core.lecture.repository.LectureRepository;
-import kr.co.knowledgerally.core.lecture.service.LectureService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -31,7 +27,7 @@ public class LectureDoneService {
             }
 
             lecture.setState(Lecture.State.DONE);
-            eventPublisher.publishEvent(new LectureStateChangedEvent(lecture));
+            eventPublisher.publishEvent(new LectureDoneEvent(lecture));
         }
         lectureRepository.saveAllAndFlush(lectures);
     }
