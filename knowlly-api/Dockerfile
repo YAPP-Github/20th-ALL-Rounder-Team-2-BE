@@ -10,5 +10,5 @@ WORKDIR /home/gradle/project
 # RUN gradle clean build --no-daemon > /dev/null 2>&1 || true
 COPY build/libs/knowlly-api-0.0.1-SNAPSHOT.jar /home/gradle/project
 
-ENTRYPOINT ["java","-jar", "-Xms300m", "-Xmx300m", "/home/gradle/project/knowlly-api-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "-Xms600m", "-Xmx600m", "/home/gradle/project/knowlly-api-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8080

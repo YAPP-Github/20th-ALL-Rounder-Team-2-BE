@@ -10,5 +10,5 @@ WORKDIR /home/gradle/project
 # RUN gradle clean build --no-daemon > /dev/null 2>&1 || true
 COPY build/libs/knowlly-batch-0.0.1-SNAPSHOT.jar /home/gradle/project
 
-ENTRYPOINT ["java","-jar", "-Xms200m", "-Xmx200m", "/home/gradle/project/knowlly-batch-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "-Xms450m", "-Xmx450m", "/home/gradle/project/knowlly-batch-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8080
