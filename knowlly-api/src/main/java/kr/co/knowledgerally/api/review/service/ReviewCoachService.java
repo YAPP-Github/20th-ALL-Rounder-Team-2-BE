@@ -2,7 +2,6 @@ package kr.co.knowledgerally.api.review.service;
 
 import kr.co.knowledgerally.api.review.component.ReviewMapper;
 import kr.co.knowledgerally.api.review.dto.ReviewDto;
-import kr.co.knowledgerally.api.review.event.ReviewWrittenEvent;
 import kr.co.knowledgerally.core.coach.entity.Coach;
 import kr.co.knowledgerally.core.coach.entity.Review;
 import kr.co.knowledgerally.core.coach.service.ReviewService;
@@ -45,9 +44,6 @@ public class ReviewCoachService {
         review.setReviewee(coach);
         review.setWriter(loggedInUser);
         review.setLectureName(lecture.getLectureInformation().getTopic());
-
-        eventPublisher.publishEvent(new ReviewWrittenEvent(lecture));
-
         return reviewMapper.toDto(reviewService.saveReview(review));
     }
 }

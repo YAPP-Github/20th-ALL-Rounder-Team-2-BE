@@ -2,6 +2,7 @@ package kr.co.knowledgerally.core.core.component;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -11,6 +12,10 @@ import java.util.TimeZone;
 public class DateFactory {
     public Date now() {
         return new Date();
+    }
+
+    public LocalDateTime getLocalDateTimeNow() {
+        return LocalDateTime.now();
     }
 
     /**

@@ -73,6 +73,11 @@ subprojects {
 			classDirectories.setFrom(files(classDirectories.files.collect {
 				fileTree(dir: it, exclude: [
 						"**/*Knowlly*Application*",
+						"**/*BatchStarter*",
+						"**/listener/*",
+						"**/trigger/*",
+						"**/job/*",
+						"**/scheduler/*",
 						"**/config/*",
 						"**/exception/*",
 						"**/dto/*",
@@ -102,6 +107,11 @@ subprojects {
 
 				excludes = [
 				        "**/*Knowlly*Application*",
+				        "**/*BatchStarter*",
+				        "**/listener/*",
+				        "**/trigger/*",
+				        "**/job/*",
+				        "**/scheduler/*",
 				        "**/config/*",
 				        "**/exception/*",
 				        "**/dto/*",

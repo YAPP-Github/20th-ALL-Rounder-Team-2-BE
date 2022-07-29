@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class BallService {
+public class BallTransactionService {
     private final BallHistoryRepository ballHistoryRepository;
     private final UserService userService;
     private final UserRepository userRepository;
 
     @Transactional
-    public void giveBall(BallTransactionVo ballTransactionVo) {
+    public void makeBallTransaction(BallTransactionVo ballTransactionVo) {
         User target = userService.findById(ballTransactionVo.getTargetUserId());
         target.ballIncrement(ballTransactionVo.getCount());
         userRepository.save(target);

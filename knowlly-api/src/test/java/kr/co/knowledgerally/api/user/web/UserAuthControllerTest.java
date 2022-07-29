@@ -1,6 +1,5 @@
 package kr.co.knowledgerally.api.user.web;
 
-import com.jayway.jsonpath.JsonPath;
 import kr.co.knowledgerally.api.annotation.WithMockKnowllyUser;
 import kr.co.knowledgerally.api.core.jwt.dto.JwtToken;
 import kr.co.knowledgerally.api.core.jwt.dto.ProviderToken;
@@ -9,15 +8,11 @@ import kr.co.knowledgerally.api.core.jwt.service.JwtService;
 import kr.co.knowledgerally.api.core.oauth2.dto.OAuth2Profile;
 import kr.co.knowledgerally.api.core.oauth2.service.OAuth2ServiceFactory;
 import kr.co.knowledgerally.api.web.AbstractControllerTest;
-import kr.co.knowledgerally.core.user.entity.User;
-import kr.co.knowledgerally.core.user.repository.UserRepository;
-import kr.co.knowledgerally.core.user.service.BallService;
+import kr.co.knowledgerally.core.user.service.BallTransactionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +43,7 @@ class UserAuthControllerTest extends AbstractControllerTest {
     private OAuth2ServiceFactory oAuth2ServiceFactory;
 
     @MockBean
-    private BallService ballService;
+    private BallTransactionService ballTransactionService;
 
     @BeforeEach
     void setUp() {

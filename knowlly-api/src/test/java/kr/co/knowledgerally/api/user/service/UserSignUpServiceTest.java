@@ -7,16 +7,12 @@ import kr.co.knowledgerally.api.core.jwt.service.JwtService;
 import kr.co.knowledgerally.api.core.oauth2.dto.OAuth2Profile;
 import kr.co.knowledgerally.api.core.oauth2.service.OAuth2ServiceFactory;
 import kr.co.knowledgerally.api.user.dto.UserSignUpDto;
-import kr.co.knowledgerally.core.user.entity.User;
-import kr.co.knowledgerally.core.user.repository.UserRepository;
-import kr.co.knowledgerally.core.user.service.BallService;
+import kr.co.knowledgerally.core.user.service.BallTransactionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,7 +36,7 @@ class UserSignUpServiceTest {
     private OAuth2ServiceFactory oAuth2ServiceFactory;
 
     @MockBean
-    private BallService ballService;
+    private BallTransactionService ballTransactionService;
 
     @BeforeEach
     void setUp() {
@@ -66,7 +62,7 @@ class UserSignUpServiceTest {
 
         Thread.sleep(1000); // 비동기 실행때문에 삽입
 
-        verify(ballService, times(1)).giveBall(any());
+        verify(ballTransactionService, times(1)).makeBallTransaction(any());
     }
 
 }
