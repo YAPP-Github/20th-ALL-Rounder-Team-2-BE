@@ -13,18 +13,17 @@ on:
     branches:
       - main
 env:
+  ARTIFACT_NAME: knowlly-api-artifact
   API_APP_NAME: knowlly-api
   API_JAR_NAME: knowlly-api-0.0.1-SNAPSHOT.jar
   API_DEPLOYMENT_NAME: knowlly-api-dev-deployment
   API_DEPLOYMENT_FILE_NAME: knowlly-api-dev-deployment.yml
   API_IMAGE: knowlly-api
-  API_ARTIFACT: knowlly-api-artifact
   BATCH_APP_NAME: knowlly-batch
   BATCH_JAR_NAME: knowlly-batch-0.0.1-SNAPSHOT.jar
   BATCH_DEPLOYMENT_NAME: knowlly-batch-dev-deployment
   BATCH_DEPLOYMENT_FILE_NAME: knowlly-batch-dev-deployment.yml
   BATCH_IMAGE: knowlly-batch
-  BATCH_ARTIFACT: knowlly-batch-artifact
 jobs:
   test:
     name: Gradle 테스트
@@ -65,7 +64,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         name: 생성한 파일 업로드
         with:
-          name: ${{ env.API_ARTIFACT }}
+          name: ${{ env.ARTIFACT_NAME }}
           path: |
             ${{ github.workspace }}/${{ env.API_APP_NAME }}/build/libs/${{ env.API_JAR_NAME }}
             ${{ github.workspace }}/${{ env.BATCH_APP_NAME }}/build/libs/${{ env.BATCH_JAR_NAME }}
@@ -81,7 +80,7 @@ jobs:
       - name: 업로드한 파일 다운로드
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.API_ARTIFACT }}
+          name: ${{ env.ARTIFACT_NAME }}
 
       - name: 업로드한 파일 빌드 경로로 위치
         run: |
@@ -163,7 +162,7 @@ jobs:
       - name: 업로드한 파일 다운로드
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.BATCH_ARTIFACT }}
+          name: ${{ env.ARTIFACT_NAME }}
 
       - name: 업로드한 파일 빌드 경로로 위치
         run: |
