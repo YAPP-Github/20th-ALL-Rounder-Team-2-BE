@@ -13,7 +13,7 @@ on:
     branches:
       - main
 env:
-  ARTIFACT_NAME: knowlly-api-artifact
+  ARTIFACT_NAME: knowlly-artifact
   API_APP_NAME: knowlly-api
   API_JAR_NAME: knowlly-api-0.0.1-SNAPSHOT.jar
   API_DEPLOYMENT_NAME: knowlly-api-dev-deployment

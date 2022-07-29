@@ -75,7 +75,7 @@ public class LectureDoneJobConductor extends AbstractJobConductor {
         reader.setQueryString("select distinct lec from Lecture lec " +
                 "left join fetch lec.forms f left join fetch f.user " +
                 "join fetch lec.lectureInformation li join fetch li.category join fetch li.coach co join fetch co.user " +
-                "WHERE lec.state <> :state AND lec.endAt < :now ");
+                "WHERE lec.isActive = true AND lec.state <> :state AND lec.endAt < :now ");
         Map<String, Object> parameterValues = new HashMap<>();
         parameterValues.put("now", dateFactory.getLocalDateTimeNow());
         parameterValues.put("state", Lecture.State.DONE);
