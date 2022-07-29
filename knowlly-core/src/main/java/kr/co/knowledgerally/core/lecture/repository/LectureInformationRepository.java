@@ -23,6 +23,15 @@ public interface LectureInformationRepository extends
      * @param pageable 페이징 객체
      * @return 클래스-info 페이징 객체
      */
+    @Query(value = "select distinct li from LectureInformation li " +
+            "left join fetch li.lectures lecs " +
+            "join fetch li.category join fetch li.coach co join fetch co.user " +
+            "where li.isActive = true " +
+            "order by li.id desc",
+    countQuery = "select count(distinct li) from LectureInformation li " +
+            "left join li.lectures lecs " +
+            "join li.category join li.coach co join co.user " +
+            "where li.isActive = true ")
     Page<LectureInformation> findAllTop10ByIsActiveOrderByIdDesc(boolean isActive, Pageable pageable);
 
     /**

@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,19 +46,19 @@ public class LectureInformationRepositoryTest {
         assertEquals(4, lectureInformations.getTotalElements());
         assertEquals(2, lectureInformations.getTotalPages());
         assertEquals(2, lectureInformations.getContent().size());
-        assertEquals(lectureInformations.getContent().get(0).getTopic(), "요리 클래스");
-        assertEquals(
+        assertEquals("요리 클래스", lectureInformations.getContent().get(0).getTopic());
+        assertEquals(1,
                 lectureInformations
                         .getContent()
                         .get(0)
-                        .getLectureImages().size(), 1
+                        .getLectureImages().size()
         );
-        assertEquals(lectureInformations.getContent().get(1).getTopic(), "그래픽 디자인");
-        assertEquals(
+        assertEquals("그래픽 디자인", lectureInformations.getContent().get(1).getTopic());
+        assertEquals(1,
                 lectureInformations
                         .getContent()
                         .get(1)
-                        .getLectureImages().size(), 1
+                        .getLectureImages().size()
         );
     }
 
@@ -66,28 +67,28 @@ public class LectureInformationRepositoryTest {
         Category category = testCategoryEntityFactory.createEntity(3L);
         Page<LectureInformation> lectureInformations = lectureInformationRepository.findAllByCategoryAndIsActiveOrderByIdDesc(category, true, PageRequest.of(0, 2));
 
-        assertEquals(lectureInformations.getContent().get(0).getTopic(), "자바 개발");
+        assertEquals("자바 개발", lectureInformations.getContent().get(0).getTopic());
     }
 
     @Test
     void 클래스_info_목록_카테고리_이름과_활성화_여부로_검색() {
         List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByCategoryNameAndIsActiveOrderByIdDesc(Category.Name.ETC, true);
 
-        assertEquals(lectureInformationList.get(0).getTopic(), "요리 클래스");
+        assertEquals("요리 클래스", lectureInformationList.get(0).getTopic());
     }
 
     @Test
     void 클래스_info_목록_Topic과_활성화_여부로_검색() {
         List<LectureInformation> lectureInformationList = lectureInformationRepository.findAllByTopicContainingAndIsActiveOrderByIdDesc("수업", true);
 
-        assertEquals(lectureInformationList.get(0).getTopic(), "마케팅 수업");
+        assertEquals("마케팅 수업", lectureInformationList.get(0).getTopic());
     }
 
     @Test
     void 클래스_info_활성화_여부로_상세조회() {
         LectureInformation lectureInformation = lectureInformationRepository.findByIdAndIsActive(1L, true).orElseThrow();
 
-        assertEquals(lectureInformation.getTopic(), "마케팅 수업");
+        assertEquals( "마케팅 수업", lectureInformation.getTopic());
     }
 
     @Test
