@@ -1,4 +1,4 @@
-name: API & Batch - Test and Deploy - dev
+name: API - Test and Deploy - prod
 
 on:
   workflow_dispatch:
@@ -9,33 +9,25 @@ on:
         default: 'warning'
       tags:
         description: 'Test scenario tags'
-  push:
-    branches:
-      - main
 env:
   ARTIFACT_NAME: knowlly-artifact
   API_APP_NAME: knowlly-api
   API_JAR_NAME: knowlly-api-0.0.1-SNAPSHOT.jar
-  API_DEPLOYMENT_NAME: knowlly-api-dev-deployment
-  API_DEPLOYMENT_FILE_NAME: knowlly-api-dev-deployment.yml
+  API_DEPLOYMENT_NAME: knowlly-api-deployment
+  API_DEPLOYMENT_FILE_NAME: knowlly-api-prod-deployment.yml
   API_IMAGE: knowlly-api
-  BATCH_APP_NAME: knowlly-batch
-  BATCH_JAR_NAME: knowlly-batch-0.0.1-SNAPSHOT.jar
-  BATCH_DEPLOYMENT_NAME: knowlly-batch-dev-deployment
-  BATCH_DEPLOYMENT_FILE_NAME: knowlly-batch-dev-deployment.yml
-  BATCH_IMAGE: knowlly-batch
 jobs:
   test:
     name: Gradle 테스트
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: application-dev.yml 디코딩
+      - name: application-prod.yml 디코딩
         uses: timheuer/base64-to-file@v1.1
         with:
-          fileName: 'application-dev.yml'
+          fileName: 'application-prod.yml'
           fileDir: './knowlly-core/src/main/resources/'
-          encodedString: ${{ secrets.APPLICATION_YML_DEV_BASE64 }}
+          encodedString: ${{ secrets.APPLICATION_YML_PROD_BASE64 }}
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -54,12 +46,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: liquibase 스키마 업데이트
-        run: ./gradlew dbMigration update ${{ secrets.DB_MIGRATION_PARAMS_DEV }}
+        run: ./gradlew dbMigration update ${{ secrets.DB_MIGRATION_PARAMS_PROD }}
 
       - name: Gradle 테스트 및 실행파일 생성
         run: ./gradlew build test bootJar -Dfile.encoding=UTF-8
         env:
-          TEST_SPRING_PROFILES_ACTIVE: dev
+          TEST_SPRING_PROFILES_ACTIVE: prod
 
       - uses: actions/upload-artifact@v2
         name: 생성한 파일 업로드
@@ -67,7 +59,6 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: |
             ${{ github.workspace }}/${{ env.API_APP_NAME }}/build/libs/${{ env.API_JAR_NAME }}
-            ${{ github.workspace }}/${{ env.BATCH_APP_NAME }}/build/libs/${{ env.BATCH_JAR_NAME }}
           retention-days: 1
   deployment-api:
     name: API 빌드, 푸쉬 후 개발에 배포
@@ -139,94 +130,13 @@ jobs:
       - name: 클러스터에 배포
         uses: NaLDo627/kubectl@master
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_PROD }}
         with:
           args: apply -f deploy.yml
 
       - name: 배포 확인
         uses: NaLDo627/kubectl@master
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_PROD }}
         with:
           args: '"rollout status deployment/${{ env.API_DEPLOYMENT_NAME }}"'
-
-  deployment-batch:
-    name: BATCH 빌드, 푸쉬 후 개발에 배포
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: 소스코드 체크아웃
-        uses: actions/checkout@v2
-
-      - name: 업로드한 파일 다운로드
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-
-      - name: 업로드한 파일 빌드 경로로 위치
-        run: |
-          mkdir -p ${{ env.BATCH_APP_NAME }}/build/libs
-          mv ${{ env.BATCH_JAR_NAME }} ${{ env.BATCH_APP_NAME }}/build/libs/
-
-      - name: SHA 업데이트
-        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/_meta
-
-      - name: 이미지 태그 준비
-        id: get-tag
-        run: |
-          tag=$(echo $GITHUB_SHA | head -c7)
-          echo "::set-output name=tag::$tag"
-      - name: 도커 캐싱 준비
-        uses: docker/setup-buildx-action@v1
-
-      - name: 도커 레이어 캐싱
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      - name: 도커 로그인
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-
-      - name: 컨테이너 이미지 빌드 및 이미지 푸쉬
-        uses: docker/build-push-action@v2
-        with:
-          context: ./${{ env.BATCH_APP_NAME }}/
-          push: true
-          tags: docker.io/${{ secrets.DOCKER_USERNAME }}/${{ env.BATCH_IMAGE }}:${{ steps.get-tag.outputs.tag }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      - name: 캐시 삭제
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-      - name: 배포파일 업데이트
-        run: TAG=${{ steps.get-tag.outputs.tag }} && sed -i 's|<IMAGE>|docker.io/${{ secrets.DOCKER_USERNAME }}/${{ env.BATCH_IMAGE }}:'${TAG}'|' $GITHUB_WORKSPACE/deployment/${{ env.BATCH_DEPLOYMENT_FILE_NAME }}
-
-      - name: 환경변수 치환 후 최종 배포 파일 생성
-        uses: danielr1996/envsubst-action@1.0.0
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        with:
-          input: deployment/${{ env.BATCH_DEPLOYMENT_FILE_NAME }}
-          output: deploy.yml
-
-      - name: 클러스터에 배포
-        uses: NaLDo627/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
-        with:
-          args: apply -f deploy.yml
-
-      - name: 배포 확인
-        uses: NaLDo627/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
-        with:
-          args: '"rollout status deployment/${{ env.BATCH_DEPLOYMENT_NAME }}"'

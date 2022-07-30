@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: knowlly-api-dev-deployment
+  name: knowlly-api-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: knowlly-api-dev
+      app: knowlly-api
   template:
     metadata:
       labels:
-        app: knowlly-api-dev
+        app: knowlly-api
     spec:
       containers:
-        - name: knowlly-api-dev
+        - name: knowlly-api
           image: <IMAGE>
           resources:
             requests:
               memory: "800Mi"
-              cpu: "1000m"
+              cpu: "350m"
             limits:
               memory: "800Mi"
-              cpu: "1000m"
+              cpu: "350m"
           ports:
             - containerPort: 8080
           startupProbe:
@@ -45,7 +45,7 @@ spec:
             failureThreshold: 3
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "dev"
+              value: "prod"
             - name: AWS_ACCESS_KEY_ID
               value: "$AWS_ACCESS_KEY_ID"
             - name: AWS_SECRET_ACCESS_KEY
