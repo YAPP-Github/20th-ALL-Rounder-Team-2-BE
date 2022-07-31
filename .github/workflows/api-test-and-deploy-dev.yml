@@ -82,11 +82,6 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
 
-      - name: 업로드한 파일 빌드 경로로 위치
-        run: |
-          mkdir -p ${{ env.API_APP_NAME }}/build/libs 
-          mv ${{ env.API_JAR_NAME }} ${{ env.API_APP_NAME }}/build/libs/
-
       - name: SHA 업데이트
         run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/_meta
 
@@ -162,11 +157,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.ARTIFACT_NAME }}
-
-      - name: 업로드한 파일 빌드 경로로 위치
-        run: |
-          mkdir -p ${{ env.BATCH_APP_NAME }}/build/libs
-          mv ${{ env.BATCH_JAR_NAME }} ${{ env.BATCH_APP_NAME }}/build/libs/
 
       - name: SHA 업데이트
         run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/_meta
