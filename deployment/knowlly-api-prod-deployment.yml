@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: knowlly-api-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: knowlly-api
@@ -18,10 +18,10 @@ spec:
           resources:
             requests:
               memory: "1000Mi"
-              cpu: "300m"
+              cpu: "400m"
             limits:
               memory: "1000Mi"
-              cpu: "300m"
+              cpu: "400m"
           ports:
             - containerPort: 8080
           startupProbe:
