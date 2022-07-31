@@ -2,6 +2,10 @@ spring:
     profiles:
       active: default
 
+    datasource:
+      hikari:
+        maximum-pool-size: 8
+
   # JPA
     jpa:
       hibernate:
