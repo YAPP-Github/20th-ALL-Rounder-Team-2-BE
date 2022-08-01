@@ -55,6 +55,7 @@ jobs:
         files: | 
             ./knowlly-core/build/test-results/**/*.xml
             ./knowlly-api/build/test-results/**/*.xml
+            ./knowlly-batch/build/test-results/**/*.xml
 
     - name: Report Codecov Test Coverage
       uses: codecov/codecov-action@v2
