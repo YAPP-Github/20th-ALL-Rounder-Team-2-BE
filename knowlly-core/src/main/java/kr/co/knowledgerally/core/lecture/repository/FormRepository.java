@@ -42,4 +42,12 @@ public interface FormRepository extends JpaRepository<Form, Long> {
      * @return 신청서 목록
      */
     List<Form> findAllByLecture_LectureInformation_CoachAndIsActiveOrderByCreatedAtDesc(Coach coach, boolean isActive);
+
+    /**
+     * 클래스 일정으로 신청서 목록 조회
+     * @param lecture 클래스 일정
+     * @param isActive 활성화 여부
+     * @return 신청서 목록
+     */
+    List<Form> findAllByLectureAndIsActiveOrderByCreatedAtDesc(Lecture lecture, boolean isActive);
 }

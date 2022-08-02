@@ -9,6 +9,7 @@ import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureRegisterDto;
+import kr.co.knowledgerally.api.lecture.service.LectureDeleteService;
 import kr.co.knowledgerally.api.lecture.service.LectureRegisterService;
 import kr.co.knowledgerally.core.lecture.entity.Category;
 import kr.co.knowledgerally.core.lecture.entity.LectureInformation;
@@ -31,6 +32,7 @@ import java.util.List;
 @RequestMapping("/api/lecture-schedule")
 public class LectureController {
     private final LectureRegisterService lectureRegisterService;
+    private final LectureDeleteService lectureDeleteService;
 
     @ApiOperation(value = "클래스 일정 등록", notes = "클래스 일정을 등록합니다.")
     @ApiResponses({
@@ -46,5 +48,18 @@ public class LectureController {
 
         return ResponseEntity.ok(ApiResult.ok(
                 lectureRegisterService.register(lectureInfoId, lectureRegisterDto, loggedInUser)));
+    }
+
+    @ApiOperation(value = "클래스 일정 삭제", notes = "클래스 일정을 삭제합니다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    @DeleteMapping("/{lectureId}")
+    public ResponseEntity<ApiResult<LectureDto.ReadOnly>> deleteLecture (
+            @ApiParam(value = "클래스 일정 Id", required = true)
+            @PathVariable Long lectureId) {
+
+        return ResponseEntity.ok(ApiResult.ok(
+                lectureDeleteService.delete(lectureId)));
     }
 }

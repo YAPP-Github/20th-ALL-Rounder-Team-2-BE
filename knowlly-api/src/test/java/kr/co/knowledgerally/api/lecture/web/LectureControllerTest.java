@@ -7,13 +7,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class LectureControllerTest extends AbstractControllerTest {
     private static final String LECTURE_SCHEDULE_LECTUREINFO_URL = "/api/lecture-schedule/lectureinfo/";
+    private static final String LECTURE_SCHEDULE_URL = "/api/lecture-schedule/";
 
     @WithMockKnowllyUser
     @Test
@@ -91,6 +91,27 @@ class LectureControllerTest extends AbstractControllerTest {
                         post(LECTURE_SCHEDULE_LECTUREINFO_URL + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
+                ).andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @WithMockKnowllyUser
+    @Test
+    public void 클래스_일정_삭제_테스트() throws Exception {
+        mockMvc.perform(
+                        delete(LECTURE_SCHEDULE_URL + 3)
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.forms[0].state").value("REJECT"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.forms[1].state").value("REJECT"));
+    }
+
+    @WithMockKnowllyUser
+    @Test public void 클래스_일정_삭제_예정된_클래스_일정이면_400() throws Exception {
+        mockMvc.perform(
+                        delete(LECTURE_SCHEDULE_URL + 2)
+                                .contentType(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isBadRequest())
                 .andDo(print());
     }
