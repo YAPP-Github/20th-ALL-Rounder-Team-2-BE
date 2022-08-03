@@ -32,11 +32,11 @@ public class LectureDeleteService {
      * @return 삭제한 LectureDto
      */
     @Transactional
-    public LectureDto.ReadOnly delete(long lectureId) {
+    public Lecture delete(long lectureId) {
         Lecture lecture = lectureService.findById(lectureId);
 
-        if (lecture.getState() == Lecture.State.ON_GOING) {
-            throw new BadRequestException(ErrorMessage.ON_GOING_CAN_NOT_DELETE);
+        if (lecture.getState() != Lecture.State.ON_BOARD) {
+            throw new BadRequestException(ErrorMessage.SCHEDULE_CAN_NOT_DELETE);
         }
         List<Form> forms = formService.findAllByLecture(lecture);
 
@@ -44,10 +44,9 @@ public class LectureDeleteService {
             form.setState(Form.State.REJECT);
         }
 
+        formRepository.saveAll(forms);
         lecture.setActive(false);
-        lectureRepository.save(lecture);
-        formRepository.saveAllAndFlush(forms);
 
-        return lectureMapper.toDto(lecture);
+        return lectureRepository.saveAndFlush(lecture);
     }
 }

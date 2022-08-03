@@ -10,6 +10,7 @@ import kr.co.knowledgerally.core.core.exception.ResourceNotFoundException;
 import kr.co.knowledgerally.core.lecture.entity.Form;
 import kr.co.knowledgerally.core.lecture.util.TestFormEntityFactory;
 import kr.co.knowledgerally.core.lecture.entity.Lecture;
+import kr.co.knowledgerally.core.lecture.util.TestLectureEntityFactory;
 import kr.co.knowledgerally.core.user.entity.User;
 import kr.co.knowledgerally.core.user.util.TestUserEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -155,5 +156,34 @@ class FormServiceTest {
         assertTrue(forms.get(1).isActive());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 20), forms.get(1).getCreatedAt());
         assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 20), forms.get(1).getUpdatedAt());
+    }
+
+    @Test
+    void 클래스_일정으로_신청서_목록_찾기_테스트() {
+        Lecture lecture = new TestLectureEntityFactory().createEntity(1);
+
+        List<Form> forms = formService.findAllByLecture(lecture);
+
+        assertEquals(2, forms.size());
+
+        assertEquals(3L, forms.get(0).getId());
+        assertEquals(1L, forms.get(0).getLecture().getId());
+        assertEquals(2L, forms.get(0).getUser().getId());
+        assertEquals("안받아주셔도 되요", forms.get(0).getContent());
+        assertEquals(Form.State.REJECT, forms.get(0).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 19), forms.get(0).getExpirationDate());
+        assertTrue(forms.get(0).isActive());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 19), forms.get(0).getCreatedAt());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 19), forms.get(0).getUpdatedAt());
+
+        assertEquals(1L, forms.get(1).getId());
+        assertEquals(1L, forms.get(1).getLecture().getId());
+        assertEquals(4L, forms.get(1).getUser().getId());
+        assertEquals("신청서를 받아주세요!", forms.get(1).getContent());
+        assertEquals(Form.State.ACCEPT, forms.get(1).getState());
+        assertEquals(LocalDateTime.of(2022, 6, 16, 22, 48, 17), forms.get(1).getExpirationDate());
+        assertTrue(forms.get(1).isActive());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), forms.get(1).getCreatedAt());
+        assertEquals(LocalDateTime.of(2022, 6, 13, 22, 48, 17), forms.get(1).getUpdatedAt());
     }
 }

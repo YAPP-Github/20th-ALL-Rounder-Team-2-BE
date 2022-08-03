@@ -6,6 +6,7 @@ import kr.co.knowledgerally.api.core.dto.ApiPageRequest;
 import kr.co.knowledgerally.api.core.dto.ApiPageResult;
 import kr.co.knowledgerally.api.core.dto.ApiResult;
 import kr.co.knowledgerally.api.lecture.component.LectureInformationMapper;
+import kr.co.knowledgerally.api.lecture.component.LectureMapper;
 import kr.co.knowledgerally.api.lecture.dto.LectureDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureInformationDto;
 import kr.co.knowledgerally.api.lecture.dto.LectureRegisterDto;
@@ -33,6 +34,7 @@ import java.util.List;
 public class LectureController {
     private final LectureRegisterService lectureRegisterService;
     private final LectureDeleteService lectureDeleteService;
+    private final LectureMapper lectureMapper;
 
     @ApiOperation(value = "클래스 일정 등록", notes = "클래스 일정을 등록합니다.")
     @ApiResponses({
@@ -60,6 +62,8 @@ public class LectureController {
             @PathVariable Long lectureId) {
 
         return ResponseEntity.ok(ApiResult.ok(
-                lectureDeleteService.delete(lectureId)));
+                lectureMapper.toDto(
+                lectureDeleteService.delete(lectureId)))
+        );
     }
 }
