@@ -28,6 +28,8 @@ jobs:
           fileName: 'application-prod.yml'
           fileDir: './knowlly-core/src/main/resources/'
           encodedString: ${{ secrets.APPLICATION_YML_PROD_BASE64 }}
+      - name: 디코딩된 application-prod.yml 출력 (디버깅 용도)
+        run: cat ./knowlly-core/src/main/resources/application-prod.yml
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
