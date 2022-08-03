@@ -84,4 +84,15 @@ public class FormService {
     public List<Form> findAllByLectureCoach(Coach coach) {
         return formRepository.findAllByLecture_LectureInformation_CoachAndIsActiveOrderByCreatedAtDesc(coach, true);
     }
+
+    /**
+     * 클래스 일정으로 신청서 목록을 조회합니다.
+     * @param lecture 클래스 일정
+     * @return 신청서 리스트
+     */
+    @Transactional(readOnly = true)
+    public  List<Form> findAllByLecture(Lecture lecture) {
+        return formRepository.findAllByLectureAndIsActiveOrderByCreatedAtDesc(lecture, true);
+    }
+
 }

@@ -16,6 +16,7 @@ public class ErrorMessage {
 
     // Lecture
     public static String NOT_EXIST_LECTURE = "존재하지 않는 클래스 일정 입니다.";
+    public static String SCHEDULE_CAN_NOT_DELETE = "매칭중 클래스 일정만 삭제할 수 있습니다.";
 
     // LectureInfo
     public static String NOT_EXIST_LECTURE_INFO = "존재하지 않는 클래스-info 입니다.";
