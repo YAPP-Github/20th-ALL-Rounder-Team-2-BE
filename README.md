@@ -1,5 +1,25 @@
-# 20th-ALL-Rounder-Team-2-BE
-[20th] All-Rounder 2팀 BackEnd
+# 🎾 Knowlly
+각자 잘아는 분야의 지식들을 
+서로 공유 할 수 있는 지식교환 플랫폼
+
+![image](https://user-images.githubusercontent.com/55652627/234002289-c3ed62db-62ba-4e4f-ab13-cbd19aae32b5.png)
+
+### 기획 의도
+
+- 새로운 분야의 지식을 배우고 싶은데 금전적 여유가 없다
+→ 내가 아는 지식을 공유하고 새로운 지식을 배우자
+
+
+### **Tech Stack**
+
+- Backend
+    - Java 11, Spring Boot, Spring Data JPA, MySQL
+    - Spring Security, JWT, OAuth 2.0
+    
+- Infra
+    - Docker, K8S
+
+ERD : https://www.erdcloud.com/d/upxjamqGs5qPfYyXC
 
 ## git convention
 - 형식 : `<업무명>: <작업 내용> (#이슈번호)`
